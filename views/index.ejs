@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Autenticación</title>
+    <title>Sistema de Gestión Escolar</title>
     <style>
-        body {
+        <>body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -72,23 +73,65 @@
             text-align: center;
             margin-bottom: 1rem;
         }
+
         .error {
             color: red;
             text-align: center;
             margin-bottom: 1rem;
         }
+
+        /* ... (mantener los estilos existentes) ... */
+        .nav-menu {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .nav-menu button {
+            padding: 0.5rem 1rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .nav-menu button:hover {
+            background: #0056b3;
+        }
+
+        #content-area {
+            margin-top: 2rem;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Sistema de Autenticación</h1>
+        <h1>Sistema de Gestión Escolar</h1>
 
         <% if (user) { %>
             <p class="welcome">Bienvenido, <%= user.username %>!</p>
-            <p>Rol: <%= user.role %></p>
+            <p>Rol: <%= user.role %>
+            </p>
             <button id="logout-btn">Cerrar sesión</button>
 
-            <% if (user.role === 'admin') { %>
+            <div class="nav-menu">
+                <% if (['admin', 'directora' , 'vicedirectora' , 'preceptora' , 'maestra' ].includes(user.role)) { %>
+                    <button id="view-students-btn">Ver Alumnos</button>
+                    <% } %>
+                        <% if (['admin', 'preceptora' , 'maestra' ].includes(user.role)) { %>
+                            <button id="add-student-btn">Añadir Alumno</button>
+                            <% } %>
+                                <% if (user.role==='padre' ) { %>
+                                    <button id="view-children-btn">Ver Mis Hijos</button>
+                                    <% } %>
+            </div>
+
+            <div id="content-area"></div>
+
+            <% if (user.role==='admin' ) { %>
                 <h2>Registrar nuevo usuario</h2>
                 <form id="register-form">
                     <label for="reg-username">Usuario:</label>
@@ -107,43 +150,26 @@
                     <button type="submit">Registrar</button>
                 </form>
                 <div id="register-message"></div>
-            <% } %>
+                <% } %>
 
-        <% } else { %>
-            <h2>Registrar nuevo usuario</h2>
-            <form id="register-form">
-                <label for="reg-username">Usuario:</label>
-                <input type="text" id="reg-username" name="username" required>
-                <label for="reg-password">Contraseña:</label>
-                <input type="password" id="reg-password" name="password" required>
-                <label for="reg-role">Rol:</label>
-                <select id="reg-role" name="role" required>
-                    <option value="admin">Admin</option>
-                    <option value="directora">Directora</option>
-                    <option value="vicedirectora">Vicedirectora</option>
-                    <option value="preceptora">Preceptora</option>
-                    <option value="maestra">Maestra</option>
-                    <option value="padre">Padre</option>
-                </select>
-                <button type="submit">Registrar</button>
-            </form>
-            <div id="register-message"></div>
-            <h2>Iniciar sesión</h2>
-            <form id="login-form">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Iniciar sesión</button>
-            </form>
-            <div id="login-message"></div>
-        <% } %>
+                    <% } else { %>
+                        <h2>Iniciar sesión</h2>
+                        <form id="login-form">
+                            <label for="username">Usuario:</label>
+                            <input type="text" id="username" name="username" required>
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" name="password" required>
+                            <button type="submit">Iniciar sesión</button>
+                        </form>
+                        <div id="login-message"></div>
+                        <% } %>
     </div>
 
     <script>
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
         const logoutBtn = document.getElementById('logout-btn');
+        const contentArea = document.getElementById('content-area');
 
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
@@ -159,8 +185,8 @@
                     if (response.ok) {
                         location.reload();
                     } else {
-                        const error = await response.text();
-                        document.getElementById('login-message').textContent = error;
+                        const error = await response.json();
+                        document.getElementById('login-message').textContent = error.error;
                         document.getElementById('login-message').className = 'error';
                     }
                 } catch (error) {
@@ -182,7 +208,8 @@
                         body: JSON.stringify({ username, password, role })
                     });
                     if (response.ok) {
-                        document.getElementById('register-message').textContent = 'Usuario registrado con éxito';
+                        const data = await response.json();
+                        document.getElementById('register-message').textContent = data.message;
                         document.getElementById('register-message').className = 'success';
                         registerForm.reset();
                     } else {
@@ -208,6 +235,85 @@
                 }
             });
         }
+
+        // Funciones para manejar las nuevas funcionalidades
+        async function viewStudents() {
+            try {
+                const response = await fetch('/alumnos');
+                if (response.ok) {
+                    const students = await response.json();
+                    contentArea.innerHTML = `
+                        <h2>Lista de Alumnos</h2>
+                        <ul>
+                            ${students.map(student => `<li>${student.name} - ${student.classRoom}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    contentArea.innerHTML = '<p class="error">No se pudieron cargar los alumnos</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function addStudent() {
+            contentArea.innerHTML = `
+                <h2>Añadir Alumno</h2>
+                <form id="add-student-form">
+                    <label for="student-name">Nombre:</label>
+                    <input type="text" id="student-name" required>
+                    <label for="student-classroom">Aula:</label>
+                    <input type="text" id="student-classroom" required>
+                    <button type="submit">Añadir</button>
+                </form>
+            `;
+
+            document.getElementById('add-student-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('student-name').value;
+                const classRoom = document.getElementById('student-classroom').value;
+                try {
+                    const response = await fetch('/alumnos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, classRoom })
+                    });
+                    if (response.ok) {
+                        contentArea.innerHTML = '<p class="success">Alumno añadido con éxito</p>';
+                    } else {
+                        const error = await response.json();
+                        contentArea.innerHTML = `<p class="error">${error.message}</p>`;
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        async function viewChildren() {
+            try {
+                const response = await fetch('/mis-hijos');
+                if (response.ok) {
+                    const children = await response.json();
+                    contentArea.innerHTML = `
+                        <h2>Mis Hijos</h2>
+                        <ul>
+                            ${children.map(child => `<li>${child.name} - ${child.classRoom}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    contentArea.innerHTML = '<p class="error">No se pudieron cargar los datos de los hijos</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Agregar event listeners para los nuevos botones
+        document.getElementById('view-students-btn')?.addEventListener('click', viewStudents);
+        document.getElementById('add-student-btn')?.addEventListener('click', addStudent);
+        document.getElementById('view-children-btn')?.addEventListener('click', viewChildren);
     </script>
 </body>
+
 </html>
