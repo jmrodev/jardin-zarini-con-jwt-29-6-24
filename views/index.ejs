@@ -153,189 +153,210 @@
             <div id="login-message"></div>
         <% } %>
     </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('login-form');
-            const registerForm = document.getElementById('register-form');
-            const logoutBtn = document.getElementById('logout-btn');
-            const contentArea = document.getElementById('content-area');
-
-            if (loginForm) {
-                loginForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const username = document.getElementById('username').value;
-                    const password = document.getElementById('password').value;
-                    try {
-                        const response = await fetch('/login', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ username, password })
-                        });
+         document.addEventListener('DOMContentLoaded', () => {
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const logoutBtn = document.getElementById('logout-btn');
+        const contentArea = document.getElementById('content-area');
+    
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                try {
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = await response.json();
                         if (response.ok) {
                             location.reload();
                         } else {
-                            const error = await response.json();
-                            document.getElementById('login-message').textContent = error.error;
+                            document.getElementById('login-message').textContent = data.error;
                             document.getElementById('login-message').className = 'error';
                         }
-                    } catch (error) {
-                        console.error('Error:', error);
-                    }
-                });
-            }
-
-            if (registerForm) {
-                registerForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const username = document.getElementById('reg-username').value;
-                    const password = document.getElementById('reg-password').value;
-                    const role = document.getElementById('reg-role').value;
-                    try {
-                        const response = await fetch('/register', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ username, password, role })
-                        });
-                        if (response.ok) {
-                            const data = await response.json();
-                            document.getElementById('register-message').textContent = data.message;
-                            document.getElementById('register-message').className = 'success';
-                            registerForm.reset();
-                        } else {
-                            const error = await response.json();
-                            document.getElementById('register-message').textContent = error.error;
-                            document.getElementById('register-message').className = 'error';
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                    }
-                });
-            }
-
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', async () => {
-                    try {
-                        const response = await fetch('/logout', { method: 'POST' });
-                        if (response.ok) {
-                            location.reload();
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                    }
-                });
-            }
-
-            async function viewStudents() {
-                try {
-                    const response = await fetch('/alumnos');
-                    if (response.ok) {
-                        const students = await response.json();
-                        contentArea.innerHTML = `
-                            <h2>Lista de Alumnos</h2>
-                            <ul>
-                                ${students.map(student => `<li>${student.name} - ${student.classRoom}</li>`).join('')}
-                            </ul>
-                        `;
                     } else {
-                        contentArea.innerHTML = '<p class="error">No se pudieron cargar los alumnos</p>';
+                        console.error('Expected JSON, but got:', await response.text());
                     }
                 } catch (error) {
                     console.error('Error:', error);
                 }
+            });
+        }
+    
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('reg-username').value;
+                const password = document.getElementById('reg-password').value;
+                const role = document.getElementById('reg-role').value;
+                try {
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password, role })
+                    });
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = await response.json();
+                        if (response.ok) {
+                            document.getElementById('register-message').textContent = data.message;
+                            document.getElementById('register-message').className = 'success';
+                            registerForm.reset();
+                        } else {
+                            document.getElementById('register-message').textContent = data.error;
+                            document.getElementById('register-message').className = 'error';
+                        }
+                    } else {
+                        console.error('Expected JSON, but got:', await response.text());
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/logout', { method: 'POST' });
+                    if (response.ok) {
+                        location.reload();
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    
+        async function viewStudents() {
+            try {
+                const response = await fetch('/alumnos');
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const students = await response.json();
+                    contentArea.innerHTML = `
+                        <h2>Lista de Alumnos</h2>
+                        <ul>
+                            ${students.map(student => `<li>${student.name} - ${student.classRoom}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    contentArea.innerHTML = '<p class="error">No se pudieron cargar los alumnos</p>';
+                    console.error('Expected JSON, but got:', await response.text());
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-
-            async function addStudent() {
-                contentArea.innerHTML = `
-                    <h2>Añadir Alumno</h2>
-                    <form id="add-student-form">
-                        <label for="student-id">ID:</label>
-                        <input type="text" id="student-id" required>
-                        
-                        <label for="student-name">Nombre:</label>
-                        <input type="text" id="student-name" required>
-                        
-                        <label for="student-dni">DNI:</label>
-                        <input type="number" id="student-dni" required>
-                        
-                        <label for="student-birth-date">Fecha de Nacimiento:</label>
-                        <input type="date" id="student-birth-date" required>
-                        
-                        <label for="student-address">Dirección:</label>
-                        <input type="text" id="student-address" required>
-                        
-                        <label for="student-contacts">Contactos:</label>
-                        <input type="text" id="student-contacts" required>
-                        
-                        <label for="student-turn">Turno:</label>
-                        <input type="text" id="student-turn" required>
-                        
-                        <label for="student-classroom">Aula:</label>
-                        <input type="text" id="student-classroom" required>
-                        
-                        <label for="student-teacher-id">ID del Profesor:</label>
-                        <input type="text" id="student-teacher-id" required>
-                        
-                        <button type="submit">Añadir</button>
-                        <p id="add-student-message"></p>
-                    </form>
-                `;
-
-                document.getElementById('add-student-form').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const studentData = {
-                        id: document.getElementById('student-id').value,
-                        name: document.getElementById('student-name').value,
-                        dni: document.getElementById('student-dni').value,
-                        birthDate: document.getElementById('student-birth-date').value,
-                        address: document.getElementById('student-address').value,
-                        contacts: document.getElementById('student-contacts').value,
-                        turn: document.getElementById('student-turn').value,
-                        classRoom: document.getElementById('student-classroom').value,
-                        teacherId: document.getElementById('student-teacher-id').value
-                    };
-                    try {
-                        const response = await fetch('/alumnos', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(studentData)
-                        });
+        }
+    
+        async function addStudent() {
+            contentArea.innerHTML = `
+                <h2>Añadir Alumno</h2>
+                <form id="add-student-form">
+                    <label for="student-id">ID:</label>
+                    <input type="text" id="student-id" required>
+                    
+                    <label for="student-name">Nombre:</label>
+                    <input type="text" id="student-name" required>
+                    
+                    <label for="student-dni">DNI:</label>
+                    <input type="number" id="student-dni" required>
+                    
+                    <label for="student-birth-date">Fecha de Nacimiento:</label>
+                    <input type="date" id="student-birth-date" required>
+                    
+                    <label for="student-address">Dirección:</label>
+                    <input type="text" id="student-address" required>
+                    
+                    <label for="student-contacts">Contactos:</label>
+                    <input type="text" id="student-contacts" required>
+                    
+                    <label for="student-turn">Turno:</label>
+                    <input type="text" id="student-turn" required>
+                    
+                    <label for="student-classroom">Aula:</label>
+                    <input type="text" id="student-classroom" required>
+                    
+                    <label for="student-teacher-id">ID del Profesor:</label>
+                    <input type="text" id="student-teacher-id" required>
+                    
+                    <button type="submit">Añadir</button>
+                    <p id="add-student-message"></p>
+                </form>
+            `;
+    
+            document.getElementById('add-student-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const studentData = {
+                    id: document.getElementById('student-id').value,
+                    name: document.getElementById('student-name').value,
+                    dni: document.getElementById('student-dni').value,
+                    birthDate: document.getElementById('student-birth-date').value,
+                    address: document.getElementById('student-address').value,
+                    contacts: document.getElementById('student-contacts').value,
+                    turn: document.getElementById('student-turn').value,
+                    classRoom: document.getElementById('student-classroom').value,
+                    teacherId: document.getElementById('student-teacher-id').value
+                };
+                try {
+                    const response = await fetch('/alumnos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(studentData)
+                    });
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
                         if (response.ok) {
                             contentArea.innerHTML = '<p class="success">Alumno añadido con éxito</p>';
                         } else {
                             const error = await response.json();
                             contentArea.innerHTML = `<p class="error">${error.message}</p>`;
                         }
-                    } catch (error) {
-                        console.error('Error:', error);
-                    }
-                });
-            }
-
-            async function viewChildren() {
-                try {
-                    const response = await fetch('/mis-hijos');
-                    if (response.ok) {
-                        const children = await response.json();
-                        contentArea.innerHTML = `
-                            <h2>Mis Hijos</h2>
-                            <ul>
-                                ${children.map(child => `<li>${child.name} - ${child.classRoom}</li>`).join('')}
-                            </ul>
-                        `;
                     } else {
-                        contentArea.innerHTML = '<p class="error">No se pudieron cargar los datos de los hijos</p>';
+                        contentArea.innerHTML = '<p class="error">No se pudo añadir el alumno</p>';
+                        console.error('Expected JSON, but got:', await response.text());
                     }
                 } catch (error) {
                     console.error('Error:', error);
                 }
+            });
+        }
+    
+        async function viewChildren() {
+            try {
+                const response = await fetch('/mis-hijos');
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const children = await response.json();
+                    contentArea.innerHTML = `
+                        <h2>Mis Hijos</h2>
+                        <ul>
+                            ${children.map(child => `<li>${child.name} - ${child.classRoom}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    contentArea.innerHTML = '<p class="error">No se pudieron cargar los datos de los hijos</p>';
+                    console.error('Expected JSON, but got:', await response.text());
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-
-            document.getElementById('view-students-btn')?.addEventListener('click', viewStudents);
-            document.getElementById('add-student-btn')?.addEventListener('click', addStudent);
-            document.getElementById('view-children-btn')?.addEventListener('click', viewChildren);
-        });
+        }
+    
+        document.getElementById('view-students-btn')?.addEventListener('click', viewStudents);
+        document.getElementById('add-student-btn')?.addEventListener('click', addStudent);
+        document.getElementById('view-children-btn')?.addEventListener('click', viewChildren);
+    });
+    
     </script>
+
+   
 </body>
 
 </html>
