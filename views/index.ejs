@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión Escolar</title>
     <style>
-        <>body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -25,8 +25,7 @@
             width: 300px;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             text-align: center;
             color: #333;
         }
@@ -41,9 +40,7 @@
             color: #555;
         }
 
-        input[type="text"],
-        input[type="password-log"],
-        input[type="password-reg"] {
+        input[type="text"], input[type="password"], input[type="date"], input[type="number"] {
             padding: 0.5rem;
             margin-bottom: 1rem;
             border: 1px solid #ccc;
@@ -69,18 +66,12 @@
             margin-bottom: 1rem;
         }
 
-        .welcome {
+        .success {
+            color: green;
             text-align: center;
             margin-bottom: 1rem;
         }
 
-        .error {
-            color: red;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        /* ... (mantener los estilos existentes) ... */
         .nav-menu {
             margin-top: 1rem;
             display: flex;
@@ -113,25 +104,24 @@
 
         <% if (user) { %>
             <p class="welcome">Bienvenido, <%= user.username %>!</p>
-            <p>Rol: <%= user.role %>
-            </p>
+            <p>Rol: <%= user.role %></p>
             <button id="logout-btn">Cerrar sesión</button>
 
             <div class="nav-menu">
-                <% if (['admin', 'directora' , 'vicedirectora' , 'preceptora' , 'maestra' ].includes(user.role)) { %>
+                <% if (['admin', 'directora', 'vicedirectora', 'preceptora', 'maestra'].includes(user.role)) { %>
                     <button id="view-students-btn">Ver Alumnos</button>
-                    <% } %>
-                        <% if (['admin', 'preceptora' , 'maestra' ].includes(user.role)) { %>
-                            <button id="add-student-btn">Añadir Alumno</button>
-                            <% } %>
-                                <% if (user.role==='padre' ) { %>
-                                    <button id="view-children-btn">Ver Mis Hijos</button>
-                                    <% } %>
+                <% } %>
+                <% if (['admin', 'preceptora', 'maestra'].includes(user.role)) { %>
+                    <button id="add-student-btn">Añadir Alumno</button>
+                <% } %>
+                <% if (user.role === 'padre') { %>
+                    <button id="view-children-btn">Ver Mis Hijos</button>
+                <% } %>
             </div>
 
             <div id="content-area"></div>
 
-            <% if (user.role==='admin' ) { %>
+            <% if (user.role === 'admin') { %>
                 <h2>Registrar nuevo usuario</h2>
                 <form id="register-form">
                     <label for="reg-username">Usuario:</label>
@@ -150,169 +140,201 @@
                     <button type="submit">Registrar</button>
                 </form>
                 <div id="register-message"></div>
-                <% } %>
-
-                    <% } else { %>
-                        <h2>Iniciar sesión</h2>
-                        <form id="login-form">
-                            <label for="username">Usuario:</label>
-                            <input type="text" id="username" name="username" required>
-                            <label for="password">Contraseña:</label>
-                            <input type="password" id="password" name="password" required>
-                            <button type="submit">Iniciar sesión</button>
-                        </form>
-                        <div id="login-message"></div>
-                        <% } %>
+            <% } %>
+        <% } else { %>
+            <h2>Iniciar sesión</h2>
+            <form id="login-form">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            <div id="login-message"></div>
+        <% } %>
     </div>
 
     <script>
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        const logoutBtn = document.getElementById('logout-btn');
-        const contentArea = document.getElementById('content-area');
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const logoutBtn = document.getElementById('logout-btn');
+            const contentArea = document.getElementById('content-area');
 
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                try {
-                    const response = await fetch('/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ username, password })
-                    });
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        const error = await response.json();
-                        document.getElementById('login-message').textContent = error.error;
-                        document.getElementById('login-message').className = 'error';
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    try {
+                        const response = await fetch('/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password })
+                        });
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            const error = await response.json();
+                            document.getElementById('login-message').textContent = error.error;
+                            document.getElementById('login-message').className = 'error';
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
                     }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
-
-        if (registerForm) {
-            registerForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const username = document.getElementById('reg-username').value;
-                const password = document.getElementById('reg-password').value;
-                const role = document.getElementById('reg-role').value;
-                try {
-                    const response = await fetch('/register', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ username, password, role })
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        document.getElementById('register-message').textContent = data.message;
-                        document.getElementById('register-message').className = 'success';
-                        registerForm.reset();
-                    } else {
-                        const error = await response.json();
-                        document.getElementById('register-message').textContent = error.error;
-                        document.getElementById('register-message').className = 'error';
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
-
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', async () => {
-                try {
-                    const response = await fetch('/logout', { method: 'POST' });
-                    if (response.ok) {
-                        location.reload();
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
-
-        // Funciones para manejar las nuevas funcionalidades
-        async function viewStudents() {
-            try {
-                const response = await fetch('/alumnos');
-                if (response.ok) {
-                    const students = await response.json();
-                    contentArea.innerHTML = `
-                        <h2>Lista de Alumnos</h2>
-                        <ul>
-                            ${students.map(student => `<li>${student.name} - ${student.classRoom}</li>`).join('')}
-                        </ul>
-                    `;
-                } else {
-                    contentArea.innerHTML = '<p class="error">No se pudieron cargar los alumnos</p>';
-                }
-            } catch (error) {
-                console.error('Error:', error);
+                });
             }
-        }
 
-        async function addStudent() {
-            contentArea.innerHTML = `
-                <h2>Añadir Alumno</h2>
-                <form id="add-student-form">
-                    <label for="student-name">Nombre:</label>
-                    <input type="text" id="student-name" required>
-                    <label for="student-classroom">Aula:</label>
-                    <input type="text" id="student-classroom" required>
-                    <button type="submit">Añadir</button>
-                </form>
-            `;
+            if (registerForm) {
+                registerForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const username = document.getElementById('reg-username').value;
+                    const password = document.getElementById('reg-password').value;
+                    const role = document.getElementById('reg-role').value;
+                    try {
+                        const response = await fetch('/register', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password, role })
+                        });
+                        if (response.ok) {
+                            const data = await response.json();
+                            document.getElementById('register-message').textContent = data.message;
+                            document.getElementById('register-message').className = 'success';
+                            registerForm.reset();
+                        } else {
+                            const error = await response.json();
+                            document.getElementById('register-message').textContent = error.error;
+                            document.getElementById('register-message').className = 'error';
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
 
-            document.getElementById('add-student-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('student-name').value;
-                const classRoom = document.getElementById('student-classroom').value;
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        const response = await fetch('/logout', { method: 'POST' });
+                        if (response.ok) {
+                            location.reload();
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            async function viewStudents() {
                 try {
-                    const response = await fetch('/alumnos', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name, classRoom })
-                    });
+                    const response = await fetch('/alumnos');
                     if (response.ok) {
-                        contentArea.innerHTML = '<p class="success">Alumno añadido con éxito</p>';
+                        const students = await response.json();
+                        contentArea.innerHTML = `
+                            <h2>Lista de Alumnos</h2>
+                            <ul>
+                                ${students.map(student => `<li>${student.name} - ${student.classRoom}</li>`).join('')}
+                            </ul>
+                        `;
                     } else {
-                        const error = await response.json();
-                        contentArea.innerHTML = `<p class="error">${error.message}</p>`;
+                        contentArea.innerHTML = '<p class="error">No se pudieron cargar los alumnos</p>';
                     }
                 } catch (error) {
                     console.error('Error:', error);
                 }
-            });
-        }
-
-        async function viewChildren() {
-            try {
-                const response = await fetch('/mis-hijos');
-                if (response.ok) {
-                    const children = await response.json();
-                    contentArea.innerHTML = `
-                        <h2>Mis Hijos</h2>
-                        <ul>
-                            ${children.map(child => `<li>${child.name} - ${child.classRoom}</li>`).join('')}
-                        </ul>
-                    `;
-                } else {
-                    contentArea.innerHTML = '<p class="error">No se pudieron cargar los datos de los hijos</p>';
-                }
-            } catch (error) {
-                console.error('Error:', error);
             }
-        }
 
-        // Agregar event listeners para los nuevos botones
-        document.getElementById('view-students-btn')?.addEventListener('click', viewStudents);
-        document.getElementById('add-student-btn')?.addEventListener('click', addStudent);
-        document.getElementById('view-children-btn')?.addEventListener('click', viewChildren);
+            async function addStudent() {
+                contentArea.innerHTML = `
+                    <h2>Añadir Alumno</h2>
+                    <form id="add-student-form">
+                        <label for="student-id">ID:</label>
+                        <input type="text" id="student-id" required>
+                        
+                        <label for="student-name">Nombre:</label>
+                        <input type="text" id="student-name" required>
+                        
+                        <label for="student-dni">DNI:</label>
+                        <input type="number" id="student-dni" required>
+                        
+                        <label for="student-birth-date">Fecha de Nacimiento:</label>
+                        <input type="date" id="student-birth-date" required>
+                        
+                        <label for="student-address">Dirección:</label>
+                        <input type="text" id="student-address" required>
+                        
+                        <label for="student-contacts">Contactos:</label>
+                        <input type="text" id="student-contacts" required>
+                        
+                        <label for="student-turn">Turno:</label>
+                        <input type="text" id="student-turn" required>
+                        
+                        <label for="student-classroom">Aula:</label>
+                        <input type="text" id="student-classroom" required>
+                        
+                        <label for="student-teacher-id">ID del Profesor:</label>
+                        <input type="text" id="student-teacher-id" required>
+                        
+                        <button type="submit">Añadir</button>
+                        <p id="add-student-message"></p>
+                    </form>
+                `;
+
+                document.getElementById('add-student-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const studentData = {
+                        id: document.getElementById('student-id').value,
+                        name: document.getElementById('student-name').value,
+                        dni: document.getElementById('student-dni').value,
+                        birthDate: document.getElementById('student-birth-date').value,
+                        address: document.getElementById('student-address').value,
+                        contacts: document.getElementById('student-contacts').value,
+                        turn: document.getElementById('student-turn').value,
+                        classRoom: document.getElementById('student-classroom').value,
+                        teacherId: document.getElementById('student-teacher-id').value
+                    };
+                    try {
+                        const response = await fetch('/alumnos', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(studentData)
+                        });
+                        if (response.ok) {
+                            contentArea.innerHTML = '<p class="success">Alumno añadido con éxito</p>';
+                        } else {
+                            const error = await response.json();
+                            contentArea.innerHTML = `<p class="error">${error.message}</p>`;
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            async function viewChildren() {
+                try {
+                    const response = await fetch('/mis-hijos');
+                    if (response.ok) {
+                        const children = await response.json();
+                        contentArea.innerHTML = `
+                            <h2>Mis Hijos</h2>
+                            <ul>
+                                ${children.map(child => `<li>${child.name} - ${child.classRoom}</li>`).join('')}
+                            </ul>
+                        `;
+                    } else {
+                        contentArea.innerHTML = '<p class="error">No se pudieron cargar los datos de los hijos</p>';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            document.getElementById('view-students-btn')?.addEventListener('click', viewStudents);
+            document.getElementById('add-student-btn')?.addEventListener('click', addStudent);
+            document.getElementById('view-children-btn')?.addEventListener('click', viewChildren);
+        });
     </script>
 </body>
 
