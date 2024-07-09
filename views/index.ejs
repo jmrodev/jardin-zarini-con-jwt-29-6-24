@@ -106,6 +106,7 @@
     <div class="container">
         <h1>Sistema de Gestión Escolar</h1>
 
+      
         <% if (user) { %>
             <p class="welcome">Bienvenido, <%= user.username %>!</p>
             <p>Rol: <%= user.role %>
@@ -171,7 +172,7 @@
                     const username = document.getElementById('username').value;
                     const password = document.getElementById('password').value;
                     try {
-                        const response = await fetch('/login', {
+                        const response = await fetch('/auth/login', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ username, password })
@@ -180,6 +181,7 @@
                         if (contentType && contentType.includes('application/json')) {
                             const data = await response.json();
                             if (response.ok) {
+                                console.log(data);
                                 // Aquí deberías recibir el token del servidor y almacenarlo en una cookie
                                 document.cookie = `access_token=${data.token}; Secure; SameSite=None`; // Ejemplo de cómo establecer la cookie
                                 location.reload(); // Recargar la página después de iniciar sesión
@@ -204,11 +206,12 @@
                     const password = document.getElementById('reg-password').value;
                     const role = document.getElementById('reg-role').value;
                     try {
-                        const response = await fetch('/register', {
+                        const response = await fetch('/auth/register', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ username, password, role })
                         });
+                        console.log(response);
                         const contentType = response.headers.get('content-type');
                         if (contentType && contentType.includes('application/json')) {
                             const data = await response.json();
@@ -232,7 +235,7 @@
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', async () => {
                     try {
-                        const response = await fetch('/logout', { method: 'POST' });
+                        const response = await fetch('/auth/logout', { method: 'POST' });
                         if (response.ok) {
                             location.reload();
                         }
@@ -244,7 +247,7 @@
 
             async function viewStudents() {
                 try {
-                    const response = await fetch('/alumnos');
+                    const response = await fetch('/students');
                     const contentType = response.headers.get('content-type');
                     if (contentType && contentType.includes('application/json')) {
                         const students = await response.json();
@@ -264,77 +267,85 @@
             }
 
             async function addStudent() {
-                contentArea.innerHTML = `
-                <h2>Añadir Alumno</h2>
-                <form id="add-student-form">
-                    <label for="student-id">ID:</label>
-                    <input type="text" id="student-id" required>
-                    
-                    <label for="student-name">Nombre:</label>
-                    <input type="text" id="student-name" required>
-                    
-                    <label for="student-dni">DNI:</label>
-                    <input type="number" id="student-dni" required>
-                    
-                    <label for="student-birth-date">Fecha de Nacimiento:</label>
-                    <input type="date" id="student-birth-date" required>
-                    
-                    <label for="student-address">Dirección:</label>
-                    <input type="text" id="student-address" required>
-                    
-                    <label for="student-contacts">Contactos:</label>
-                    <input type="text" id="student-contacts" required>
-                    
-                    <label for="student-turn">Turno:</label>
-                    <input type="text" id="student-turn" required>
-                    
-                    <label for="student-classroom">Aula:</label>
-                    <input type="text" id="student-classroom" required>
-                    
-                    <label for="student-teacher-id">ID del Profesor:</label>
-                    <input type="text" id="student-teacher-id" required>
-                    
-                    <button type="submit">Añadir</button>
-                    <p id="add-student-message"></p>
-                </form>
-            `;
+    contentArea.innerHTML = `
+    <h2>Añadir Alumno</h2>
+    <form id="add-student-form">
+        <label for="student-name">Nombre:</label>
+        <input type="text" id="student-name" required>
+        
+        <label for="student-dni">DNI:</label>
+        <input type="number" id="student-dni" required>
+        
+        <label for="student-birth-date">Fecha de Nacimiento:</label>
+        <input type="date" id="student-birth-date" required>
+        
+        <label for="student-address">Dirección:</label>
+        <input type="text" id="student-address" required>
+        
+        <label for="student-contact-name">Nombre del Contacto:</label>
+        <input type="text" id="student-contact-name" required>
+        
+        <label for="student-contact-relationship">Relación del Contacto:</label>
+        <input type="text" id="student-contact-relationship" required>
+        
+        <label for="student-contact-phone">Teléfono del Contacto:</label>
+        <input type="text" id="student-contact-phone" required>
+        
+        <label for="student-turn">Turno:</label>
+        <select id="student-turn" required>
+            <option value="morning">Mañana</option>
+            <option value="afternoon">Tarde</option>
+        </select>
+        
+        <label for="student-classroom">Aula:</label>
+        <input type="text" id="student-classroom" required>
+        
+        <label for="student-teacher-id">ID del Profesor:</label>
+        <input type="text" id="student-teacher-id" required>
+        
+        <button type="submit">Añadir</button>
+    </form>
+    <p id="add-student-message"></p>
+    `;
 
-                document.getElementById('add-student-form').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const studentData = {
-                        id: document.getElementById('student-id').value,
-                        name: document.getElementById('student-name').value,
-                        dni: document.getElementById('student-dni').value,
-                        birthDate: document.getElementById('student-birth-date').value,
-                        address: document.getElementById('student-address').value,
-                        contacts: document.getElementById('student-contacts').value,
-                        turn: document.getElementById('student-turn').value,
-                        classRoom: document.getElementById('student-classroom').value,
-                        teacherId: document.getElementById('student-teacher-id').value
-                    };
-                    try {
-                        const response = await fetch('/alumnos', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(studentData)
-                        });
-                        const contentType = response.headers.get('content-type');
-                        if (contentType && contentType.includes('application/json')) {
-                            if (response.ok) {
-                                contentArea.innerHTML = '<p class="success">Alumno añadido con éxito</p>';
-                            } else {
-                                const error = await response.json();
-                                contentArea.innerHTML = `<p class="error">${error.message}</p>`;
-                            }
-                        } else {
-                            contentArea.innerHTML = '<p class="error">No se pudo añadir el alumno</p>';
-                            console.error('Expected JSON, but got:', await response.text());
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                    }
-                });
+    document.getElementById('add-student-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const studentData = {
+            name: document.getElementById('student-name').value,
+            dni: parseInt(document.getElementById('student-dni').value),
+            birth_date: document.getElementById('student-birth-date').value,
+            address: document.getElementById('student-address').value,
+            contacts: [{
+                name: document.getElementById('student-contact-name').value,
+                relationship: document.getElementById('student-contact-relationship').value,
+                phone: document.getElementById('student-contact-phone').value
+            }],
+            turn: document.getElementById('student-turn').value,
+            classRoom: document.getElementById('student-classroom').value,
+            teacherId: document.getElementById('student-teacher-id').value
+        };
+        try {
+            const response = await fetch('/students', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(studentData)
+            });
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('add-student-message').textContent = 'Alumno añadido con éxito';
+                document.getElementById('add-student-message').className = 'success';
+            } else {
+                const error = await response.json();
+                document.getElementById('add-student-message').textContent = error.message;
+                document.getElementById('add-student-message').className = 'error';
             }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('add-student-message').textContent = 'Error al añadir el alumno';
+            document.getElementById('add-student-message').className = 'error';
+        }
+    });
+}
 
             async function viewChildren() {
                 try {
