@@ -23,12 +23,25 @@ export class UserRepository {
       console.log('username correct ', username)
     }
     // Validaciones
+    const passwordRegexp='^[A-Za-z\d$@$!%*?&]+$'
+    const userNameRexep='^[A-Za-z]+$'
+
     if (username.length < 3)
       throw new Error('Username must be at least 3 characters long')
 
     if (!password || typeof password !== 'string') {
       throw new Error('Password must be a valid string')
     }
+    if (password.length < 8)
+      throw new Error('Password must be at least 8 characters long')
+
+    if (password.match(passwordRegexp) === null)
+      throw new Error('Password must contain only letters,numbers and some special character without spaces')
+
+    if (username.match(userNameRexep) === null)
+      throw new Error('Username must contain only letters')
+
+
     // Verificar si el username ya existe
     const user = await User.findOne({ username })
     if (user) throw new Error('Username already exists')
