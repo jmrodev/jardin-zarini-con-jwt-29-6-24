@@ -39,6 +39,7 @@ export const jwtMiddleware = (req, res, next) => {
 
 // Middleware para autorizar roles específicos
 export const authorizeRoles = (roles) => {
+  console.log('Roles permitidos:', roles); // Registro para depuración
   return (req, res, next) => {
     // Verificar autenticación del usuario
     if (!req.session.user) {
