@@ -177,7 +177,7 @@
           const username = document.getElementById('username').value;
           const password = document.getElementById('password').value;
           try {
-            const response = await fetch('/auth/login', {
+            const response = await fetch('/login', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -191,7 +191,6 @@
             if (contentType && contentType.includes('application/json')) {
               const data = await response.json();
               if (response.ok) {
-                console.log(data);
                 // Aquí deberías recibir el token del servidor y almacenarlo en una cookie
                 document.cookie = `access_token=${data.token}; Secure; SameSite=None`; // Ejemplo de cómo establecer la cookie
                 location.reload(); // Recargar la página después de iniciar sesión
@@ -216,7 +215,7 @@
           const password = document.getElementById('reg-password').value;
           const role = document.getElementById('reg-role').value;
           try {
-            const response = await fetch('/auth/register', {
+            const response = await fetch('/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -227,7 +226,6 @@
                 role
               })
             });
-            console.log(response);
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {
               const data = await response.json();
@@ -251,7 +249,7 @@
       if (logoutBtn) {
         logoutBtn.addEventListener('click', async () => {
           try {
-            const response = await fetch('/auth/logout', {
+            const response = await fetch('/logout', {
               method: 'POST'
             });
             if (response.ok) {

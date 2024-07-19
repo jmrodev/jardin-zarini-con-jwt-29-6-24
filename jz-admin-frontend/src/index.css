@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  
 }
 
 .container {
@@ -17,7 +17,8 @@ body {
   width: 300px;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   color: #333;
 }
@@ -33,7 +34,10 @@ label {
   color: #555;
 }
 
-input[type="text"], input[type="password"], input[type="date"], input[type="number"] {
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"] {
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;

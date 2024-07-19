@@ -51,6 +51,10 @@ export class StudentRepository {
   static async update (id, updateData) {
     const student = await this.getById(id);
     
+    if (Object.keys(updateData).length === 0) {
+      throw new Error('No update data provided');
+    }
+
     Validation.validateUpdateData(updateData);
 
     if (updateData.dni && updateData.dni !== student.dni) {

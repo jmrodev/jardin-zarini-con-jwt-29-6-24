@@ -1,10 +1,10 @@
-import express from 'express';
-import authRoutes from './authRoutes.js';
-import studentRoutes from './studentRoutes.js';
+import express from 'express'
+import authRoutes from './authRoutes.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.use('/auth', authRoutes);
-router.use('/students', studentRoutes);
-
-export { router };
+router.use('/', authRoutes)
+router.get('/test', (req, res) => {
+  res.json({ message: 'Endpoint de prueba exitoso' })
+})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+export { router }
