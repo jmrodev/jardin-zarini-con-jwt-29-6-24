@@ -2,12 +2,11 @@ import DBLocal from 'db-local'
 import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 import { SALTROUNDS } from '../config/config.js'
-// este archivo es el repositorio de usuarios, se encarga de manejar la lógica de la base de datos
-// segun que base de datos se use, se debe importar el modulo correspondiente
-// y adaptar el codigo para que funcione con la base de datos que se este utilizando
 
+// Inicializa DBLocal con el directorio de la base de datos
 const { Schema } = new DBLocal({ path: './db' })
 
+// Define el esquema de usuario
 const User = Schema('User', {
   _id: { type: String, required: true },
   username: { type: String, required: true },
@@ -17,37 +16,60 @@ const User = Schema('User', {
 })
 
 export class UserRepository {
-  // Se utiliza static porque encapsula y no es necesario crear instancias nuevas  de las clases
-  static async create(username, password, role) {
-    //validaciones
-    // if (typeof username !== 'string')
-    //   throw new Error('username must be a string')
+  // Método para crear un nuevo usuario
+  static async create(Userata) {
+    const {username, password, role} = Userata
+    if (username){
+      console.log('username correct ', username)
+    }
+    // Validaciones
     if (username.length < 3)
-      throw new Error('username must be at least 3 characters long ')
+      throw new Error('Username must be at least 3 characters long')
 
-    // verificar si no existe el username
-    const user = await  User.findOne({ username })
-    if (user) throw new Error('username already exists')
+    if (!password || typeof password !== 'string') {
+      throw new Error('Password must be a valid string')
+    }
+    // Verificar si el username ya existe
+    const user = await User.findOne({ username })
+    if (user) throw new Error('Username already exists')
 
-    // encriptar la contraseña
+    console.log('Password:',typeof(password)) // Debugging output
+    console.log('Salt Rounds:', SALTROUNDS) // Debugging output
+
+    // Encriptar la contraseña
     const hash = await bcrypt.hash(password, SALTROUNDS)
 
-    //si la base de datos no genera id unicos
+    // Generar un ID único si la base de datos no lo hace automáticamente
     const id = crypto.randomUUID()
 
+    // Crear y guardar el nuevo usuario
     await User.create({
       _id: id,
       username,
-      password : hash,
+      password: hash,
       role,
     }).save()
 
     return id
   }
 
-  // metodos para agregar en el futuro
-  async getUser(username) {}
-  async getUsers() {}
-  async updateUser(username, data) {}
-  async deleteUser(username) {}
+  // Método para obtener un usuario por username (por implementar)
+  static async getUser(username) {
+    // Implementar la lógica para obtener un usuario por su nombre de usuario
+  }
+
+  // Método para obtener todos los usuarios (por implementar)
+  static async getUsers() {
+    // Implementar la lógica para obtener todos los usuarios
+  }
+
+  // Método para actualizar un usuario (por implementar)
+  static async updateUser(username, data) {
+    // Implementar la lógica para actualizar un usuario
+  }
+
+  // Método para eliminar un usuario (por implementar)
+  static async deleteUser(username) {
+    // Implementar la lógica para eliminar un usuario
+  }
 }

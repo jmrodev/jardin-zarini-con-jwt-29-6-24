@@ -1,19 +1,20 @@
-// authMiddleware.js
 import jwt from 'jsonwebtoken';
 import { SECRET_JWT_KEY } from '../config/config.js';
-import { StudentRepository } from '../repositories/student-repository.js';
 
 // Middleware para autenticar con JWT
 export const jwtMiddleware = (req, res, next) => {
+  // Obtener token desde cookies o encabezado de autorización
   const token = req.cookies.access_token || req.headers['authorization']?.split(' ')[1];
-  req.session = { user: null };
+  req.session = { user: null }; // Inicializar sesión
 
+  // Verificar presencia del token
   if (!token) {
-    console.log('No token provided');
+    console.log('No token provided from authmiddleware'); // Registro para depuración
     return res.status(401).json({ message: 'No se proporcionó token de autenticación' });
   }
 
   try {
+    // Verificar el token JWT
     const data = jwt.verify(token, SECRET_JWT_KEY);
     req.session.user = data;
     console.log('Usuario autenticado:', req.session.user);
@@ -21,13 +22,11 @@ export const jwtMiddleware = (req, res, next) => {
   } catch (error) {
     console.log('Error de token:', error.message);
 
-    // Invalidar la sesión
+    // Invalidar la sesión y limpiar la cookie del token
     req.session.user = null;
-
-    // Limpiar la cookie del token
     res.clearCookie('access_token');
 
-    // Manejar diferentes tipos de errores JWT
+    // Manejar errores de JWT
     if (error instanceof jwt.TokenExpiredError) {
       return res.status(401).json({ message: 'Token expirado. Por favor, inicie sesión nuevamente.' });
     } else if (error instanceof jwt.JsonWebTokenError) {
@@ -41,44 +40,16 @@ export const jwtMiddleware = (req, res, next) => {
 // Middleware para autorizar roles específicos
 export const authorizeRoles = (roles) => {
   return (req, res, next) => {
+    // Verificar autenticación del usuario
     if (!req.session.user) {
       console.log('Usuario no autenticado'); // Registro para depuración
       return res.status(403).json({ message: 'No autorizado' });
     }
+    // Verificar si el rol del usuario está en la lista de roles permitidos
     if (!roles.includes(req.session.user.role)) {
       console.log(`Rol no autorizado: ${req.session.user.role}`); // Registro para depuración
       return res.status(403).json({ message: 'No autorizado' });
     }
     next();
   };
-};
-
-// Middleware para autorizar maestra
-export const authorizeMaestra = async (req, res, next) => {
-  if (req.session.user.role === 'maestra') {
-    const alumno = await StudentRepository.getById(req.params.id);
-    if (req.session.user.classRoom !== alumno.classRoom) {
-      return res.status(403).json({ message: 'No autorizado' });
-    }
-  }
-  next();
-};
-
-// Middleware para autorizar padre
-export const authorizePadre = async (req, res, next) => {
-  const hijo = await StudentRepository.getById(req.params.id);
-  if (hijo.classRoom !== 'sala3') {
-    return res.status(403).json({ message: 'No autorizado' });
-  }
-  next();
-};
-
-// Middleware para autorizar creación por maestra
-export const authorizeMaestraCreate = (req, res, next) => {
-  if (req.session.user.role === 'maestra') {
-    if (req.body.classRoom !== req.session.user.classRoom || req.body.classRoom === 'sala3') {
-      return res.status(403).json({ message: 'No autorizado' });
-    }
-  }
-  next();
 };
