@@ -4,7 +4,7 @@ import authRoutes from './authRoutes.js'
 const router = express.Router()
 
 
-router.get('/test', (req, res) => {
+router.get('/routTest', (req, res) => {
   res.json({ message: 'Endpoint de prueba exitoso' })
 })                   
 router.use('/', authRoutes)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
