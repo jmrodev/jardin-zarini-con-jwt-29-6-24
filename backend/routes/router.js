@@ -9,11 +9,10 @@ router.use(morgan('combined', { stream: logger.stream }))
 
 router.get('/routTest', (req, res) => {
   logger.info('Endpoint de prueba exitoso')
-
   res.json({ message: 'Endpoint de prueba exitoso' })
 })
 
-router.use('/', authRoutes)
+router.use('/api', authRoutes)
 
 router.use((error, req, res, next) => {
   logger.error(

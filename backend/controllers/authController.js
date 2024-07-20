@@ -6,14 +6,15 @@ import { createUser } from '../services/userService.js'
 
 export const getAuthStatus = (req, res) => {
   
-  const { user } = req.session
+  const { user } = req.user
   res.json({ message: 'Auth routes working', user ,
     accessToken: req.cookies.access_token,
+    
   })
 }
 
 export const debugAuth = (req, res) => {
-  res.json({ user: req.session.user })
+  res.json({ user: req.user })
 }
 
 export const loginUser = async (req, res) => {

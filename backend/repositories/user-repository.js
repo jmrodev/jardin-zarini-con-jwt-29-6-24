@@ -1,3 +1,5 @@
+/* The UserRepository class provides methods for interacting with user data in a MongoDB database,
+including creating, updating, deleting, and retrieving user information. */
 // repositories/user-repository.js
 import bcrypt from 'bcrypt';
 import User from '../models/userSchema.js';

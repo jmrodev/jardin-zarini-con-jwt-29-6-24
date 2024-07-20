@@ -1,3 +1,5 @@
+/* This code snippet is setting up a basic Express server in JavaScript. Here's a breakdown of what
+each part is doing: */
 import express from 'express';
 import { PORT } from './config/config.js';
 import { router as routes } from './routes/router.js';
