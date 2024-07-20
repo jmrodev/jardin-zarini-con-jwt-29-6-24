@@ -52,6 +52,7 @@ router.get('/debug', (req, res, next) => {
 
 router.post('/logout', (req, res, next) => {
   logger.info(`Logout attempt for user: ${req.user.username}`)
+  jwtMiddleware(req, res, next)
   logoutUser(req, res, next)
 })
 

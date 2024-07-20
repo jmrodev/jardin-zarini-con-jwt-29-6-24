@@ -56,6 +56,50 @@ export const registerUser = async (req, res) => {
   }
 }
 
-export const logoutUser = (req, res) => {
-  res.clearCookie('access_token').send('Logged out')
-}
+export const logoutUser = async (req, res) => {
+  try {
+    // Verifica si el usuario está autenticado
+    if (!req.user) {
+      return res.status(401).json({ message: 'No authenticated user found' });
+    }
+
+    const { username, jti } = req.user;
+
+    // Registra el intento de logout
+    logger.info(`Logout attempt for user: ${username}`);
+
+    // Limpia la cookie del token
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+
+    // Agrega el token a la lista negra
+    // Asumiendo que jti es un identificador único del token y que tienes una función addToBlacklist implementada
+    if (jti) {
+      await addToBlacklist(jti);
+      logger.info(`Token added to blacklist for user: ${username}`);
+    }
+
+    // Envía una respuesta exitosa
+    res.status(200).json({ 
+      message: 'Logout successful',
+      redirectUrl: '/login',
+      clearLocalStorage: true
+    });
+
+    // Registra el logout exitoso
+    logger.info(`User logged out successfully: ${username}`);
+
+  } catch (error) {
+    // Registra el error
+    logger.error(`Error during logout for user: ${req.user?.username || 'unknown'}`, { error });
+
+    // Envía una respuesta de error
+    res.status(500).json({ 
+      message: 'Error during logout process',
+      error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message
+    });
+  }
+};

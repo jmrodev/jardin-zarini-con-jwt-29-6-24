@@ -118,3 +118,15 @@
 {"level":"info","message":"Auth status checked for user: juanc","service":"user-service","timestamp":"2024-07-20 19:31:45"}
 {"error":{},"level":"error","message":"Auth Error: Converting circular structure to JSON\n    --> starting at object with constructor 'Socket'\n    |     property 'parser' -> object with constructor 'HTTPParser'\n    --- property 'socket' closes the circle","route":"/api/protected","service":"user-service","timestamp":"2024-07-20 19:31:45","user":"juanc"}
 {"level":"info","message":"::1 - - [20/Jul/2024:22:31:45 +0000] \"GET /api/protected HTTP/1.1\" 500 217 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:31:45"}
+{"level":"info","message":"Auth Route accessed: GET /api/protected","service":"user-service","timestamp":"2024-07-20 19:33:20"}
+{"level":"info","message":"Auth status checked for user: juanc","service":"user-service","timestamp":"2024-07-20 19:33:20"}
+{"level":"info","message":"::1 - - [20/Jul/2024:22:33:20 +0000] \"GET /api/protected HTTP/1.1\" 200 223 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:33:20"}
+{"level":"info","message":"Auth Route accessed: GET /api/logout","service":"user-service","timestamp":"2024-07-20 19:34:16"}
+{"level":"info","message":"::1 - - [20/Jul/2024:22:34:16 +0000] \"GET /api/logout HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:34:16"}
+{"level":"info","message":"Auth Route accessed: GET /api/logout","service":"user-service","timestamp":"2024-07-20 19:44:12"}
+{"level":"info","message":"::1 - - [20/Jul/2024:22:44:12 +0000] \"GET /api/logout HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:44:12"}
+{"level":"info","message":"::1 - - [20/Jul/2024:22:44:32 +0000] \"GET /logout HTTP/1.1\" 404 145 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:44:32"}
+{"level":"info","message":"Auth Route accessed: GET /api/logout","service":"user-service","timestamp":"2024-07-20 19:44:40"}
+{"level":"info","message":"::1 - - [20/Jul/2024:22:44:40 +0000] \"GET /api/logout HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:44:40"}
+{"level":"info","message":"Auth Route accessed: GET /api/logout","service":"user-service","timestamp":"2024-07-20 19:48:41"}
+{"level":"info","message":"::1 - - [20/Jul/2024:22:48:41 +0000] \"GET /api/logout HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:48:41"}
