@@ -7,14 +7,10 @@ import { jsonMiddleware } from './middlewares/jsonMiddleware.js';
 import {cookieMiddleware} from './middlewares/cookieMiddleware.js';
 
 const app = express();
-
 // Middlewares
 app.use(corsMiddleware);
 app.use(cookieMiddleware);
-//app.use(cookieParser());
 app.use(jsonMiddleware);
-app.use(express.json());
-
 app.use('/', routes);
 
 app.listen(PORT, () => {

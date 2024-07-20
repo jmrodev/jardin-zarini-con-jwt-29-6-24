@@ -9,7 +9,6 @@ export const jwtMiddleware = (req, res, next) => {
 
   // Verificar presencia del token
   if (!token) {
-    console.log('No token provided from authmiddleware'); // Registro para depuración
     return res.status(401).json({ message: 'No se proporcionó token de autenticación' });
   }
 
@@ -17,10 +16,8 @@ export const jwtMiddleware = (req, res, next) => {
     // Verificar el token JWT
     const data = jwt.verify(token, SECRET_JWT_KEY);
     req.session.user = data;
-    console.log('Usuario autenticado:', req.session.user);
     next();
   } catch (error) {
-    console.log('Error de token:', error.message);
 
     // Invalidar la sesión y limpiar la cookie del token
     req.session.user = null;
@@ -39,16 +36,13 @@ export const jwtMiddleware = (req, res, next) => {
 
 // Middleware para autorizar roles específicos
 export const authorizeRoles = (roles) => {
-  console.log('Roles permitidos:', roles); // Registro para depuración
   return (req, res, next) => {
     // Verificar autenticación del usuario
     if (!req.session.user) {
-      console.log('Usuario no autenticado'); // Registro para depuración
       return res.status(403).json({ message: 'No autorizado' });
     }
     // Verificar si el rol del usuario está en la lista de roles permitidos
     if (!roles.includes(req.session.user.role)) {
-      console.log(`Rol no autorizado: ${req.session.user.role}`); // Registro para depuración
       return res.status(403).json({ message: 'No autorizado' });
     }
     next();

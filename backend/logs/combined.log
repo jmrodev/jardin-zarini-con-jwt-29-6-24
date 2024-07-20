@@ -1,0 +1,39 @@
+{"level":"info","message":"Auth Route accessed: GET /","service":"user-service","timestamp":"2024-07-20 12:50:54"}
+{"error":{},"level":"error","message":"Auth Error: Cannot read properties of undefined (reading 'username')","route":"/","service":"user-service","timestamp":"2024-07-20 12:50:54","user":"unauthenticated"}
+{"level":"info","message":"::1 - - [20/Jul/2024:15:50:54 +0000] \"GET / HTTP/1.1\" 500 68 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 12:50:54"}
+{"level":"info","message":"Auth Route accessed: POST /login","service":"user-service","timestamp":"2024-07-20 12:51:05"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-20 12:51:05"}
+{"level":"info","message":"::1 - - [20/Jul/2024:15:51:05 +0000] \"POST /login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 12:51:05"}
+{"level":"info","message":"Auth Route accessed: POST /login","service":"user-service","timestamp":"2024-07-20 12:53:36"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-20 12:53:36"}
+{"level":"info","message":"::1 - - [20/Jul/2024:15:53:36 +0000] \"POST /login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 12:53:36"}
+{"level":"info","message":"Auth Route accessed: POST /students","service":"user-service","timestamp":"2024-07-20 12:53:48"}
+{"level":"info","message":"::1 - - [20/Jul/2024:15:53:48 +0000] \"POST /students HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 12:53:48"}
+{"level":"info","message":"Auth Route accessed: POST /register","service":"user-service","timestamp":"2024-07-20 12:53:59"}
+{"level":"info","message":"Registration attempt for user: juanc","service":"user-service","timestamp":"2024-07-20 12:53:59"}
+{"level":"info","message":"::1 - - [20/Jul/2024:15:53:59 +0000] \"POST /register HTTP/1.1\" 400 38 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 12:53:59"}
+{"level":"info","message":"Auth Route accessed: GET /protectedTest","service":"user-service","timestamp":"2024-07-20 12:54:13"}
+{"error":{},"level":"error","message":"Auth Error: Cannot read properties of undefined (reading 'username')","route":"/protectedTest","service":"user-service","timestamp":"2024-07-20 12:54:13","user":"unauthenticated"}
+{"level":"info","message":"::1 - - [20/Jul/2024:15:54:13 +0000] \"GET /protectedTest HTTP/1.1\" 500 68 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 12:54:13"}
+{"level":"info","message":"Auth Route accessed: POST /login","service":"user-service","timestamp":"2024-07-20 13:14:55"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-20 13:14:55"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:14:55 +0000] \"POST /login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:14:55"}
+{"level":"info","message":"Auth Route accessed: GET /protectedTest","service":"user-service","timestamp":"2024-07-20 13:15:00"}
+{"error":{},"level":"error","message":"Auth Error: Cannot read properties of undefined (reading 'username')","route":"/protectedTest","service":"user-service","timestamp":"2024-07-20 13:15:00","user":"unauthenticated"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:00 +0000] \"GET /protectedTest HTTP/1.1\" 500 68 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:00"}
+{"level":"info","message":"Auth Route accessed: GET /","service":"user-service","timestamp":"2024-07-20 13:15:08"}
+{"error":{},"level":"error","message":"Auth Error: Cannot read properties of undefined (reading 'username')","route":"/","service":"user-service","timestamp":"2024-07-20 13:15:08","user":"unauthenticated"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:08 +0000] \"GET / HTTP/1.1\" 500 68 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:08"}
+{"level":"info","message":"Auth Route accessed: GET /authTest","service":"user-service","timestamp":"2024-07-20 13:15:17"}
+{"level":"info","message":"Auth test endpoint accessed","service":"user-service","timestamp":"2024-07-20 13:15:17"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:17 +0000] \"GET /authTest HTTP/1.1\" 200 40 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:17"}
+{"level":"info","message":"Auth Route accessed: GET /","service":"user-service","timestamp":"2024-07-20 13:15:23"}
+{"error":{},"level":"error","message":"Auth Error: Cannot read properties of undefined (reading 'username')","route":"/","service":"user-service","timestamp":"2024-07-20 13:15:23","user":"unauthenticated"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:23 +0000] \"GET / HTTP/1.1\" 500 68 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:23"}
+{"level":"info","message":"Auth Route accessed: GET /","service":"user-service","timestamp":"2024-07-20 13:15:34"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:34 +0000] \"GET / HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:34"}
+{"level":"info","message":"Auth Route accessed: GET /authTest","service":"user-service","timestamp":"2024-07-20 13:15:40"}
+{"level":"info","message":"Auth test endpoint accessed","service":"user-service","timestamp":"2024-07-20 13:15:40"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:40 +0000] \"GET /authTest HTTP/1.1\" 200 40 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:40"}
+{"level":"info","message":"Auth Route accessed: GET /protectedTest","service":"user-service","timestamp":"2024-07-20 13:15:44"}
+{"level":"info","message":"::1 - - [20/Jul/2024:16:15:44 +0000] \"GET /protectedTest HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 13:15:44"}

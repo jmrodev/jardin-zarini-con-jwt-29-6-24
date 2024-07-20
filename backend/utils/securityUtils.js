@@ -10,3 +10,4 @@ export async function hashPassword(password) {
 export function generateUniqueId() {
   return crypto.randomUUID();
 }
+

@@ -1,54 +1,65 @@
-// repositories/userRepository.js
-import bcrypt from 'bcrypt'
-import UserSchema from '../models/userSchema.js'
-import { hashPassword, generateUniqueId } from '../utils/securityUtils.js'
-import {validateUsername, validatePassword} from '../validators/userValidators.js'
+// repositories/user-repository.js
+import bcrypt from 'bcrypt';
+import User from '../models/userSchema.js';
+
 export class UserRepository {
-  static async create(userData) {
-    const { username, password, role } = userData
-    validateUsername(username)
-    validatePassword(password)
-    const existingUser = await UserSchema.findOne({ username })
-    if (existingUser) {
-      throw new Error('Username already exists')
-    }
-    const hash = await hashPassword(password)
-    const id = generateUniqueId()
-
-    await UserSchema.create({
-      _id: id,
-      username,
-      password: hash,
-      role,
-    }).save()
-
-    return id
+  static async postUser(userData) {
+    const newUser = User.create(userData);
+    await newUser.save();
+    return newUser;
   }
 
-  static async login(userData) {
-    const { username, password } = userData
+  static async loginUser(userData) {
+    const { username, password } = userData;
 
-    const user = await UserSchema.findOne({ username })
+    const user = User.findOne({ username });
     if (!user) {
-      throw new Error('Username not found')
+      throw new Error('Username not found');
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new Error('Invalid password')
+      throw new Error('Invalid password');
     }
 
-    const { password: _, ...userWithoutPassword } = user
-    return userWithoutPassword
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 
-  static async getUser(username) {}
+  static async getUser(username) {
+    const user = User.findOne({ username });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+  }
 
-  static async getUsers() {}
+  static async getUsers() {
+    const users = User.find();
+    return users.map((user) => {
+      const { password, ...userWithoutPassword } = user;
+      return userWithoutPassword;
+    });
+  }
 
-  static async updateUser(username, data) {}
+  static async updateUser(username, data) {
+    const user = User.findOne({ username });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    Object.assign(user, data);
+    await user.save();
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+  }
 
   static async deleteUser(username) {
-    // Implementar la lógica para eliminar un usuario
+    const user = User.findOne({ username });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    await User.remove({ username });
+    return { message: 'User deleted successfully' };
   }
 }
