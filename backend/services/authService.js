@@ -17,7 +17,7 @@ export const loginUserService = async ({ username, password }) => {
   return { user, token };
 };
 
-export const logoutUserService = (req, res) => {
+export const logoutUserService = async  (req, res) => {
   res.clearCookie('access_token', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',

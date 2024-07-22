@@ -6,7 +6,7 @@ import { SECRET_JWT_KEY } from '../config/config.js'
 import { createUserService } from '../services/userManagementService.js'
 import logger from '../utils/logger.js'
 
-export const getAuthStatusController = (req, res) => {
+export const getAuthStatusController = async (req, res) => {
   const { user } = req.user
   res.json({
     message: 'Auth routes working',
@@ -15,7 +15,7 @@ export const getAuthStatusController = (req, res) => {
   })
 }
 
-export const debugAuthController = (req, res) => {
+export const debugAuthController =async (req, res) => {
   res.json({ user: req.user })
 }
 

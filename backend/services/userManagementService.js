@@ -18,14 +18,14 @@ export async function createUserService({ username, password, role }) {
 
   try {
     const newUser = await UserRepository.postUserRepository({
-      id,
+      _id: id,
       username,
       password: hash,
       role,
     })
     return {
-      message: 'Usuario creado exitosamente',
-      user: { id: newUser.id, username: newUser.username, role: newUser.role },
+      message: 'Usuario creado exitosamente',newUser,
+      user: { id: newUser._id, username: newUser.username, role: newUser.role },
     }
   } catch (error) {
     console.error('Error en createUser:', error)
