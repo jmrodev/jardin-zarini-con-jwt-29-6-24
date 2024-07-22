@@ -1,7 +1,7 @@
 // controllers/authController.js
 import jwt from 'jsonwebtoken'
 import { UserRepository } from '../repositories/user-repository.js'
-import { loginUserService, logoutUser } from '../services/authService.js'
+import { loginUserService, logoutUserService } from '../services/authService.js'
 import { SECRET_JWT_KEY } from '../config/config.js'
 import { createUser } from '../services/userManagementService.js'
 import logger from '../utils/logger.js'
@@ -63,7 +63,7 @@ export const logoutUserController = async (req, res) => {
     logger.info(`Logout attempt for user: ${username}`)
 
     // Limpia la cookie del token
-    logoutUser(req, res)
+    logoutUserService(req, res)
 
     // Envía una respuesta exitosa
     res.status(200).json({
