@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { UserRepository } from '../repositories/user-repository.js'
 import { loginUserService, logoutUserService } from '../services/authService.js'
 import { SECRET_JWT_KEY } from '../config/config.js'
-import { createUser } from '../services/userManagementService.js'
+import { createUserService } from '../services/userManagementService.js'
 import logger from '../utils/logger.js'
 
 export const getAuthStatusController = (req, res) => {
@@ -42,7 +42,7 @@ export const registerUserController = async (req, res) => {
   const { username, password, role } = req.body
 
   try {
-    const result = await createUser({ username, password, role })
+    const result = await createUserService({ username, password, role })
     res.json(result)
   } catch (error) {
     res.status(400).json({ error: error.message })

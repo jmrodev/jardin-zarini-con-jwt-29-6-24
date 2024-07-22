@@ -7,7 +7,7 @@ import {
   checkIfUserExists,
 } from '../validators/userValidators.js'
 
-export async function createUser({ username, password, role }) {
+export async function createUserService({ username, password, role }) {
   validateUsername(username)
   validatePassword(password)
   validateEntries(username, password, role)
