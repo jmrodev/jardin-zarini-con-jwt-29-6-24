@@ -2,11 +2,11 @@
 import express from 'express'
 import logger from '../utils/logger.js'
 import {
-  getAuthStatus,
-  debugAuth,
-  loginUser,
-  registerUser,
-  logoutUser,
+  getAuthStatusController,
+  debugAuthController,
+  loginUserController,
+  registerUserController,
+  logoutUserController,
 } from '../controllers/authController.js'
 import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
 import { authorizeRoles } from '../middlewares/authorizeRoles.js'
@@ -22,12 +22,12 @@ router.use((req, res, next) => {
 // Rutas públicas
 router.post('/login', (req, res, next) => {
   logger.info(`Login attempt for user: ${req.body.username}`)
-  loginUser(req, res, next)
+  loginUserController(req, res, next)
 })
 
 router.post('/register', (req, res, next) => {
   logger.info(`Registration attempt for user: ${req.body.username}`)
-  registerUser(req, res, next)
+  registerUserController(req, res, next)
 })
 
 router.get('/authTest', (req, res) => {
@@ -42,18 +42,18 @@ router.use(jwtMiddleware)
 router.get('/protected', (req, res, next) => {
   console.log('Request object:', req.user.username);
  logger.info(`Auth status checked for user: ${req.user.username}`)
-  getAuthStatus(req, res, next)
+  getAuthStatusController(req, res, next)
 })
 
 router.get('/debug', (req, res, next) => {
   logger.info(`Debug info requested for user: ${req.username}`)
-  debugAuth(req, res, next)
+  debugAuthController(req, res, next)
 })
 
 router.post('/logout', (req, res, next) => {
   logger.info(`Logout attempt for user: ${req.user.username}`)
   jwtMiddleware(req, res, next)
-  logoutUser(req, res, next)
+  logoutUserController(req, res, next)
 })
 
 // Ruta protegida de prueba
