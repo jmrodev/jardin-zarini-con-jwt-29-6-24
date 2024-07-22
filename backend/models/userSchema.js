@@ -10,5 +10,6 @@ const UserSchema = Schema('User', {
   role: { type: String, required: true },
   classRoom: { type: String },
 });
+console.log('Esquema de Usuario creado:', UserSchema);
 
 export default UserSchema;

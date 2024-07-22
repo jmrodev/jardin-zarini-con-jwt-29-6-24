@@ -9,13 +9,17 @@ export class UserRepository {
   static async postUserRepository(userData) {
     const newUser = User.create(userData);
     await newUser.save();
-    return newUser;
+  // Intentamos obtener el usuario recién creado
+  const createdUser = User.findOne({ _id: userData._id });
+  console.log('Usuario creado y recuperado en postUserRepository:', createdUser);
+  return createdUser;
+
   }
 
   static async loginUserRepository(userData) {
     const { username, password } = userData;
 
-    const user = User.findOne({ username });
+    const user = User.find({ username });
     if (!user) {
       throw new Error('Username not found');
     }
@@ -30,7 +34,7 @@ export class UserRepository {
   }
 
   static async getUserRepository(username) {
-    const user = User.findOne({ username });
+    const user = User.find({ username });
     if (!user) {
       throw new Error('User not found');
     }
@@ -47,7 +51,7 @@ export class UserRepository {
   }
 
   static async updateUserRepository(username, data) {
-    const user = User.findOne({ username });
+    const user = User.find({ username });
     if (!user) {
       throw new Error('User not found');
     }
@@ -58,7 +62,7 @@ export class UserRepository {
   }
 
   static async deleteUserRepository(username) {
-    const user = User.findOne({ username });
+    const user = User.find({ username });
     if (!user) {
       throw new Error('User not found');
     }

@@ -23,9 +23,24 @@ export async function createUserService({ username, password, role }) {
       password: hash,
       role,
     })
+    console.log('Usuario creado exitosamente:', newUser)
+    // Verifica si newUser es un array y toma el primer elemento si es así
+    const user = Array.isArray(newUser) ? newUser[0] : newUser
+
+    if (!user || !user._id || !user.username || !user.role) {
+      console.error('Propiedades faltantes en el usuario creado:', user);
+      throw new Error('El usuario creado no tiene todas las propiedades esperadas');
+    }
+
+     
     return {
-      message: 'Usuario creado exitosamente',newUser,
-      user: { id: newUser._id, username: newUser.username, role: newUser.role },
+      message: 'Usuario creado exitosamente',
+      user: { 
+        id: user._id, 
+        username: user.username, 
+        role: user.role 
+      },
+     
     }
   } catch (error) {
     console.error('Error en createUser:', error)
