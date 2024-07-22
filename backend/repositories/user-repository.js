@@ -5,13 +5,14 @@ import bcrypt from 'bcrypt';
 import User from '../models/userSchema.js';
 
 export class UserRepository {
-  static async postUser(userData) {
+  
+  static async postUserRepository(userData) {
     const newUser = User.create(userData);
     await newUser.save();
     return newUser;
   }
 
-  static async loginUser(userData) {
+  static async loginUserRepository(userData) {
     const { username, password } = userData;
 
     const user = User.findOne({ username });
@@ -28,7 +29,7 @@ export class UserRepository {
     return userWithoutPassword;
   }
 
-  static async getUser(username) {
+  static async getUserRepository(username) {
     const user = User.findOne({ username });
     if (!user) {
       throw new Error('User not found');
@@ -37,7 +38,7 @@ export class UserRepository {
     return userWithoutPassword;
   }
 
-  static async getUsers() {
+  static async getUsersRepository() {
     const users = User.find();
     return users.map((user) => {
       const { password, ...userWithoutPassword } = user;
@@ -45,7 +46,7 @@ export class UserRepository {
     });
   }
 
-  static async updateUser(username, data) {
+  static async updateUserRepository(username, data) {
     const user = User.findOne({ username });
     if (!user) {
       throw new Error('User not found');
@@ -56,7 +57,7 @@ export class UserRepository {
     return userWithoutPassword;
   }
 
-  static async deleteUser(username) {
+  static async deleteUserRepository(username) {
     const user = User.findOne({ username });
     if (!user) {
       throw new Error('User not found');

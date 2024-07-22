@@ -235,3 +235,15 @@
 {"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-21 23:06:20"}
 {"level":"info","message":"Protected admin route accessed by user: juanc","service":"user-service","timestamp":"2024-07-21 23:06:20"}
 {"level":"info","message":"::1 - - [22/Jul/2024:02:06:20 +0000] \"GET /api/protectedTest HTTP/1.1\" 200 16 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:06:20"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 11:53:44"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-22 11:53:44"}
+{"level":"info","message":"::1 - - [22/Jul/2024:14:53:44 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 11:53:44"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-22 11:53:56"}
+{"level":"info","message":"Protected admin route accessed by user: juanc","service":"user-service","timestamp":"2024-07-22 11:53:56"}
+{"level":"info","message":"::1 - - [22/Jul/2024:14:53:56 +0000] \"GET /api/protectedTest HTTP/1.1\" 200 16 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 11:53:56"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-22 12:00:02"}
+{"level":"info","message":"Protected admin route accessed by user: juanc","service":"user-service","timestamp":"2024-07-22 12:00:02"}
+{"level":"info","message":"::1 - - [22/Jul/2024:15:00:02 +0000] \"GET /api/protectedTest HTTP/1.1\" 200 16 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 12:00:02"}
+{"level":"info","message":"Auth Route accessed: POST /api/register","service":"user-service","timestamp":"2024-07-22 12:00:33"}
+{"level":"info","message":"Registration attempt for user: juanmaestro","service":"user-service","timestamp":"2024-07-22 12:00:33"}
+{"level":"info","message":"::1 - - [22/Jul/2024:15:00:34 +0000] \"POST /api/register HTTP/1.1\" 200 51 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 12:00:34"}

@@ -3,7 +3,7 @@ import { UserRepository } from '../repositories/user-repository.js';
 import { SECRET_JWT_KEY } from '../config/config.js';
 
 export const loginUserService = async ({ username, password }) => {
-  const user = await UserRepository.loginUser({ username, password });
+  const user = await UserRepository.loginUserRepository({ username, password });
   const token = jwt.sign(
     {
       id: user.id,

@@ -17,7 +17,7 @@ export async function createUserService({ username, password, role }) {
   const id = generateUniqueId()
 
   try {
-    const newUser = await UserRepository.postUser({
+    const newUser = await UserRepository.postUserRepository({
       id,
       username,
       password: hash,

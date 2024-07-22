@@ -9,6 +9,7 @@ export const authorizeRoles = (roles) => {
       }
       // Verificar si el rol del usuario está en la lista de roles permitidos
       if (!roles.includes(req.user.role)) {
+        console.log(req.user.role);
         return res.status(403).json({ message: 'No autorizado' });
       }
       next();
