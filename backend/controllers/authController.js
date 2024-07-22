@@ -3,13 +3,14 @@ import jwt from 'jsonwebtoken'
 import { UserRepository } from '../repositories/user-repository.js'
 import { SECRET_JWT_KEY } from '../config/config.js'
 import { createUser } from '../services/userService.js'
+import  logger  from '../utils/logger.js'
+
 
 export const getAuthStatus = (req, res) => {
   
   const { user } = req.user
   res.json({ message: 'Auth routes working', user ,
     accessToken: req.cookies.access_token,
-    
   })
 }
 
@@ -56,14 +57,16 @@ export const registerUser = async (req, res) => {
   }
 }
 
+
 export const logoutUser = async (req, res) => {
+  console.log(req.cookies.access_token);
   try {
     // Verifica si el usuario está autenticado
     if (!req.user) {
       return res.status(401).json({ message: 'No authenticated user found' });
     }
 
-    const { username, jti } = req.user;
+    const { username } = req.user;
 
     // Registra el intento de logout
     logger.info(`Logout attempt for user: ${username}`);
@@ -74,13 +77,6 @@ export const logoutUser = async (req, res) => {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict'
     });
-
-    // Agrega el token a la lista negra
-    // Asumiendo que jti es un identificador único del token y que tienes una función addToBlacklist implementada
-    if (jti) {
-      await addToBlacklist(jti);
-      logger.info(`Token added to blacklist for user: ${username}`);
-    }
 
     // Envía una respuesta exitosa
     res.status(200).json({ 
@@ -102,4 +98,5 @@ export const logoutUser = async (req, res) => {
       error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message
     });
   }
+  console.log("sin cookie", req.cookies.access_token);
 };

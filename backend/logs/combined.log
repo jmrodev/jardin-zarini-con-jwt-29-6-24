@@ -130,3 +130,108 @@
 {"level":"info","message":"::1 - - [20/Jul/2024:22:44:40 +0000] \"GET /api/logout HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:44:40"}
 {"level":"info","message":"Auth Route accessed: GET /api/logout","service":"user-service","timestamp":"2024-07-20 19:48:41"}
 {"level":"info","message":"::1 - - [20/Jul/2024:22:48:41 +0000] \"GET /api/logout HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-20 19:48:41"}
+{"level":"info","message":"Auth Route accessed: GET /api/logout","service":"user-service","timestamp":"2024-07-21 22:34:55"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:34:55 +0000] \"GET /api/logout HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:34:55"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:35:06"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:35:06 +0000] \"POST /api/logout HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:35:06"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-21 22:35:13"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:35:13"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:35:13 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:35:13"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:35:23"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:36:50"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:37:46"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:38:44"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:38:44"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:38:44 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:38:44"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:40:34"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:40:34"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:40:34 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:40:34"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:41:10"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:41:50"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:41:50"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:41:50 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:41:50"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:42:06"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:42:06"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:42:06 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:42:06"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:42:13"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:42:13"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:42:13 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:42:13"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:42:23"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:42:23"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:42:23 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:42:23"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:42:40"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:42:40"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:42:40 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:42:40"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:42:47"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:42:47"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:42:47 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:42:47"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:43:01"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:43:01"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:43:01 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:43:01"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:43:08"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:43:08"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:43:08 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:43:08"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:43:24"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:43:24"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:43:24 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:43:24"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:44:40"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:45:58"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:45:58"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:45:58 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:45:58"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:46:08"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:46:08"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:46:08 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:46:08"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:46:26"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:46:26"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:46:26 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:46:26"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:46:51"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:47:20"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:56:27"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:56:27"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:56:27"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:56:27 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:56:27"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:58:04"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:58:04"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:58:04"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:58:04 +0000] \"POST /api/logout HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:58:04"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 22:59:12"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:59:12 +0000] \"POST /api/logout HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:59:12"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-21 22:59:21"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 22:59:21"}
+{"level":"info","message":"::1 - - [22/Jul/2024:01:59:21 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 22:59:21"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-21 23:00:52"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:00:52"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:00:53 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:00:53"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 23:01:13"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:01:13"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:01:13"}
+{"level":"info","message":"User logged out successfully: juanc","service":"user-service","timestamp":"2024-07-21 23:01:13"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:01:13 +0000] \"POST /api/logout HTTP/1.1\" 200 79 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:01:13"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 23:01:47"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:01:47 +0000] \"POST /api/logout HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:01:47"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 23:04:08"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:04:08 +0000] \"POST /api/logout HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:04:08"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-21 23:04:23"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:04:23"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:04:23 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:04:23"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 23:04:35"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:04:35"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:04:35"}
+{"level":"info","message":"User logged out successfully: juanc","service":"user-service","timestamp":"2024-07-21 23:04:35"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:04:35 +0000] \"POST /api/logout HTTP/1.1\" 200 79 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:04:35"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-21 23:05:24"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:05:24"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:05:24 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:05:24"}
+{"level":"info","message":"Auth Route accessed: POST /api/logout","service":"user-service","timestamp":"2024-07-21 23:05:59"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:05:59"}
+{"level":"info","message":"Logout attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:05:59"}
+{"level":"info","message":"User logged out successfully: juanc","service":"user-service","timestamp":"2024-07-21 23:05:59"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:05:59 +0000] \"POST /api/logout HTTP/1.1\" 200 79 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:05:59"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-21 23:06:11"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:06:11 +0000] \"GET /api/protectedTest HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:06:11"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-21 23:06:16"}
+{"level":"info","message":"Login attempt for user: juanc","service":"user-service","timestamp":"2024-07-21 23:06:16"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:06:16 +0000] \"POST /api/login HTTP/1.1\" 200 77 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:06:16"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-21 23:06:20"}
+{"level":"info","message":"Protected admin route accessed by user: juanc","service":"user-service","timestamp":"2024-07-21 23:06:20"}
+{"level":"info","message":"::1 - - [22/Jul/2024:02:06:20 +0000] \"GET /api/protectedTest HTTP/1.1\" 200 16 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-21 23:06:20"}

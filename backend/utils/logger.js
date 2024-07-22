@@ -34,4 +34,4 @@ logger.stream = {
   write: message => logger.info(message.trim())
 };
 
-export default logger;
+export default logger
