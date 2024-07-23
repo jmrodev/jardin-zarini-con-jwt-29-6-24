@@ -1,6 +1,23 @@
-[{"_id":"2de80e60-389a-4b9f-a6f4-227ec0f6dadc","username":"juan","password":"$2b$10$hvMEsoordtkkt.m/Rg4.Nun1gMCmH2A1tVOBPTJzbHorSnDTic2t6","role":"maestro"},{"_id":"f487c729-0b29-4e1c-a420-8165b1e2a90a","username":"juanmxxxdd","password":"$2b$10$ia53RFnVgBLRXa8ByWTn.etI.9Yrp.GMPh70B6eHSHiv/SJtxI1cy","role":"maestro"}]<!DOCTYPE html>
 
-// validators/userValidators.js
+each part is doing: */
+import express from 'express';
+import { PORT } from './config/config.js';
+import { router as routes } from './routes/router.js';
+import { corsMiddleware } from './middlewares/corsMiddleware.js';
+import { jsonMiddleware } from './middlewares/jsonMiddleware.js';
+//import cookieParser from 'cookie-parser';
+import {cookieMiddleware} from './middlewares/cookieMiddleware.js';
+
+const app = express();
+// Middlewares
+app.use(corsMiddleware);
+app.use(cookieMiddleware);
+app.use(jsonMiddleware);
+app.use('/', routes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});// validators/userValidators.js
 import UserSchema from '../models/userSchema.js'
 
 export function validateUsername(username) {
@@ -109,7 +126,6 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 router.get('/protected', (req, res, next) => {
-  console.log('Request object:', req.user.username);
  logger.info(`Auth status checked for user: ${req.user.username}`)
   getAuthStatusController(req, res, next)
 })
@@ -208,7 +224,6 @@ const UserSchema = Schema('User', {
   role: { type: String, required: true },
   classRoom: { type: String },
 });
-console.log('Esquema de Usuario creado:', UserSchema);
 
 export default UserSchema;export const {
     PORT = 3000,
@@ -288,7 +303,6 @@ export const authorizeRoles = (roles) => {
       }
       // Verificar si el rol del usuario está en la lista de roles permitidos
       if (!roles.includes(req.user.role)) {
-        console.log(req.user.role);
         return res.status(403).json({ message: 'No autorizado' });
       }
       next();
@@ -327,31 +341,27 @@ export async function createUserService({ username, password, role }) {
       password: hash,
       role,
     })
-    console.log('Usuario creado exitosamente:', newUser);
-    
-    // Verificamos si newUser es un objeto y tiene las propiedades esperadas
-    if (typeof newUser !== 'object' || newUser === null) {
-      throw new Error('El usuario creado no es un objeto válido');
-    }
-    
-    const { _id, username: createdUsername, role: createdRole } = newUser;
-    
-    if (!_id || !createdUsername || !createdRole) {
-      console.error('Propiedades faltantes en el usuario creado:', newUser);
+    // Verifica si newUser es un array y toma el primer elemento si es así
+    const user = Array.isArray(newUser) ? newUser[0] : newUser
+
+    if (!user || !user._id || !user.username || !user.role) {
+      console.error('Propiedades faltantes en el usuario creado:', user);
       throw new Error('El usuario creado no tiene todas las propiedades esperadas');
     }
-    
+
+     
     return {
       message: 'Usuario creado exitosamente',
       user: { 
-        id: _id, 
-        username: createdUsername, 
-        role: createdRole 
+        id: user._id, 
+        username: user.username, 
+        role: user.role 
       },
-    };
+     
+    }
   } catch (error) {
-    console.error('Error en createUser:', error);
-    throw new Error(`Error al crear el usuario: ${error.message}`);
+    console.error('Error en createUser:', error)
+    throw new Error(`Error al crear el usuario: ${error.message}`)
   }
 }
 import jwt from 'jsonwebtoken';
@@ -432,7 +442,6 @@ export const registerUserController = async (req, res) => {
 }
 
 export const logoutUserController = async (req, res) => {
-  console.log(req.cookies.access_token)
   try {
     // Verifica si el usuario está autenticado
     if (!req.user) {
@@ -472,7 +481,6 @@ export const logoutUserController = async (req, res) => {
           : error.message,
     })
   }
-  console.log('sin cookie', req.cookies.access_token)
 }
 {
   "name": "jardin-zarini-con-jwt-29-6-24",
@@ -637,71 +645,69 @@ class Validation {
 }/* The UserRepository class provides methods for interacting with user data in a MongoDB database,
 including creating, updating, deleting, and retrieving user information. */
 // repositories/user-repository.js
-import bcrypt from 'bcrypt';
-import User from '../models/userSchema.js';
+import bcrypt from 'bcrypt'
+import User from '../models/userSchema.js'
 
 export class UserRepository {
-  
   static async postUserRepository(userData) {
-    const newUser = User.create(userData);
-    await newUser.save();
-   // Intentamos obtener el usuario recién creado
-   const createdUser = User.find(user => user._id === userData._id);
-   console.log('Usuario creado y recuperado en postUserRepository:', createdUser);
-   return createdUser;
+    const newUser = User.create(userData)
+    await newUser.save()
+    // Intentamos obtener el usuario recién creado
+    const createdUser = User.findOne({ _id: userData._id }) 
+  
+    return createdUser
   }
 
   static async loginUserRepository(userData) {
-    const { username, password } = userData;
+    const { username, password } = userData
 
-    const user = User.find({ username });
+    const user = User.findOne({ username })
     if (!user) {
-      throw new Error('Username not found');
+      throw new Error('Username not found')
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
-      throw new Error('Invalid password');
+      throw new Error('Invalid password')
     }
-
-    const { password: _, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    
+    const { password: _, ...userWithoutPassword } = user
+    return userWithoutPassword
   }
 
   static async getUserRepository(username) {
-    const user = User.find({ username });
+    const user = User.find({ username })
     if (!user) {
-      throw new Error('User not found');
+      throw new Error('User not found')
     }
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    const { password, ...userWithoutPassword } = user
+    return userWithoutPassword
   }
 
   static async getUsersRepository() {
-    const users = User.find();
+    const users = User.find()
     return users.map((user) => {
-      const { password, ...userWithoutPassword } = user;
-      return userWithoutPassword;
-    });
+      const { password, ...userWithoutPassword } = user
+      return userWithoutPassword
+    })
   }
 
   static async updateUserRepository(username, data) {
-    const user = User.find({ username });
+    const user = User.find({ username })
     if (!user) {
-      throw new Error('User not found');
+      throw new Error('User not found')
     }
-    Object.assign(user, data);
-    await user.save();
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    Object.assign(user, data)
+    await user.save()
+    const { password, ...userWithoutPassword } = user
+    return userWithoutPassword
   }
 
   static async deleteUserRepository(username) {
-    const user = User.find({ username });
+    const user = User.find({ username })
     if (!user) {
-      throw new Error('User not found');
+      throw new Error('User not found')
     }
-    await User.remove({ username });
-    return { message: 'User deleted successfully' };
+    await User.remove({ username })
+    return { message: 'User deleted successfully' }
   }
 }

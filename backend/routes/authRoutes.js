@@ -9,7 +9,9 @@ import {
   logoutUserController,
 } from '../controllers/authController.js'
 import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
-import { authorizeRoles } from '../middlewares/authorizeRoles.js'
+import { authorize } from '../middlewares/authorizeRolesAndPermissions.js'
+import { PERMISSIONS } from '../config/roles.js'
+import { createStudentController } from '../controllers/studentController.js'
 
 const router = express.Router()
 
@@ -40,7 +42,6 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 router.get('/protected', (req, res, next) => {
-  console.log('Request object:', req.user.username);
  logger.info(`Auth status checked for user: ${req.user.username}`)
   getAuthStatusController(req, res, next)
 })
@@ -57,11 +58,14 @@ router.post('/logout', (req, res, next) => {
 })
 
 // Ruta protegida de prueba
-router.get('/protectedTest', authorizeRoles('admin'), (req, res) => {
+// Solo verificar rol
+router.get('/protectedTest', authorize(['admin']),registerUserController, (req, res) => {
   logger.info(`Protected admin route accessed by user: ${req.user.username}`)
   res.send('You are an admin')
 })
 
+// Verificar rol y permisos específicos
+router.post('/students', authorize(['admin', 'teacher'], [PERMISSIONS.CREATE_STUDENT]), createStudentController);
 // Manejador de errores para rutas de autenticación
 router.use((err, req, res, next) => {
   logger.error(`Auth Error: ${err.message}`, {

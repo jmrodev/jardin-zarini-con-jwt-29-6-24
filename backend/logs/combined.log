@@ -423,3 +423,114 @@
 {"level":"info","message":"Auth Route accessed: POST /api/register","service":"user-service","timestamp":"2024-07-22 20:13:21"}
 {"level":"info","message":"Registration attempt for user: juamn","service":"user-service","timestamp":"2024-07-22 20:13:21"}
 {"level":"info","message":"::1 - - [22/Jul/2024:23:13:21 +0000] \"POST /api/register HTTP/1.1\" 200 130 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 20:13:21"}
+{"level":"info","message":"Auth Route accessed: POST /api/register","service":"user-service","timestamp":"2024-07-22 22:25:31"}
+{"level":"info","message":"Registration attempt for user: juamn","service":"user-service","timestamp":"2024-07-22 22:25:31"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:25:31 +0000] \"POST /api/register HTTP/1.1\" 400 38 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:25:31"}
+{"level":"info","message":"Auth Route accessed: POST /api/register","service":"user-service","timestamp":"2024-07-22 22:25:38"}
+{"level":"info","message":"Registration attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:25:38"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:25:38 +0000] \"POST /api/register HTTP/1.1\" 200 131 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:25:38"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:26:18"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:26:18"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:26:18 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:26:18"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:26:32"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:26:32"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:26:32 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:26:32"}
+{"level":"info","message":"Auth Route accessed: POST /api/register","service":"user-service","timestamp":"2024-07-22 22:27:49"}
+{"level":"info","message":"Registration attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:27:49"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:27:49 +0000] \"POST /api/register HTTP/1.1\" 400 38 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:27:49"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:27:53"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:27:53"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:27:53 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:27:53"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:28:04 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:28:04"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-22 22:28:08"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:28:08 +0000] \"GET /api/protectedTest HTTP/1.1\" 401 56 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:28:08"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:28:52"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:28:52"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:28:52 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:28:52"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:28:53"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:28:53"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:28:53 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:28:53"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:33:43"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:33:43"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:33:43 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:33:43"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:34:25"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:34:25"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:34:25 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:34:25"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:36:12"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:36:12"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:36:12 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:36:12"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:45:27"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:45:27"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:45:27 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:45:27"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:45:49"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:45:49"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:45:49 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:45:49"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:46:23"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:46:23"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:46:23 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:46:23"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:46:50"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:46:50"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:46:50 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:46:50"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:48:08"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:48:08"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:48:08 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:48:08"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:48:54"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:48:54"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:48:54 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:48:54"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:49:40"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:49:40"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:49:40 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:49:40"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:50:37"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:50:37"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:50:37 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:50:37"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 22:50:55"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 22:50:55"}
+{"level":"info","message":"::1 - - [23/Jul/2024:01:50:55 +0000] \"POST /api/login HTTP/1.1\" 401 44 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 22:50:55"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:04:49"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:04:49"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:04:49 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:04:49"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:10:55"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:10:55"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:10:55 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:10:55"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:11:15 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:11:15"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:11:17 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:11:17"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:11:19 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:11:19"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:11:28"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:11:28"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:11:28 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:11:28"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:14:25"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:14:25"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:14:25 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:14:25"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:14:31 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:14:31"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:17:02 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:17:02"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:17:16"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:17:16"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:17:16 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:17:16"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:17:18"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:17:18"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:17:18 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:17:18"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:17:21"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:17:21"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:17:21 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:17:21"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:17:53"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:17:53"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:17:54 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:17:54"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:21:19"}
+{"level":"info","message":"Login attempt for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:21:19"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:21:19 +0000] \"POST /api/login HTTP/1.1\" 200 92 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:21:19"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:21:24 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:21:24"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:21:26 +0000] \"GET /protected HTTP/1.1\" 404 148 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:21:26"}
+{"level":"info","message":"Auth Route accessed: GET /api/protected","service":"user-service","timestamp":"2024-07-22 23:21:42"}
+{"level":"info","message":"Auth status checked for user: juamnt","service":"user-service","timestamp":"2024-07-22 23:21:42"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:21:42 +0000] \"GET /api/protected HTTP/1.1\" 200 227 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:21:42"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-22 23:21:54"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:21:54 +0000] \"GET /api/protectedTest HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:21:54"}
+{"level":"info","message":"Auth Route accessed: POST /api/register","service":"user-service","timestamp":"2024-07-22 23:22:24"}
+{"level":"info","message":"Registration attempt for user: juamnmt","service":"user-service","timestamp":"2024-07-22 23:22:24"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:22:24 +0000] \"POST /api/register HTTP/1.1\" 200 130 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:22:24"}
+{"level":"info","message":"Auth Route accessed: POST /api/login","service":"user-service","timestamp":"2024-07-22 23:23:22"}
+{"level":"info","message":"Login attempt for user: juamnmt","service":"user-service","timestamp":"2024-07-22 23:23:22"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:23:22 +0000] \"POST /api/login HTTP/1.1\" 200 91 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:23:22"}
+{"level":"info","message":"Auth Route accessed: GET /api/protectedTest","service":"user-service","timestamp":"2024-07-22 23:23:32"}
+{"level":"info","message":"Protected admin route accessed by user: juamnmt","service":"user-service","timestamp":"2024-07-22 23:23:32"}
+{"level":"info","message":"::1 - - [23/Jul/2024:02:23:32 +0000] \"GET /api/protectedTest HTTP/1.1\" 200 16 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-22 23:23:32"}

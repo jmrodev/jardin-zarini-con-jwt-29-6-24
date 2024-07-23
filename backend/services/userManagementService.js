@@ -15,6 +15,7 @@ export async function createUserService({ username, password, role }) {
 
   const hash = await hashPassword(password)
   const id = generateUniqueId()
+  const permissions = ROLE_PERMISSIONS[role] || [];
 
   try {
     const newUser = await UserRepository.postUserRepository({
@@ -22,8 +23,8 @@ export async function createUserService({ username, password, role }) {
       username,
       password: hash,
       role,
+      permissions,
     })
-    console.log('Usuario creado exitosamente:', newUser)
     // Verifica si newUser es un array y toma el primer elemento si es así
     const user = Array.isArray(newUser) ? newUser[0] : newUser
 

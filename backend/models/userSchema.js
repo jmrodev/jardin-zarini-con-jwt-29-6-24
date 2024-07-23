@@ -8,8 +8,8 @@ const UserSchema = Schema('User', {
   username: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
+  permissions: { type: Array, default: [] },
   classRoom: { type: String },
 });
-console.log('Esquema de Usuario creado:', UserSchema);
 
 export default UserSchema;

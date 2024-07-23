@@ -9,6 +9,7 @@ export const loginUserService = async ({ username, password }) => {
       id: user.id,
       username: user.username,
       role: user.role,
+      permissions: user.permissions,
       classRoom: user.classRoom,
     },
     SECRET_JWT_KEY,

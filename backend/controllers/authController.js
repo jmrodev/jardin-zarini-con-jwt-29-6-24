@@ -50,7 +50,6 @@ export const registerUserController = async (req, res) => {
 }
 
 export const logoutUserController = async (req, res) => {
-  console.log(req.cookies.access_token)
   try {
     // Verifica si el usuario está autenticado
     if (!req.user) {
@@ -90,5 +89,6 @@ export const logoutUserController = async (req, res) => {
           : error.message,
     })
   }
-  console.log('sin cookie', req.cookies.access_token)
 }
+
+

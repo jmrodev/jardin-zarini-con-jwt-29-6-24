@@ -1,20 +1,4 @@
-import DBLocal from 'db-local'
 import crypto from 'crypto'
-
-const { Schema } = new DBLocal({ path: './db' })
-
-const Student = Schema('Student', {
-  _id: { type: String, required: true },
-  name: { type: String, required: true },
-  dni: { type: Number, required: true },
-  birth_date: { type: String, required: true },
-  address: { type: String, required: true },
-  contacts: { type: Array, required: true },
-  turn: { type: String, required: true },
-  classRoom: { type: String, required: true },
-  teacherId: { type: String, required: true }
-})
-
 export class StudentRepository {
   static async create (studentData) {
     Validation.validateStudentData(studentData);
