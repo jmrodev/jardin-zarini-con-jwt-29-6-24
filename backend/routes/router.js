@@ -7,6 +7,7 @@ import logger from '../utils/logger.js'
 const router = express.Router()
 
 router.use(morgan('combined', { stream: logger.stream }))
+
 router.use('/api', studentRoutes )
 router.use('/auth', authRoutes )
 
