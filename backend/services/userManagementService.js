@@ -6,16 +6,22 @@ import {
   validateEntries,
   checkIfUserExists,
 } from '../validators/userValidators.js'
+import { PERMISSIONS, ROLES, ROLE_PERMISSIONS } from '../config/roles.js'
 
-export async function createUserService({ username, password, role }) {
+export async function createUserService({
+  username,
+  password,
+  role,
+  permissions,
+}) {
+
   validateUsername(username)
   validatePassword(password)
-  validateEntries(username, password, role)
+  validateEntries(username, password, role, permissions)
   await checkIfUserExists(username)
 
   const hash = await hashPassword(password)
   const id = generateUniqueId()
-  const permissions = ROLE_PERMISSIONS[role] || [];
 
   try {
     const newUser = await UserRepository.postUserRepository({
@@ -23,25 +29,26 @@ export async function createUserService({ username, password, role }) {
       username,
       password: hash,
       role,
-      permissions,
+      permissions: permissions || ROLE_PERMISSIONS[role],
     })
     // Verifica si newUser es un array y toma el primer elemento si es así
     const user = Array.isArray(newUser) ? newUser[0] : newUser
 
-    if (!user || !user._id || !user.username || !user.role) {
-      console.error('Propiedades faltantes en el usuario creado:', user);
-      throw new Error('El usuario creado no tiene todas las propiedades esperadas');
+    if (!user || !user._id || !user.username || !user.role || !user.permissions) {
+      console.error('Propiedades faltantes en el usuario creado:', user)
+      throw new Error(
+        'El usuario creado no tiene todas las propiedades esperadas'
+      )
     }
 
-     
     return {
       message: 'Usuario creado exitosamente',
-      user: { 
-        id: user._id, 
-        username: user.username, 
-        role: user.role 
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+        permissions: user.permissions,
       },
-     
     }
   } catch (error) {
     console.error('Error en createUser:', error)

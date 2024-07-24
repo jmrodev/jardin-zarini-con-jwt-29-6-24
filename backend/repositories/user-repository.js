@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt'
 import User from '../models/userSchema.js'
 
 export class UserRepository {
+  
   static async postUserRepository(userData) {
     const newUser = User.create(userData)
     await newUser.save()

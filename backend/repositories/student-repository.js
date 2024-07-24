@@ -3,17 +3,17 @@ export class StudentRepository {
   static async create (studentData) {
     Validation.validateStudentData(studentData);
 
-    const existingStudent = Student.findOne({ dni: studentData.dni });
+    const existingStudent =  await Student.findOne({ dni: studentData.dni });
     if (existingStudent) {
       throw new Error('A student with this DNI already exists');
     }
 
     const id = crypto.randomUUID()
-    const student = Student.create({
+    const student = await Student.create({
       _id: id,
       ...studentData
     }).save()
-    return student
+    return await student
   }
 
   static async getAll () {
@@ -21,7 +21,7 @@ export class StudentRepository {
   }
 
   static async getById (id) {
-    const student = Student.findOne({ _id: id });
+    const student = await Student.findOne({ _id: id });
     if (!student) {
       throw new Error('Student not found');
     }
@@ -49,7 +49,7 @@ export class StudentRepository {
     }
 
     Object.assign(student, updateData)
-    return student.save()
+    return await student.save()
   }
 
   static async delete (id) {

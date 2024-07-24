@@ -3,13 +3,14 @@ export const createStudentController = async (req, res) => {
 
   try {
     const newStudent = await UserRepository.createStudentRepository(studentData)
+    console.log(newStudent);
     res.json(newStudent)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-export const getStudentsController = async (req, res) => {
+export const getAllStudentsController = async (req, res) => {
   try {
     const students = await UserRepository.getStudentsRepository()
     res.json(students)
