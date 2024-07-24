@@ -178,27 +178,26 @@ import { PERMISSIONS } from '../config/roles.js'
 const router = express.Router()
 
 router.post(
-  '/students',
+  '/',
   authorize([PERMISSIONS.CREATE_STUDENT]),
   (req, res) => {
-    console.log("aqui aqui");
     console.log('req.body router post', req.body)
     createStudentController(req, res)
   }
 )
 
 router.get(
-  '/students',
+  '/',
   authorize([PERMISSIONS.READ_STUDENT]),
   getAllStudentsController
 )
 router.put(
-  '/students/:id',
+  '/:id',
   authorize([PERMISSIONS.UPDATE_STUDENT]),
   updateStudentController
 )
 router.delete(
-  '/students/:id',
+  '/:id',
   authorize([PERMISSIONS.DELETE_STUDENT]),
   deleteStudentController
 )
@@ -206,23 +205,25 @@ router.delete(
 export default router
 import express from 'express'
 import authRoutes from './authRoutes.js'
+import studentRoutes from './studentRoutes.js'
 import morgan from 'morgan'
 import logger from '../utils/logger.js'
 
 const router = express.Router()
 
 router.use(morgan('combined', { stream: logger.stream }))
-router.use('/api', authRoutes)
+router.use('/api', studentRoutes )
+router.use('/auth', authRoutes )
 
 router.use((error, req, res, next) => {
   logger.error(
-    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
+    `${error.status || 500} - ${error.message} - ${req.originalUrl} - ${
       req.method
     } - ${req.ip}`
   )
- res.status(err.status || 500).json({
+ res.status(error.status || 500).json({
     error: 'Error del servidor',
-    message: err.message
+    message: error.message
   });
 })
 
@@ -232,7 +233,7 @@ import express from 'express'
 import logger from '../utils/logger.js'
 import {
   loginUserController,
-  registerUserController,
+  createUserController,
   logoutUserController,
 } from '../controllers/userController.js'
 import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
@@ -254,7 +255,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/register', (req, res, next) => {
   logger.info(`Registration attempt for user: ${req.body.username}`)
-  registerUserController(req, res, next)
+  createUserController(req, res, next)
 })
 
 // Middleware de autenticación JWT
@@ -262,7 +263,7 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 // ruteo a rute estudiantes
-router.use('/students', studentRoutes, (req, res, next) => {
+router.use('/', studentRoutes, (req, res, next) => {
   logger.info('Student route accessed')
   console.log('req.user', req.user);
   next()
@@ -298,9 +299,7 @@ const logDir = 'logs';
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
-    winston.format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss'
-    }),
+    winston.format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
     winston.format.errors({ stack: true }),
     winston.format.splat(),
     winston.format.json()
@@ -360,7 +359,7 @@ import DBLocal from 'db-local';
 
 const { Schema } = new DBLocal({ path: './db' })
 
-const Student = Schema('Student', {
+const StudentSchema = Schema('Student', {
   _id: { type: String, required: true },
   name: { type: String, required: true },
   dni: { type: Number, required: true },
@@ -372,7 +371,7 @@ const Student = Schema('Student', {
   teacherId: { type: String, required: true }
 })
 
-export default Studentexport const {
+export default StudentSchemaexport const {
     PORT = 3000,
     SALTROUNDS = 10,
     SECRET_JWT_KEY = 'AdminPassword123!',
@@ -416,14 +415,9 @@ const cookieMiddleware = (cookieParser())
 export { cookieMiddleware }import jwt from 'jsonwebtoken'
 import { SECRET_JWT_KEY } from '../config/config.js'
 
-// Middleware para autenticar con JWT
 export const jwtMiddleware = (req, res, next) => {
-  // Obtener token desde cookies o encabezado de autorización
   const token =
     req.cookies.access_token || req.headers['authorization']?.split(' ')[1]
-  //req.session = { user: null }; // Inicializar sesión
-
-  // Verificar presencia del token
   if (!token) {
     return res
       .status(401)
@@ -431,18 +425,12 @@ export const jwtMiddleware = (req, res, next) => {
   }
 
   try {
-    // Verificar el token JWT
     const data = jwt.verify(token, SECRET_JWT_KEY)
-    //req.session.user = data;
     req.user = data
     next()
   } catch (error) {
-    // Invalidar la sesión y limpiar la cookie del token
-    // req.session.user = null;
     req.user = null
     res.clearCookie('access_token')
-
-    // Manejar errores de JWT
     if (error instanceof jwt.TokenExpiredError) {
       return res
         .status(401)
@@ -470,10 +458,7 @@ const ejsMiddleware = app.set('view engine', 'ejs')
 export { ejsMiddleware }import { hasPermission as checkPermission } from '../utils/permissionUtils.js';
 export const authorize = (requiredPermission) => {
   return (req, res, next) => {
-    const userRole = req.user.role; // Asumiendo que el rol del usuario está disponible en req.user
-    console.log('userRole', userRole);
-    console.log('requiredPermission', requiredPermission);
-
+    const userRole = req.user.role;
     if (requiredPermission.every(permission => checkPermission(userRole, permission))){
       return next();
     } else {
@@ -589,47 +574,30 @@ export const loginUserController = async (req, res) => {
     const { user, token } = await loginUserService({ username, password })
 
     res
-      .cookie('access_token', token, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-      })
-      .send({ user })
+      .cookie('access_token', token, {httpOnly: true})
+      .send.json( user )
   } catch (error) {
     res.status(401).json({ error: error.message })
   }
 }
 
-export const registerUserController = async (req, res) => {
-  const { username, password, role, permissions } = req.body
+export const createUserController = async (req, res) => {
+  const userData = req.body;
 
-  if (!ROLE_PERMISSIONS[role]) {
-    console.log(ROLE_PERMISSIONS[role])
+  const validationErrors = Validation.validateUserData(userData);
 
-    return res.status(400).json({ error: 'Invalid role' })
-  }
-
-  if (permissions) {
-    for (const permission of permissions) {
-      if (!hasPermission(role, permission)) {
-        return res.status(400).json({ error: 'Invalid permission' })
-      }
-    }
+  if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages });
   }
 
   try {
-    const result = await createUserService({
-      username,
-      password,
-      role,
-      permissions,
-    })
-    res.json(result)
+    const newUser = await createUserService(userData);
+    res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json({ error: error.message })
+    console.error('Error en createUserController:', error);
+    res.status(500).json({ error: 'Error al crear el usuario' });
   }
-}
+};
 
 export const logoutUserController = async (req, res) => {
   try {
@@ -681,10 +649,10 @@ export const createStudentController = async (req, res) => {
 
   const validationErrors = Validation.validateStudentData(studentData);
 
-  if (validationErrors) {
-    return res.status(400).json({ error: validationErrors });
+  if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages });
   }
-
+  
   try {
     const newStudent = await StudentRepository.createStudentRepository(studentData);
     res.json(newStudent);
@@ -801,7 +769,7 @@ export const debugAuthController =async (req, res) => {
     "winston": "^3.13.1"
   }
 }
-import Student from '../models/studentSchema.js'
+import StudentSchema from '../models/studentSchema.js'
 import crypto from 'crypto'
 import Validation  from '../validators/studenValidators.js'
 
@@ -810,13 +778,13 @@ export default class StudentRepository {
   static async createStudentRepository(studentData) {
      Validation.validateStudentData(studentData);
 
-    const existingStudent =  await Student.findOne({ dni: studentData.dni });
+    const existingStudent =  await StudentSchema.findOne({ dni: studentData.dni });
     if (existingStudent) {
       throw new Error('A student with this DNI already exists');
     }
 
     const id = crypto.randomUUID()
-    const student = await Student.create({
+    const student = await StudentSchema.create({
       _id: id,
       ...studentData
     }).save()
@@ -824,11 +792,11 @@ export default class StudentRepository {
   }
 
   static async getAll () {
-    return Student.find()
+    return StudentSchema.find()
   }
 
   static async getById (id) {
-    const student = await Student.findOne({ _id: id });
+    const student = await StudentSchema.findOne({ _id: id });
     if (!student) {
       throw new Error('Student not found');
     }
@@ -836,7 +804,7 @@ export default class StudentRepository {
   }
 
   static async getByParentId (parentId) {
-    return Student.find(student => student.contacts.some(contact => contact.id === parentId))
+    return StudentSchema.find(student => student.contacts.some(contact => contact.id === parentId))
   }
 
   static async update (id, updateData) {
@@ -849,7 +817,7 @@ export default class StudentRepository {
     Validation.validateUpdateData(updateData);
 
     if (updateData.dni && updateData.dni !== student.dni) {
-      const existingStudent = Student.findOne({ dni: updateData.dni });
+      const existingStudent = StudentSchema.findOne({ dni: updateData.dni });
       if (existingStudent) {
         throw new Error('A student with this DNI already exists');
       }
@@ -861,7 +829,7 @@ export default class StudentRepository {
 
   static async delete (id) {
     const student = await this.getById(id);
-    Student.deleteOne({ _id: id });
+    StudentSchema.deleteOne({ _id: id });
     return { message: 'Student deleted successfully' };
   }
 }/* The UserRepository class provides methods for interacting with user data in a MongoDB database,
@@ -875,9 +843,7 @@ export class UserRepository {
   static async postUserRepository(userData) {
     const newUser = User.create(userData)
     await newUser.save()
-    // Intentamos obtener el usuario recién creado
     const createdUser = User.findOne({ _id: userData._id }) 
-  
     return createdUser
   }
 

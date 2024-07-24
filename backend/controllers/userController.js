@@ -1,8 +1,7 @@
 import { loginUserService, logoutUserService } from '../services/authService.js'
 import { createUserService } from '../services/userManagementService.js'
 import logger from '../utils/logger.js'
-import { ROLE_PERMISSIONS } from '../config/roles.js'
-import { hasPermission } from '../utils/permissionUtils.js'
+import validateUserData from '../validators/userValidators.js'
 
 export const loginUserController = async (req, res) => {
   const { username, password } = req.body
@@ -10,31 +9,29 @@ export const loginUserController = async (req, res) => {
   try {
     const { user, token } = await loginUserService({ username, password })
 
-    res
-      .cookie('access_token', token, {httpOnly: true})
-      .send.json( user )
+    res.cookie('access_token', token, { httpOnly: true }).send({ user })
   } catch (error) {
     res.status(401).json({ error: error.message })
   }
 }
 
 export const createUserController = async (req, res) => {
-  const userData = req.body;
+  const userData = req.body
 
-  const validationErrors = Validation.validateUserData(userData);
+  const validationErrors = validateUserData(userData)
 
   if (!validationErrors.isValid) {
-    return res.status(400).json({ error: validationErrors.messages });
+    return res.status(400).json({ error: validationErrors.messages })
   }
 
   try {
-    const newUser = await createUserService(userData);
-    res.status(201).json(newUser);
+    const newUser = await createUserService(userData)
+    res.status(201).json(newUser)
   } catch (error) {
-    console.error('Error en createUserController:', error);
-    res.status(500).json({ error: 'Error al crear el usuario' });
+    console.error('Error en createUserController:', error)
+    res.status(500).json({ error: 'Error al crear el usuario' })
   }
-};
+}
 
 export const logoutUserController = async (req, res) => {
   try {

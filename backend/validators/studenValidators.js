@@ -8,7 +8,7 @@ export default class Validation {
     if (!data.dni || typeof data.dni !== 'number') {
       errors.push('Invalid DNI: The DNI is required and must be a number.')
     }
-    if (!data.birthDate || !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
+    if (!data.birth_date || !/^\d{4}-\d{2}-\d{2}$/.test(data.birth_date)) {
       errors.push(
         'Invalid birth date format: The birth date is required and must be in the format YYYY-MM-DD.'
       )
@@ -58,7 +58,7 @@ export default class Validation {
     if (data.dni && typeof data.dni !== 'number') {
       errors.push('Invalid DNI: If provided, the DNI must be a number.')
     }
-    if (data.birthDate && !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
+    if (data.birth_date && !/^\d{4}-\d{2}-\d{2}$/.test(data.birth_date)) {
       errors.push(
         'Invalid birth date format: If provided, the birth date must be in the format YYYY-MM-DD.'
       )

@@ -33,7 +33,7 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 // ruteo a rute estudiantes
-router.use('/students', studentRoutes, (req, res, next) => {
+router.use('/api', studentRoutes, (req, res, next) => {
   logger.info('Student route accessed')
   console.log('req.user', req.user);
   next()

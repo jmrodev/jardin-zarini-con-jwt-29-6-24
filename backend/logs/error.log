@@ -21,3 +21,7 @@
 {"error":{},"level":"error","message":"Auth Error: Cannot read properties of undefined (reading 'user')","route":"/api/protected","service":"user-service","timestamp":"2024-07-20 19:21:43","user":"juanc"}
 {"error":{},"level":"error","message":"Auth Error: Cannot destructure property 'user' of 'req.session' as it is undefined.","route":"/api/protected","service":"user-service","timestamp":"2024-07-20 19:23:11","user":"juanc"}
 {"error":{},"level":"error","message":"Auth Error: Converting circular structure to JSON\n    --> starting at object with constructor 'Socket'\n    |     property 'parser' -> object with constructor 'HTTPParser'\n    --- property 'socket' closes the circle","route":"/api/protected","service":"user-service","timestamp":"2024-07-20 19:31:45","user":"juanc"}
+{"level":"error","message":"500 - Cannot read properties of undefined (reading 'role') - /api/ - POST - ::1","service":"user-service","timestamp":"2024-07-24 12:24:17"}
+{"level":"error","message":"500 - Cannot read properties of undefined (reading 'role') - /api - POST - ::1","service":"user-service","timestamp":"2024-07-24 12:27:20"}
+{"level":"error","message":"500 - Cannot read properties of undefined (reading 'role') - /api - POST - ::1","service":"user-service","timestamp":"2024-07-24 12:43:47"}
+{"level":"error","message":"500 - Cannot read properties of undefined (reading 'role') - /api - GET - ::1","service":"user-service","timestamp":"2024-07-24 13:12:20"}

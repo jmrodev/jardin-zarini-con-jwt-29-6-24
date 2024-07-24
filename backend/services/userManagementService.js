@@ -5,7 +5,7 @@ import {
   validatePassword,
   validateEntries,
   checkIfUserExists,
-} from '../validators/userValidators.js'
+} from '../validators/commonValidators.js'
 import { PERMISSIONS, ROLES, ROLE_PERMISSIONS } from '../config/roles.js'
 
 export async function createUserService({

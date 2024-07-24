@@ -5,7 +5,10 @@ import Validation  from '../validators/studenValidators.js'
 
 export default class StudentRepository {
   static async createStudentRepository(studentData) {
+
+    console.log('studentData', studentData);
      Validation.validateStudentData(studentData);
+
 
     const existingStudent =  await StudentSchema.findOne({ dni: studentData.dni });
     if (existingStudent) {
@@ -20,7 +23,7 @@ export default class StudentRepository {
     return await student
   }
 
-  static async getAll () {
+  static async getStudentsRepository () {
     return StudentSchema.find()
   }
 

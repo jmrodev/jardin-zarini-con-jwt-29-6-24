@@ -1,43 +1,48 @@
-// validators/userValidators.js
-import UserSchema from '../models/userSchema.js'
+import { validateEntries, validateUsername, validatePassword } from './commonValidators.js';
 
-export function validateUsername(username) {
-  const userNameRegexp = '^[A-Za-z]+$'
-  if (!username || username.length < 3) {
-    throw new Error('Username must be at least 3 characters long')
-  }
-  if (username.match(userNameRegexp) === null) {
-    throw new Error('Username must contain only letters')
-  }
-}
+export  default function validateUserData(userData) {
+  const { username, password, role, permissions } = userData;
+  const errors = [];
 
-export function validatePassword(password) {
-  const passwordRegexp = '^[A-Za-z\\d$@$!%*?&]+$'
-  if (!password || typeof password !== 'string') {
-    throw new Error('Password must be a valid string')
+  // Validate all required fields are present
+  try {
+    validateEntries(username, password, role, permissions);
+  } catch (error) {
+    errors.push(error.message);
   }
-  if (password.length < 8) {
-    throw new Error('Password must be at least 8 characters long')
-  }
-  if (password.match(passwordRegexp) === null) {
-    throw new Error(
-      'Password must contain only letters, numbers, and some special characters without spaces'
-    )
-  }
-}
 
-export function validateEntries(username, password, role, permissions) {
-  console.log('datos ', username, password, role, permissions)
-  if (!username || !password || !role || !permissions) {
-    throw new Error(
-      'Todos los campos son obligatorios: username, password, role y permissions'
-    )
+  // Validate username
+  try {
+    validateUsername(username);
+  } catch (error) {
+    errors.push(error.message);
   }
-}
 
-export function checkIfUserExists(username) {
-  const existingUser = UserSchema.findOne({ username })
-  if (existingUser) {
-    throw new Error('Username already exists !!')
+  // Validate password
+  try {
+    validatePassword(password);
+  } catch (error) {
+    errors.push(error.message);
   }
+
+  // Check if user already exists
+  try {
+    checkIfUserExists(username);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  // If there are any errors, return them
+  if (errors.length > 0) {
+    return {
+      isValid: false,
+      errors: errors
+    };
+  }
+
+  // If all validations pass
+  return {
+    isValid: true,
+    message: 'User data is valid'
+  };
 }

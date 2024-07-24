@@ -8,7 +8,7 @@ const StudentSchema = Schema('Student', {
   _id: { type: String, required: true },
   name: { type: String, required: true },
   dni: { type: Number, required: true },
-  birthDate: { type: String, required: true },
+  birth_date: { type: String, required: true },
   address: { type: String, required: true },
   contacts: { type: Array, required: true },
   turn: { type: String, required: true },
