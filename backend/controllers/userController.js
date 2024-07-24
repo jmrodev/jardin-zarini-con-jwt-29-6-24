@@ -11,47 +11,30 @@ export const loginUserController = async (req, res) => {
     const { user, token } = await loginUserService({ username, password })
 
     res
-      .cookie('access_token', token, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-      })
-      .send({ user })
+      .cookie('access_token', token, {httpOnly: true})
+      .send.json( user )
   } catch (error) {
     res.status(401).json({ error: error.message })
   }
 }
 
-export const registerUserController = async (req, res) => {
-  const { username, password, role, permissions } = req.body
+export const createUserController = async (req, res) => {
+  const userData = req.body;
 
-  if (!ROLE_PERMISSIONS[role]) {
-    console.log(ROLE_PERMISSIONS[role])
+  const validationErrors = Validation.validateUserData(userData);
 
-    return res.status(400).json({ error: 'Invalid role' })
-  }
-
-  if (permissions) {
-    for (const permission of permissions) {
-      if (!hasPermission(role, permission)) {
-        return res.status(400).json({ error: 'Invalid permission' })
-      }
-    }
+  if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages });
   }
 
   try {
-    const result = await createUserService({
-      username,
-      password,
-      role,
-      permissions,
-    })
-    res.json(result)
+    const newUser = await createUserService(userData);
+    res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json({ error: error.message })
+    console.error('Error en createUserController:', error);
+    res.status(500).json({ error: 'Error al crear el usuario' });
   }
-}
+};
 
 export const logoutUserController = async (req, res) => {
   try {

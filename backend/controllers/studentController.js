@@ -1,18 +1,16 @@
 import StudentRepository from '../repositories/student-repository.js'
+import Validation from '../validators/studenValidators.js';
+
+
 export const createStudentController = async (req, res) => {
   const studentData = req.body;
 
-  // Validar datos del estudiante antes de crear
-  if (!studentData.name || !studentData.classRoom || !studentData.birthDate) {
-    return res.status(400).json({ error: 'Faltan datos necesarios del estudiante' });
-  }
+  const validationErrors = Validation.validateStudentData(studentData);
 
-  // Validar el formato de la fecha de nacimiento
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(studentData.birthDate)) {
-    return res.status(400).json({ error: 'Formato de fecha de nacimiento inválido. Use YYYY-MM-DD' });
+  if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages });
   }
-
+  
   try {
     const newStudent = await StudentRepository.createStudentRepository(studentData);
     res.json(newStudent);

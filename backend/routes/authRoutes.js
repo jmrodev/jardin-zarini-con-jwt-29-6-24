@@ -3,7 +3,7 @@ import express from 'express'
 import logger from '../utils/logger.js'
 import {
   loginUserController,
-  registerUserController,
+  createUserController,
   logoutUserController,
 } from '../controllers/userController.js'
 import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
@@ -25,7 +25,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/register', (req, res, next) => {
   logger.info(`Registration attempt for user: ${req.body.username}`)
-  registerUserController(req, res, next)
+  createUserController(req, res, next)
 })
 
 // Middleware de autenticación JWT

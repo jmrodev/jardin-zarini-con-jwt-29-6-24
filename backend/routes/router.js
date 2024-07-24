@@ -1,12 +1,14 @@
 import express from 'express'
 import authRoutes from './authRoutes.js'
+import studentRoutes from './studentRoutes.js'
 import morgan from 'morgan'
 import logger from '../utils/logger.js'
 
 const router = express.Router()
 
 router.use(morgan('combined', { stream: logger.stream }))
-router.use('/api', authRoutes)
+router.use('/api', studentRoutes )
+router.use('/auth', authRoutes )
 
 router.use((error, req, res, next) => {
   logger.error(
@@ -14,7 +16,10 @@ router.use((error, req, res, next) => {
       req.method
     } - ${req.ip}`
   )
-  res.status(err.status || 500).send('Error del servidor')
+ res.status(err.status || 500).json({
+    error: 'Error del servidor',
+    message: err.message
+  });
 })
 
 export { router }

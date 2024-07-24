@@ -1,5 +1,5 @@
-[{"_id":"99fa6263-f4a7-4ba4-a5b4-9605df7bc4aa","username":"juan","password":"$2b$10$vOCbfJwYa0EcLbon/2xHROzG5ki7Y.4Vq8OUKFkdj/R0TjWTBxYv2","role":"admin","permissions":["create:student","read:student"]}]{
-
+[{"_id":"a68bcec3-bf88-4113-8cda-400c1ab909f0","username":"juandops","password":"$2b$10$duSJbqBoHvTkBVw6Nj5Bl.DueMTeDtA6gL.q6aleR9Zi0BiIZ95ty","role":"teacher","permissions":["create:student","read:student"]},{"_id":"572cfb5d-b7f2-4ea3-99e3-f1cfcccdd8d8","username":"juandos","password":"$2b$10$S.HqJnfaQqwtB2rsdt.NIea12lr.jAEiIloCllGZmR.2yFbnHSubO","role":"teacher","permissions":["create:student","read:student"]},{"_id":"99fa6263-f4a7-4ba4-a5b4-9605df7bc4aa","username":"juan","password":"$2b$10$vOCbfJwYa0EcLbon/2xHROzG5ki7Y.4Vq8OUKFkdj/R0TjWTBxYv2","role":"admin","permissions":["create:student","read:student"]}][{"_id":"eaf48bea-86c3-4ef8-9e7d-40bbdab315a7","name":"estudiante1","dni":456548465,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"7f083fb0-241c-4dfe-99e8-07c1811bf2fc","name":"estudiante1","dni":45654465,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"fc48ccab-6007-420a-85be-fa1e957dd9ff","name":"estudiante1","dni":456544654,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"}]{
+ 
 /* This code snippet is setting up a basic Express server in JavaScript. Here's a breakdown of what
 each part is doing: */
 import express from 'express'
@@ -14,11 +14,113 @@ const app = express()
 app.use(corsMiddleware)
 app.use(cookieMiddleware)
 app.use(jsonMiddleware)
+
 app.use('/', routes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
+export default class Validation {
+  static validateStudentData(data) {
+    const errors = []
+
+    if (!data.name || typeof data.name !== 'string') {
+      errors.push('Invalid name: The name is required and must be a string.')
+    }
+    if (!data.dni || typeof data.dni !== 'number') {
+      errors.push('Invalid DNI: The DNI is required and must be a number.')
+    }
+    if (!data.birthDate || !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
+      errors.push(
+        'Invalid birth date format: The birth date is required and must be in the format YYYY-MM-DD.'
+      )
+    }
+    if (!data.address || typeof data.address !== 'string') {
+      errors.push(
+        'Invalid address: The address is required and must be a string.'
+      )
+    }
+    if (!Array.isArray(data.contacts) || data.contacts.length === 0) {
+      errors.push(
+        'Invalid contacts: At least one contact is required and must be an array.'
+      )
+    }
+    if (!['morning', 'afternoon'].includes(data.turn)) {
+      errors.push(
+        'Invalid turn: The turn must be either "morning" or "afternoon".'
+      )
+    }
+    if (!data.classRoom || typeof data.classRoom !== 'string') {
+      errors.push(
+        'Invalid classRoom: The classRoom is required and must be a string.'
+      )
+    }
+    if (!data.teacherId || typeof data.teacherId !== 'string') {
+      errors.push(
+        'Invalid teacherId: The teacherId is required and must be a string.'
+      )
+    }
+
+    if (errors.length > 0) {
+      return { isValid: false, messages: errors }
+    }
+
+    return {
+      isValid: true,
+      message: 'Update validation successful. The update data is valid.',
+    }
+  }
+
+  static validateUpdateData(data) {
+    const errors = []
+
+    if (data.name && typeof data.name !== 'string') {
+      errors.push('Invalid name: If provided, the name must be a string.')
+    }
+    if (data.dni && typeof data.dni !== 'number') {
+      errors.push('Invalid DNI: If provided, the DNI must be a number.')
+    }
+    if (data.birthDate && !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
+      errors.push(
+        'Invalid birth date format: If provided, the birth date must be in the format YYYY-MM-DD.'
+      )
+    }
+    if (data.address && typeof data.address !== 'string') {
+      errors.push('Invalid address: If provided, the address must be a string.')
+    }
+    if (
+      data.contacts &&
+      (!Array.isArray(data.contacts) || data.contacts.length === 0)
+    ) {
+      errors.push(
+        'Invalid contacts: If provided, contacts must be an array and at least one contact is required.'
+      )
+    }
+    if (data.turn && !['morning', 'afternoon'].includes(data.turn)) {
+      errors.push(
+        'Invalid turn: If provided, the turn must be either "morning" or "afternoon".'
+      )
+    }
+    if (data.classRoom && typeof data.classRoom !== 'string') {
+      errors.push(
+        'Invalid classRoom: If provided, the classRoom must be a string.'
+      )
+    }
+    if (data.teacherId && typeof data.teacherId !== 'string') {
+      errors.push(
+        'Invalid teacherId: If provided, the teacherId must be a string.'
+      )
+    }
+
+    if (errors.length > 0) {
+      return { isValid: false, messages: errors }
+    }
+    return {
+      isValid: true,
+      message: 'Update validation successful. The update data is valid.',
+    }
+  }
+}
 // validators/userValidators.js
 import UserSchema from '../models/userSchema.js'
 
@@ -62,24 +164,28 @@ export function checkIfUserExists(username) {
     throw new Error('Username already exists !!')
   }
 }
+// routes/studentRoutes.js
 import express from 'express'
-
 import {
   createStudentController,
   getAllStudentsController,
   updateStudentController,
   deleteStudentController,
 } from '../controllers/studentController.js'
-
-// routes/studentRoutes.js
-import { authorize } from '../middlewares/authorizeRolesAndPermissions.js'
+import { authorize } from '../middlewares/authMiddleware.js'
 import { PERMISSIONS } from '../config/roles.js'
+
 const router = express.Router()
+
 router.post(
   '/students',
   authorize([PERMISSIONS.CREATE_STUDENT]),
-   createStudentController
-);
+  (req, res) => {
+    console.log("aqui aqui");
+    console.log('req.body router post', req.body)
+    createStudentController(req, res)
+  }
+)
 
 router.get(
   '/students',
@@ -114,7 +220,10 @@ router.use((error, req, res, next) => {
       req.method
     } - ${req.ip}`
   )
-  res.status(err.status || 500).send('Error del servidor')
+ res.status(err.status || 500).json({
+    error: 'Error del servidor',
+    message: err.message
+  });
 })
 
 export { router }
@@ -127,6 +236,7 @@ import {
   logoutUserController,
 } from '../controllers/userController.js'
 import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
+import studentRoutes from './studentRoutes.js'
 
 const router = express.Router()
 
@@ -152,9 +262,12 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 // ruteo a rute estudiantes
-import studentRoutes from './studentRoutes.js'
-router.use('/students', studentRoutes)
-
+router.use('/students', studentRoutes, (req, res, next) => {
+  logger.info('Student route accessed')
+  console.log('req.user', req.user);
+  next()
+}
+)
 
 router.post('/logout', (req, res, next) => {
   logger.info(`Logout attempt for user: ${req.user.username}`)
@@ -212,7 +325,7 @@ logger.stream = {
   write: message => logger.info(message.trim())
 };
 
-export default loggerimport { ROLE_PERMISSIONS, PERMISSIONS } from '../config/roles.js';
+export default loggerimport { ROLE_PERMISSIONS} from '../config/roles.js';
 
 // Función para verificar permisos
 export function hasPermission(userRole, permission) {
@@ -251,7 +364,7 @@ const Student = Schema('Student', {
   _id: { type: String, required: true },
   name: { type: String, required: true },
   dni: { type: Number, required: true },
-  birth_date: { type: String, required: true },
+  birthDate: { type: String, required: true },
   address: { type: String, required: true },
   contacts: { type: Array, required: true },
   turn: { type: String, required: true },
@@ -354,34 +467,18 @@ export const jwtMiddleware = (req, res, next) => {
 }
 const ejsMiddleware = app.set('view engine', 'ejs')
 
-export { ejsMiddleware }// middlewares/authorizeRolesAndPermissions.js
-import { ROLE_PERMISSIONS } from '../config/roles.js';
-
-export const authorize = (allowedRoles, requiredPermissions = []) => {
+export { ejsMiddleware }import { hasPermission as checkPermission } from '../utils/permissionUtils.js';
+export const authorize = (requiredPermission) => {
   return (req, res, next) => {
-    if (!req.user) {
-      return res.status(403).json({ message: 'No autorizado' });
+    const userRole = req.user.role; // Asumiendo que el rol del usuario está disponible en req.user
+    console.log('userRole', userRole);
+    console.log('requiredPermission', requiredPermission);
+
+    if (requiredPermission.every(permission => checkPermission(userRole, permission))){
+      return next();
+    } else {
+      return res.status(403).json({ message: 'Forbidden' });
     }
-
-    console.log(req.user.role);
-    // Verificar rol
-    if (!allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Rol no autorizado' });
-    }
-
-    // Verificar permisos si se especifican
-    if (requiredPermissions.length > 0) {
-      const userPermissions = ROLE_PERMISSIONS[req.user.role] || [];
-      const hasAllRequiredPermissions = requiredPermissions.every(
-        permission => userPermissions.includes(permission)
-      );
-
-      if (!hasAllRequiredPermissions) {
-        return res.status(403).json({ message: 'Permisos insuficientes' });
-      }
-    }
-
-    next();
   };
 };import express from 'express'
 
@@ -575,68 +672,87 @@ export const logoutUserController = async (req, res) => {
     })
   }
 }
+import StudentRepository from '../repositories/student-repository.js'
+import Validation from '../validators/studenValidators.js';
+
+
 export const createStudentController = async (req, res) => {
-  const studentData = req.body
+  const studentData = req.body;
+
+  const validationErrors = Validation.validateStudentData(studentData);
+
+  if (validationErrors) {
+    return res.status(400).json({ error: validationErrors });
+  }
 
   try {
-    const newStudent = await UserRepository.createStudentRepository(studentData)
-    console.log(newStudent);
-    res.json(newStudent)
+    const newStudent = await StudentRepository.createStudentRepository(studentData);
+    res.json(newStudent);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error en createStudentController:', error);
+    res.status(500).json({ error: 'Error al crear el estudiante' });
   }
-}
+};
+
 
 export const getAllStudentsController = async (req, res) => {
   try {
-    const students = await UserRepository.getStudentsRepository()
-    res.json(students)
+    const students = await StudentRepository.getStudentsRepository();
+    res.json(students);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error en getAllStudentsController:', error);
+    res.status(500).json({ error: 'Error al obtener los estudiantes' });
   }
 }
 
 export const getStudentByIdController = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   try {
-    const student = await UserRepository.getStudentByIdRepository(id)
-    res.json(student)
+    const student = await StudentRepository.getStudentByIdRepository(id);
+    if (!student) {
+      return res.status(404).json({ error: 'Estudiante no encontrado' });
+    }
+    res.json(student);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error en getStudentByIdController:', error);
+    res.status(500).json({ error: 'Error al obtener el estudiante' });
   }
 }
 
 export const deleteStudentController = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   try {
-    const deletedStudent = await UserRepository.deleteStudentRepository(id)
-    res.json(deletedStudent)
+    const deletedStudent = await StudentRepository.deleteStudentRepository(id);
+    if (!deletedStudent) {
+      return res.status(404).json({ error: 'Estudiante no encontrado' });
+    }
+    res.json(deletedStudent);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error en deleteStudentController:', error);
+    res.status(500).json({ error: 'Error al eliminar el estudiante' });
   }
 }
 
 export const updateStudentController = async (req, res) => {
-  const { id } = req.params
-  const updateData = req.body
+  const { id } = req.params;
+  const updateData = req.body;
 
   // Verificación adicional de permisos si es necesario
   if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
-    return res
-      .status(403)
-      .json({ message: 'No tienes permiso para cambiar el aula' })
+    return res.status(403).json({ message: 'No tienes permiso para cambiar el aula' });
   }
 
   try {
-    const updatedStudent = await UserRepository.updateStudentRepository(
-      id,
-      updateData
-    )
-    res.json(updatedStudent)
+    const updatedStudent = await StudentRepository.updateStudentRepository(id, updateData);
+    if (!updatedStudent) {
+      return res.status(404).json({ error: 'Estudiante no encontrado' });
+    }
+    res.json(updatedStudent);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error en updateStudentController:', error);
+    res.status(500).json({ error: 'Error al actualizar el estudiante' });
   }
 }
 // controllers/authController.js
@@ -685,10 +801,14 @@ export const debugAuthController =async (req, res) => {
     "winston": "^3.13.1"
   }
 }
+import Student from '../models/studentSchema.js'
 import crypto from 'crypto'
-export class StudentRepository {
-  static async create (studentData) {
-    Validation.validateStudentData(studentData);
+import Validation  from '../validators/studenValidators.js'
+
+
+export default class StudentRepository {
+  static async createStudentRepository(studentData) {
+     Validation.validateStudentData(studentData);
 
     const existingStudent =  await Student.findOne({ dni: studentData.dni });
     if (existingStudent) {
@@ -744,62 +864,6 @@ export class StudentRepository {
     Student.deleteOne({ _id: id });
     return { message: 'Student deleted successfully' };
   }
-}
-
-class Validation {
-  static validateStudentData(data) {
-    if (!data.name || typeof data.name !== 'string') {
-      throw new Error('Invalid name');
-    }
-    if (!data.dni || typeof data.dni !== 'number') {
-      throw new Error('Invalid DNI');
-    }
-    if (!data.birth_date || !/^\d{4}-\d{2}-\d{2}$/.test(data.birth_date)) {
-      throw new Error('Invalid birth date format. Use YYYY-MM-DD');
-    }
-    if (!data.address || typeof data.address !== 'string') {
-      throw new Error('Invalid address');
-    }
-    if (!Array.isArray(data.contacts) || data.contacts.length === 0) {
-      throw new Error('At least one contact is required');
-    }
-    if (!['morning', 'afternoon'].includes(data.turn)) {
-      throw new Error('Invalid turn. Must be "morning" or "afternoon"');
-    }
-    if (!data.classRoom || typeof data.classRoom !== 'string') {
-      throw new Error('Invalid classRoom');
-    }
-    if (!data.teacherId || typeof data.teacherId !== 'string') {
-      throw new Error('Invalid teacherId');
-    }
-  }
-
-  static validateUpdateData(data) {
-    if (data.name && typeof data.name !== 'string') {
-      throw new Error('Invalid name');
-    }
-    if (data.dni && typeof data.dni !== 'number') {
-      throw new Error('Invalid DNI');
-    }
-    if (data.birth_date && !/^\d{4}-\d{2}-\d{2}$/.test(data.birth_date)) {
-      throw new Error('Invalid birth date format. Use YYYY-MM-DD');
-    }
-    if (data.address && typeof data.address !== 'string') {
-      throw new Error('Invalid address');
-    }
-    if (data.contacts && (!Array.isArray(data.contacts) || data.contacts.length === 0)) {
-      throw new Error('At least one contact is required');
-    }
-    if (data.turn && !['morning', 'afternoon'].includes(data.turn)) {
-      throw new Error('Invalid turn. Must be "morning" or "afternoon"');
-    }
-    if (data.classRoom && typeof data.classRoom !== 'string') {
-      throw new Error('Invalid classRoom');
-    }
-    if (data.teacherId && typeof data.teacherId !== 'string') {
-      throw new Error('Invalid teacherId');
-    }
-  }
 }/* The UserRepository class provides methods for interacting with user data in a MongoDB database,
 including creating, updating, deleting, and retrieving user information. */
 // repositories/user-repository.js
@@ -807,6 +871,7 @@ import bcrypt from 'bcrypt'
 import User from '../models/userSchema.js'
 
 export class UserRepository {
+  
   static async postUserRepository(userData) {
     const newUser = User.create(userData)
     await newUser.save()

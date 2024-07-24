@@ -4,7 +4,7 @@ import DBLocal from 'db-local';
 
 const { Schema } = new DBLocal({ path: './db' })
 
-const Student = Schema('Student', {
+const StudentSchema = Schema('Student', {
   _id: { type: String, required: true },
   name: { type: String, required: true },
   dni: { type: Number, required: true },
@@ -16,4 +16,4 @@ const Student = Schema('Student', {
   teacherId: { type: String, required: true }
 })
 
-export default Student
+export default StudentSchema

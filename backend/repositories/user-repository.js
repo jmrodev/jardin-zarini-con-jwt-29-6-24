@@ -9,9 +9,7 @@ export class UserRepository {
   static async postUserRepository(userData) {
     const newUser = User.create(userData)
     await newUser.save()
-    // Intentamos obtener el usuario recién creado
     const createdUser = User.findOne({ _id: userData._id }) 
-  
     return createdUser
   }
 
