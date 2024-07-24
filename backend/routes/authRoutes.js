@@ -7,6 +7,7 @@ import {
   logoutUserController,
 } from '../controllers/userController.js'
 import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
+import studentRoutes from './studentRoutes.js'
 
 const router = express.Router()
 
@@ -32,9 +33,12 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 // ruteo a rute estudiantes
-import studentRoutes from './studentRoutes.js'
-router.use('/students', studentRoutes)
-
+router.use('/students', studentRoutes, (req, res, next) => {
+  logger.info('Student route accessed')
+  console.log('req.user', req.user);
+  next()
+}
+)
 
 router.post('/logout', (req, res, next) => {
   logger.info(`Logout attempt for user: ${req.user.username}`)

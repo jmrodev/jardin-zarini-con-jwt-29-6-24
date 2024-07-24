@@ -1,7 +1,8 @@
+import Student from '../models/studentSchema.js'
 import crypto from 'crypto'
-export class StudentRepository {
-  static async create (studentData) {
-    Validation.validateStudentData(studentData);
+export default class StudentRepository {
+  static async createStudentRepository(studentData) {
+    // Validation.validateStudentData(studentData);
 
     const existingStudent =  await Student.findOne({ dni: studentData.dni });
     if (existingStudent) {
@@ -39,7 +40,7 @@ export class StudentRepository {
       throw new Error('No update data provided');
     }
 
-    Validation.validateUpdateData(updateData);
+   // Validation.validateUpdateData(updateData);
 
     if (updateData.dni && updateData.dni !== student.dni) {
       const existingStudent = Student.findOne({ dni: updateData.dni });
