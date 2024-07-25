@@ -6,10 +6,8 @@ import Validation  from '../validators/studenValidators.js'
 export default class StudentRepository {
   static async createStudentRepository(studentData) {
 
-    console.log('studentData', studentData);
      Validation.validateStudentData(studentData);
-
-
+     
     const existingStudent =  await StudentSchema.findOne({ dni: studentData.dni });
     if (existingStudent) {
       throw new Error('A student with this DNI already exists');
@@ -27,7 +25,8 @@ export default class StudentRepository {
     return StudentSchema.find()
   }
 
-  static async getById (id) {
+  static async getStudentByIdRepository (id) {
+    console.log('id repository', id);
     const student = await StudentSchema.findOne({ _id: id });
     if (!student) {
       throw new Error('Student not found');
@@ -35,7 +34,7 @@ export default class StudentRepository {
     return student;
   }
 
-  static async getByParentId (parentId) {
+  static async getByParentIdRepository (parentId) {
     return StudentSchema.find(student => student.contacts.some(contact => contact.id === parentId))
   }
 
@@ -59,9 +58,9 @@ export default class StudentRepository {
     return await student.save()
   }
 
-  static async delete (id) {
-    const student = await this.getById(id);
-    StudentSchema.deleteOne({ _id: id });
+  static async deleteStudentRepository (id) {
+    const student = await this.getStudentByIdRepository(id);
+    StudentSchema.remove({ _id: id });
     return { message: 'Student deleted successfully' };
   }
 }

@@ -2,16 +2,10 @@ import StudentRepository from '../repositories/student-repository.js'
 import Validation from '../validators/studenValidators.js'
 
 export const createStudentController = async (req, res) => {
-  console.log('req student', req.user)
 
   const studentData = req.body
-  console.log('studentData', studentData)
-
   const validationErrors = Validation.validateStudentData(studentData)
-
-  console.log('validationErrors', validationErrors);
-
-  if (!validationErrors.isValid) {
+    if (!validationErrors.isValid) {
     return res.status(400).json({ error: validationErrors.messages })
   }
 
@@ -27,7 +21,7 @@ export const createStudentController = async (req, res) => {
 }
 
 export const getAllStudentsController = async (req, res) => {
-  console.log('req.user', req.user)
+
   try {
     const students = await StudentRepository.getStudentsRepository()
     res.json(students)
@@ -38,6 +32,8 @@ export const getAllStudentsController = async (req, res) => {
 }
 
 export const getStudentByIdController = async (req, res) => {
+  console.log("aqui llega");
+  console.log('req.params controller', req.params);
   const { id } = req.params
 
   try {
@@ -53,6 +49,7 @@ export const getStudentByIdController = async (req, res) => {
 }
 
 export const deleteStudentController = async (req, res) => {
+  console.log('req.params delete', req.params);
   const { id } = req.params
 
   try {

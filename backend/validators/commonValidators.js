@@ -27,7 +27,6 @@ export function validatePassword(password) {
 }
 
 export function validateEntries(username, password, role, permissions) {
-  console.log('datos ', username, password, role, permissions)
   if (!username || !password || !role || !permissions) {
     throw new Error(
       'Todos los campos son obligatorios: username, password, role y permissions'

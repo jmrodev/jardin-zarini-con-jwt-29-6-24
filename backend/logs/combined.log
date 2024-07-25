@@ -930,3 +930,106 @@
 {"level":"info","message":"::1 - - [24/Jul/2024:22:36:28 +0000] \"POST /auth/api HTTP/1.1\" 400 105 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:36:28"}
 {"level":"info","message":"Auth Route accessed: POST /auth/api","service":"user-service","timestamp":"2024-07-24 19:40:22"}
 {"level":"info","message":"::1 - - [24/Jul/2024:22:40:23 +0000] \"POST /auth/api HTTP/1.1\" 200 287 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:40:23"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:42:37 +0000] \"GET /api/authTest HTTP/1.1\" 404 151 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:42:37"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api","service":"user-service","timestamp":"2024-07-24 19:43:05"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:43:05 +0000] \"GET /auth/api HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:43:05"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 19:44:05"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:44:05 +0000] \"GET /auth/api?id=fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:44:05"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:44:35"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:44:35 +0000] \"GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:44:35"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:48:27"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:48:27 +0000] \"GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:48:27"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:48:59"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:48:59 +0000] \"GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:48:59"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:50:36"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:50:36 +0000] \"GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:50:36"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:51:44"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:51:44 +0000] \"GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:51:44"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:52:50"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:52:50 +0000] \"GET /auth/api?id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:52:50"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:52:58"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:52:58 +0000] \"GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:52:58"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:53:36"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:53:36 +0000] \"GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:53:36"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:55:44"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:55:44 +0000] \"GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:55:44"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22","service":"user-service","timestamp":"2024-07-24 19:56:25"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:56:25 +0000] \"GET /auth/api?_id=%22fe45249d-52c6-42c4-8b36-c6343912731d%22 HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:56:25"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api","service":"user-service","timestamp":"2024-07-24 19:56:51"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:56:51 +0000] \"GET /auth/api HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:56:51"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 19:57:15"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:57:15 +0000] \"GET /auth/api?id=fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:57:15"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api?id=fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 19:58:04"}
+{"level":"info","message":"::1 - - [24/Jul/2024:22:58:04 +0000] \"GET /auth/api?id=fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 19:58:04"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api:id=fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 20:00:09"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:00:09 +0000] \"GET /auth/api:id=fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 404 187 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:00:09"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/:id=fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 20:00:33"}
+{"level":"info","message":"Student route accessed","service":"user-service","timestamp":"2024-07-24 20:00:33"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:00:33 +0000] \"GET /auth/api/:id=fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 404 188 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:00:33"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/:id=fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 20:01:02"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:01:02 +0000] \"GET /auth/api/:id=fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 500 42 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:01:02"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/:fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 20:01:10"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:01:10 +0000] \"GET /auth/api/:fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 500 42 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:01:10"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/fe45249d-52c6-42c4-8b36-c6343912731d","service":"user-service","timestamp":"2024-07-24 20:01:17"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:01:17 +0000] \"GET /auth/api/fe45249d-52c6-42c4-8b36-c6343912731d HTTP/1.1\" 200 287 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:01:17"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/","service":"user-service","timestamp":"2024-07-24 20:01:45"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:01:45 +0000] \"GET /auth/api/ HTTP/1.1\" 200 873 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:01:45"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:01:59"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:01:59 +0000] \"GET /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 200 194 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:01:59"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:19:45 +0000] \"GET /api/protected HTTP/1.1\" 404 152 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:19:45"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:21:41"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:21:41 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:21:41"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:21:50"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:21:50 +0000] \"GET /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 200 194 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:21:50"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:23:40"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:23:40 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:23:40"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:28:09"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:28:09 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 401 67 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:28:09"}
+{"level":"info","message":"Auth Route accessed: POST /auth/login","service":"user-service","timestamp":"2024-07-24 20:28:16"}
+{"level":"info","message":"Login attempt for user: juandops","service":"user-service","timestamp":"2024-07-24 20:28:16"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:28:16 +0000] \"POST /auth/login HTTP/1.1\" 200 142 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:28:16"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:28:21"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:28:21 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:28:21"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 20:33:40"}
+{"level":"info","message":"::1 - - [24/Jul/2024:23:33:40 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 20:33:40"}
+{"level":"info","message":"Auth Route accessed: POST /auth/login","service":"user-service","timestamp":"2024-07-24 21:47:14"}
+{"level":"info","message":"Login attempt for user: juandops","service":"user-service","timestamp":"2024-07-24 21:47:14"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:47:14 +0000] \"POST /auth/login HTTP/1.1\" 200 142 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:47:14"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 21:47:22"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:47:22 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:47:22"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 21:50:52"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:50:52 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:50:52"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 21:53:53"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:53:53 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 403 23 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:53:53"}
+{"level":"info","message":"Auth Route accessed: POST /auth/login","service":"user-service","timestamp":"2024-07-24 21:54:48"}
+{"level":"info","message":"Login attempt for user: juandjjyj","service":"user-service","timestamp":"2024-07-24 21:54:48"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:54:48 +0000] \"POST /auth/login HTTP/1.1\" 401 30 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:54:48"}
+{"level":"info","message":"Auth Route accessed: POST /auth","service":"user-service","timestamp":"2024-07-24 21:55:05"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:55:05 +0000] \"POST /auth HTTP/1.1\" 404 144 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:55:05"}
+{"level":"info","message":"Auth Route accessed: POST /auth/register","service":"user-service","timestamp":"2024-07-24 21:56:06"}
+{"level":"info","message":"Registration attempt for user: juan","service":"user-service","timestamp":"2024-07-24 21:56:06"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:56:06 +0000] \"POST /auth/register HTTP/1.1\" 400 2 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:56:06"}
+{"level":"info","message":"Auth Route accessed: POST /auth/login","service":"user-service","timestamp":"2024-07-24 21:56:28"}
+{"level":"info","message":"Login attempt for user: juan","service":"user-service","timestamp":"2024-07-24 21:56:28"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:56:29 +0000] \"POST /auth/login HTTP/1.1\" 200 136 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:56:29"}
+{"level":"info","message":"Auth Route accessed: POST /auth/register","service":"user-service","timestamp":"2024-07-24 21:57:03"}
+{"level":"info","message":"Registration attempt for user: juan","service":"user-service","timestamp":"2024-07-24 21:57:03"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:57:03 +0000] \"POST /auth/register HTTP/1.1\" 400 2 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:57:03"}
+{"level":"info","message":"Auth Route accessed: POST /auth/login","service":"user-service","timestamp":"2024-07-24 21:57:08"}
+{"level":"info","message":"Login attempt for user: juan","service":"user-service","timestamp":"2024-07-24 21:57:08"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:57:09 +0000] \"POST /auth/login HTTP/1.1\" 200 136 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:57:09"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 21:57:54"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:57:54 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 500 43 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:57:54"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 21:58:56"}
+{"level":"info","message":"::1 - - [25/Jul/2024:00:58:56 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 500 43 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 21:58:56"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 22:00:41"}
+{"level":"info","message":"::1 - - [25/Jul/2024:01:00:41 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 500 43 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 22:00:41"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 22:02:33"}
+{"level":"info","message":"::1 - - [25/Jul/2024:01:02:33 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 200 42 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 22:02:33"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api/","service":"user-service","timestamp":"2024-07-24 22:02:49"}
+{"level":"info","message":"::1 - - [25/Jul/2024:01:02:49 +0000] \"GET /auth/api/ HTTP/1.1\" 200 678 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 22:02:49"}
+{"level":"info","message":"Auth Route accessed: DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff","service":"user-service","timestamp":"2024-07-24 22:03:24"}
+{"level":"info","message":"::1 - - [25/Jul/2024:01:03:25 +0000] \"DELETE /auth/api/fc48ccab-6007-420a-85be-fa1e957dd9ff HTTP/1.1\" 500 43 \"-\" \"PostmanRuntime/7.40.0\"","service":"user-service","timestamp":"2024-07-24 22:03:25"}
+{"level":"info","message":"Auth Route accessed: GET /auth/api","service":"user-service","timestamp":"2024-07-24 22:28:37"}
+{"level":"info","message":"::1 - - [25/Jul/2024:01:28:37 +0000] \"GET /auth/api HTTP/1.1\" 401 56 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36\"","service":"user-service","timestamp":"2024-07-24 22:28:37"}
+{"level":"info","message":"::1 - - [25/Jul/2024:01:28:39 +0000] \"GET /favicon.ico HTTP/1.1\" 404 150 \"http://localhost:3000/auth/api\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36\"","service":"user-service","timestamp":"2024-07-24 22:28:39"}
