@@ -1,0 +1,902 @@
+[{"_id":"a68bcec3-bf88-4113-8cda-400c1ab909f0","username":"juandops","password":"$2b$10$duSJbqBoHvTkBVw6Nj5Bl.DueMTeDtA6gL.q6aleR9Zi0BiIZ95ty","role":"teacher","permissions":["create:student","read:student"]},{"_id":"572cfb5d-b7f2-4ea3-99e3-f1cfcccdd8d8","username":"juandos","password":"$2b$10$S.HqJnfaQqwtB2rsdt.NIea12lr.jAEiIloCllGZmR.2yFbnHSubO","role":"teacher","permissions":["create:student","read:student"]},{"_id":"99fa6263-f4a7-4ba4-a5b4-9605df7bc4aa","username":"juan","password":"$2b$10$vOCbfJwYa0EcLbon/2xHROzG5ki7Y.4Vq8OUKFkdj/R0TjWTBxYv2","role":"admin","permissions":["create:student","read:student"]}][{"_id":"eaf48bea-86c3-4ef8-9e7d-40bbdab315a7","name":"estudiante1","dni":456548465,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"7f083fb0-241c-4dfe-99e8-07c1811bf2fc","name":"estudiante1","dni":45654465,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"fc48ccab-6007-420a-85be-fa1e957dd9ff","name":"estudiante1","dni":456544654,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"}]{
+ 
+/* This code snippet is setting up a basic Express server in JavaScript. Here's a breakdown of what
+each part is doing: */
+import express from 'express'
+import { PORT } from './config/config.js'
+import { router as routes } from './routes/router.js'
+import { corsMiddleware } from './middlewares/corsMiddleware.js'
+import { jsonMiddleware } from './middlewares/jsonMiddleware.js'
+import { cookieMiddleware } from './middlewares/cookieMiddleware.js'
+
+const app = express()
+// Middlewares
+app.use(corsMiddleware)
+app.use(cookieMiddleware)
+app.use(jsonMiddleware)
+
+app.use('/', routes)
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+})
+export default class Validation {
+  static validateStudentData(data) {
+    const errors = []
+
+    if (!data.name || typeof data.name !== 'string') {
+      errors.push('Invalid name: The name is required and must be a string.')
+    }
+    if (!data.dni || typeof data.dni !== 'number') {
+      errors.push('Invalid DNI: The DNI is required and must be a number.')
+    }
+    if (!data.birthDate || !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
+      errors.push(
+        'Invalid birth date format: The birth date is required and must be in the format YYYY-MM-DD.'
+      )
+    }
+    if (!data.address || typeof data.address !== 'string') {
+      errors.push(
+        'Invalid address: The address is required and must be a string.'
+      )
+    }
+    if (!Array.isArray(data.contacts) || data.contacts.length === 0) {
+      errors.push(
+        'Invalid contacts: At least one contact is required and must be an array.'
+      )
+    }
+    if (!['morning', 'afternoon'].includes(data.turn)) {
+      errors.push(
+        'Invalid turn: The turn must be either "morning" or "afternoon".'
+      )
+    }
+    if (!data.classRoom || typeof data.classRoom !== 'string') {
+      errors.push(
+        'Invalid classRoom: The classRoom is required and must be a string.'
+      )
+    }
+    if (!data.teacherId || typeof data.teacherId !== 'string') {
+      errors.push(
+        'Invalid teacherId: The teacherId is required and must be a string.'
+      )
+    }
+
+    if (errors.length > 0) {
+      return { isValid: false, messages: errors }
+    }
+
+    return {
+      isValid: true,
+      message: 'Update validation successful. The update data is valid.',
+    }
+  }
+
+  static validateUpdateData(data) {
+    const errors = []
+
+    if (data.name && typeof data.name !== 'string') {
+      errors.push('Invalid name: If provided, the name must be a string.')
+    }
+    if (data.dni && typeof data.dni !== 'number') {
+      errors.push('Invalid DNI: If provided, the DNI must be a number.')
+    }
+    if (data.birthDate && !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
+      errors.push(
+        'Invalid birth date format: If provided, the birth date must be in the format YYYY-MM-DD.'
+      )
+    }
+    if (data.address && typeof data.address !== 'string') {
+      errors.push('Invalid address: If provided, the address must be a string.')
+    }
+    if (
+      data.contacts &&
+      (!Array.isArray(data.contacts) || data.contacts.length === 0)
+    ) {
+      errors.push(
+        'Invalid contacts: If provided, contacts must be an array and at least one contact is required.'
+      )
+    }
+    if (data.turn && !['morning', 'afternoon'].includes(data.turn)) {
+      errors.push(
+        'Invalid turn: If provided, the turn must be either "morning" or "afternoon".'
+      )
+    }
+    if (data.classRoom && typeof data.classRoom !== 'string') {
+      errors.push(
+        'Invalid classRoom: If provided, the classRoom must be a string.'
+      )
+    }
+    if (data.teacherId && typeof data.teacherId !== 'string') {
+      errors.push(
+        'Invalid teacherId: If provided, the teacherId must be a string.'
+      )
+    }
+
+    if (errors.length > 0) {
+      return { isValid: false, messages: errors }
+    }
+    return {
+      isValid: true,
+      message: 'Update validation successful. The update data is valid.',
+    }
+  }
+}
+// validators/userValidators.js
+import UserSchema from '../models/userSchema.js'
+
+export function validateUsername(username) {
+  const userNameRegexp = '^[A-Za-z]+$'
+  if (!username || username.length < 3) {
+    throw new Error('Username must be at least 3 characters long')
+  }
+  if (username.match(userNameRegexp) === null) {
+    throw new Error('Username must contain only letters')
+  }
+}
+
+export function validatePassword(password) {
+  const passwordRegexp = '^[A-Za-z\\d$@$!%*?&]+$'
+  if (!password || typeof password !== 'string') {
+    throw new Error('Password must be a valid string')
+  }
+  if (password.length < 8) {
+    throw new Error('Password must be at least 8 characters long')
+  }
+  if (password.match(passwordRegexp) === null) {
+    throw new Error(
+      'Password must contain only letters, numbers, and some special characters without spaces'
+    )
+  }
+}
+
+export function validateEntries(username, password, role, permissions) {
+  console.log('datos ', username, password, role, permissions)
+  if (!username || !password || !role || !permissions) {
+    throw new Error(
+      'Todos los campos son obligatorios: username, password, role y permissions'
+    )
+  }
+}
+
+export function checkIfUserExists(username) {
+  const existingUser = UserSchema.findOne({ username })
+  if (existingUser) {
+    throw new Error('Username already exists !!')
+  }
+}
+// routes/studentRoutes.js
+import express from 'express'
+import {
+  createStudentController,
+  getAllStudentsController,
+  updateStudentController,
+  deleteStudentController,
+} from '../controllers/studentController.js'
+import { authorize } from '../middlewares/authMiddleware.js'
+import { PERMISSIONS } from '../config/roles.js'
+
+const router = express.Router()
+
+router.post(
+  '/',
+  authorize([PERMISSIONS.CREATE_STUDENT]),
+  (req, res) => {
+    console.log('req.body router post', req.body)
+    createStudentController(req, res)
+  }
+)
+
+router.get(
+  '/',
+  authorize([PERMISSIONS.READ_STUDENT]),
+  getAllStudentsController
+)
+router.put(
+  '/:id',
+  authorize([PERMISSIONS.UPDATE_STUDENT]),
+  updateStudentController
+)
+router.delete(
+  '/:id',
+  authorize([PERMISSIONS.DELETE_STUDENT]),
+  deleteStudentController
+)
+
+export default router
+import express from 'express'
+import authRoutes from './authRoutes.js'
+import studentRoutes from './studentRoutes.js'
+import morgan from 'morgan'
+import logger from '../utils/logger.js'
+
+const router = express.Router()
+
+router.use(morgan('combined', { stream: logger.stream }))
+router.use('/api', studentRoutes )
+router.use('/auth', authRoutes )
+
+router.use((error, req, res, next) => {
+  logger.error(
+    `${error.status || 500} - ${error.message} - ${req.originalUrl} - ${
+      req.method
+    } - ${req.ip}`
+  )
+ res.status(error.status || 500).json({
+    error: 'Error del servidor',
+    message: error.message
+  });
+})
+
+export { router }
+// routes/authRoutes.js
+import express from 'express'
+import logger from '../utils/logger.js'
+import {
+  loginUserController,
+  createUserController,
+  logoutUserController,
+} from '../controllers/userController.js'
+import { jwtMiddleware } from '../middlewares/jwtMiddleware.js'
+import studentRoutes from './studentRoutes.js'
+
+const router = express.Router()
+
+// Middleware de logging para todas las rutas de autenticación
+router.use((req, res, next) => {
+  logger.info(`Auth Route accessed: ${req.method} ${req.originalUrl}`)
+  next()
+})
+
+// Rutas públicas
+router.post('/login', (req, res, next) => {
+  logger.info(`Login attempt for user: ${req.body.username}`)
+  loginUserController(req, res, next)
+})
+
+router.post('/register', (req, res, next) => {
+  logger.info(`Registration attempt for user: ${req.body.username}`)
+  createUserController(req, res, next)
+})
+
+// Middleware de autenticación JWT
+router.use(jwtMiddleware)
+
+// Rutas protegidas
+// ruteo a rute estudiantes
+router.use('/', studentRoutes, (req, res, next) => {
+  logger.info('Student route accessed')
+  console.log('req.user', req.user);
+  next()
+}
+)
+
+router.post('/logout', (req, res, next) => {
+  logger.info(`Logout attempt for user: ${req.user.username}`)
+  jwtMiddleware(req, res, next)
+  logoutUserController(req, res, next)
+})
+
+export default router
+// utils/securityUtils.js
+import crypto from 'crypto';
+import bcrypt from 'bcrypt';
+import { SALTROUNDS } from '../config/config.js';
+
+export async function hashPassword(password) {
+  return await bcrypt.hash(password, SALTROUNDS);
+}
+
+export function generateUniqueId() {
+  return crypto.randomUUID();
+}
+
+// utils/logger.js
+import winston from 'winston';
+import path from 'path';
+
+const logDir = 'logs';
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
+    winston.format.errors({ stack: true }),
+    winston.format.splat(),
+    winston.format.json()
+  ),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' }),
+    new winston.transports.File({ filename: path.join(logDir, 'combined.log') })
+  ]
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.colorize(),
+      winston.format.simple()
+    )
+  }));
+}
+
+logger.stream = {
+  write: message => logger.info(message.trim())
+};
+
+export default loggerimport { ROLE_PERMISSIONS} from '../config/roles.js';
+
+// Función para verificar permisos
+export function hasPermission(userRole, permission) {
+    if (ROLE_PERMISSIONS[userRole]) {
+        return ROLE_PERMISSIONS[userRole].includes(permission);
+    }
+    return false;
+}
+
+{
+    "watch": ["."],
+    "ext": "js,json,ejs",
+    "ignore": ["db/*", "logs/*"],
+    "exec": "node index.js"
+  }// models/userSchema.js
+import DBLocal from 'db-local';
+
+const { Schema } = new DBLocal({ path: './db' });
+
+const UserSchema = Schema('User', {
+  _id: { type: String, required: true },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true },
+  permissions: { type: Array, default: [] },
+  classRoom: { type: String },
+});
+
+export default UserSchema;
+// models/userSchema.js
+import DBLocal from 'db-local';
+
+const { Schema } = new DBLocal({ path: './db' })
+
+const StudentSchema = Schema('Student', {
+  _id: { type: String, required: true },
+  name: { type: String, required: true },
+  dni: { type: Number, required: true },
+  birthDate: { type: String, required: true },
+  address: { type: String, required: true },
+  contacts: { type: Array, required: true },
+  turn: { type: String, required: true },
+  classRoom: { type: String, required: true },
+  teacherId: { type: String, required: true }
+})
+
+export default StudentSchemaexport const {
+    PORT = 3000,
+    SALTROUNDS = 10,
+    SECRET_JWT_KEY = 'AdminPassword123!',
+    SERVER_URL = 'http://localhost:5173'
+  } = process.env// config/roles.js
+export const ROLES = {
+    ADMIN: 'admin',
+    TEACHER: 'teacher',
+    PARENT: 'parent',
+  };
+  
+  export const PERMISSIONS = {
+    CREATE_STUDENT: 'create:student',
+    READ_STUDENT: 'read:student',
+    UPDATE_STUDENT: 'update:student',
+    DELETE_STUDENT: 'delete:student',
+    MANAGE_USERS: 'manage:users',
+    // ... otros permisos
+  };
+  
+  export const ROLE_PERMISSIONS = {
+    [ROLES.ADMIN]: [
+      PERMISSIONS.CREATE_STUDENT,
+      PERMISSIONS.READ_STUDENT,
+      PERMISSIONS.UPDATE_STUDENT,
+      PERMISSIONS.DELETE_STUDENT,
+      PERMISSIONS.MANAGE_USERS,
+    ],
+    [ROLES.TEACHER]: [
+      PERMISSIONS.CREATE_STUDENT,
+      PERMISSIONS.READ_STUDENT,
+      PERMISSIONS.UPDATE_STUDENT,
+    ],
+    [ROLES.PARENT]: [
+      PERMISSIONS.READ_STUDENT,
+    ],
+  };import cookieParser from 'cookie-parser'
+
+const cookieMiddleware = (cookieParser())
+
+export { cookieMiddleware }import jwt from 'jsonwebtoken'
+import { SECRET_JWT_KEY } from '../config/config.js'
+
+export const jwtMiddleware = (req, res, next) => {
+  const token =
+    req.cookies.access_token || req.headers['authorization']?.split(' ')[1]
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: 'No se proporcionó token de autenticación' })
+  }
+
+  try {
+    const data = jwt.verify(token, SECRET_JWT_KEY)
+    req.user = data
+    next()
+  } catch (error) {
+    req.user = null
+    res.clearCookie('access_token')
+    if (error instanceof jwt.TokenExpiredError) {
+      return res
+        .status(401)
+        .json({
+          message: 'Token expirado. Por favor, inicie sesión nuevamente.',
+        })
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res
+        .status(401)
+        .json({
+          message: 'Token inválido. Por favor, inicie sesión nuevamente.',
+        })
+    } else {
+      return res
+        .status(401)
+        .json({
+          message:
+            'Error de autenticación. Por favor, inicie sesión nuevamente.',
+        })
+    }
+  }
+}
+const ejsMiddleware = app.set('view engine', 'ejs')
+
+export { ejsMiddleware }import { hasPermission as checkPermission } from '../utils/permissionUtils.js';
+export const authorize = (requiredPermission) => {
+  return (req, res, next) => {
+    const userRole = req.user.role;
+    if (requiredPermission.every(permission => checkPermission(userRole, permission))){
+      return next();
+    } else {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+  };
+};import express from 'express'
+
+const jsonMiddleware = (express.json())
+
+export { jsonMiddleware }import { SERVER_URL } from '../config/config.js'
+import cors from 'cors'
+const corsMiddleware = cors({
+    origin: SERVER_URL , // Ajusta esto según tu configuración
+    credentials: true, // Permitir cookies entre dominios
+  })
+
+export { corsMiddleware }
+import { UserRepository } from '../repositories/user-repository.js'
+import { hashPassword, generateUniqueId } from '../utils/securityUtils.js'
+import {
+  validateUsername,
+  validatePassword,
+  validateEntries,
+  checkIfUserExists,
+} from '../validators/userValidators.js'
+import { PERMISSIONS, ROLES, ROLE_PERMISSIONS } from '../config/roles.js'
+
+export async function createUserService({
+  username,
+  password,
+  role,
+  permissions,
+}) {
+
+  validateUsername(username)
+  validatePassword(password)
+  validateEntries(username, password, role, permissions)
+  await checkIfUserExists(username)
+
+  const hash = await hashPassword(password)
+  const id = generateUniqueId()
+
+  try {
+    const newUser = await UserRepository.postUserRepository({
+      _id: id,
+      username,
+      password: hash,
+      role,
+      permissions: permissions || ROLE_PERMISSIONS[role],
+    })
+    // Verifica si newUser es un array y toma el primer elemento si es así
+    const user = Array.isArray(newUser) ? newUser[0] : newUser
+
+    if (!user || !user._id || !user.username || !user.role || !user.permissions) {
+      console.error('Propiedades faltantes en el usuario creado:', user)
+      throw new Error(
+        'El usuario creado no tiene todas las propiedades esperadas'
+      )
+    }
+
+    return {
+      message: 'Usuario creado exitosamente',
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role,
+        permissions: user.permissions,
+      },
+    }
+  } catch (error) {
+    console.error('Error en createUser:', error)
+    throw new Error(`Error al crear el usuario: ${error.message}`)
+  }
+}
+import jwt from 'jsonwebtoken';
+import { UserRepository } from '../repositories/user-repository.js';
+import { SECRET_JWT_KEY } from '../config/config.js';
+
+export const loginUserService = async ({ username, password }) => {
+  const user = await UserRepository.loginUserRepository({ username, password });
+  const token = jwt.sign(
+    {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+      permissions: user.permissions,
+      classRoom: user.classRoom,
+    },
+    SECRET_JWT_KEY,
+    { expiresIn: '1h' }
+  );
+  return { user, token };
+};
+
+export const logoutUserService = async  (req, res) => {
+  res.clearCookie('access_token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict'
+  });
+};
+import { loginUserService, logoutUserService } from '../services/authService.js'
+import { createUserService } from '../services/userManagementService.js'
+import logger from '../utils/logger.js'
+import { ROLE_PERMISSIONS } from '../config/roles.js'
+import { hasPermission } from '../utils/permissionUtils.js'
+
+export const loginUserController = async (req, res) => {
+  const { username, password } = req.body
+
+  try {
+    const { user, token } = await loginUserService({ username, password })
+
+    res
+      .cookie('access_token', token, {httpOnly: true})
+      .send.json( user )
+  } catch (error) {
+    res.status(401).json({ error: error.message })
+  }
+}
+
+export const createUserController = async (req, res) => {
+  const userData = req.body;
+
+  const validationErrors = Validation.validateUserData(userData);
+
+  if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages });
+  }
+
+  try {
+    const newUser = await createUserService(userData);
+    res.status(201).json(newUser);
+  } catch (error) {
+    console.error('Error en createUserController:', error);
+    res.status(500).json({ error: 'Error al crear el usuario' });
+  }
+};
+
+export const logoutUserController = async (req, res) => {
+  try {
+    // Verifica si el usuario está autenticado
+    if (!req.user) {
+      return res.status(401).json({ message: 'No authenticated user found' })
+    }
+
+    const { username } = req.user
+
+    // Registra el intento de logout
+    logger.info(`Logout attempt for user: ${username}`)
+
+    // Limpia la cookie del token
+    logoutUserService(req, res)
+
+    // Envía una respuesta exitosa
+    res.status(200).json({
+      message: 'Logout successful',
+      redirectUrl: '/login',
+      clearLocalStorage: true,
+    })
+
+    // Registra el logout exitoso
+    logger.info(`User logged out successfully: ${username}`)
+  } catch (error) {
+    // Registra el error
+    logger.error(
+      `Error during logout for user: ${req.user?.username || 'unknown'}`,
+      { error }
+    )
+
+    // Envía una respuesta de error
+    res.status(500).json({
+      message: 'Error during logout process',
+      error:
+        process.env.NODE_ENV === 'production'
+          ? 'An unexpected error occurred'
+          : error.message,
+    })
+  }
+}
+import StudentRepository from '../repositories/student-repository.js'
+import Validation from '../validators/studenValidators.js';
+
+
+export const createStudentController = async (req, res) => {
+  const studentData = req.body;
+
+  const validationErrors = Validation.validateStudentData(studentData);
+
+  if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages });
+  }
+  
+  try {
+    const newStudent = await StudentRepository.createStudentRepository(studentData);
+    res.json(newStudent);
+  } catch (error) {
+    console.error('Error en createStudentController:', error);
+    res.status(500).json({ error: 'Error al crear el estudiante' });
+  }
+};
+
+
+export const getAllStudentsController = async (req, res) => {
+  try {
+    const students = await StudentRepository.getStudentsRepository();
+    res.json(students);
+  } catch (error) {
+    console.error('Error en getAllStudentsController:', error);
+    res.status(500).json({ error: 'Error al obtener los estudiantes' });
+  }
+}
+
+export const getStudentByIdController = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const student = await StudentRepository.getStudentByIdRepository(id);
+    if (!student) {
+      return res.status(404).json({ error: 'Estudiante no encontrado' });
+    }
+    res.json(student);
+  } catch (error) {
+    console.error('Error en getStudentByIdController:', error);
+    res.status(500).json({ error: 'Error al obtener el estudiante' });
+  }
+}
+
+export const deleteStudentController = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedStudent = await StudentRepository.deleteStudentRepository(id);
+    if (!deletedStudent) {
+      return res.status(404).json({ error: 'Estudiante no encontrado' });
+    }
+    res.json(deletedStudent);
+  } catch (error) {
+    console.error('Error en deleteStudentController:', error);
+    res.status(500).json({ error: 'Error al eliminar el estudiante' });
+  }
+}
+
+export const updateStudentController = async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  // Verificación adicional de permisos si es necesario
+  if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
+    return res.status(403).json({ message: 'No tienes permiso para cambiar el aula' });
+  }
+
+  try {
+    const updatedStudent = await StudentRepository.updateStudentRepository(id, updateData);
+    if (!updatedStudent) {
+      return res.status(404).json({ error: 'Estudiante no encontrado' });
+    }
+    res.json(updatedStudent);
+  } catch (error) {
+    console.error('Error en updateStudentController:', error);
+    res.status(500).json({ error: 'Error al actualizar el estudiante' });
+  }
+}
+// controllers/authController.js
+
+
+export const getAuthStatusController = async (req, res) => {
+  const { user } = req.user
+  res.json({
+    message: 'Auth routes working',
+    user,
+    accessToken: req.cookies.access_token,
+  })
+}
+
+export const debugAuthController =async (req, res) => {
+  res.json({ user: req.user })
+}
+
+
+{
+  "name": "jardin-zarini-con-jwt-29-6-24",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "db-local": "^3.1.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7",
+    "winston": "^3.13.1"
+  }
+}
+import StudentSchema from '../models/studentSchema.js'
+import crypto from 'crypto'
+import Validation  from '../validators/studenValidators.js'
+
+
+export default class StudentRepository {
+  static async createStudentRepository(studentData) {
+     Validation.validateStudentData(studentData);
+
+    const existingStudent =  await StudentSchema.findOne({ dni: studentData.dni });
+    if (existingStudent) {
+      throw new Error('A student with this DNI already exists');
+    }
+
+    const id = crypto.randomUUID()
+    const student = await StudentSchema.create({
+      _id: id,
+      ...studentData
+    }).save()
+    return await student
+  }
+
+  static async getAll () {
+    return StudentSchema.find()
+  }
+
+  static async getById (id) {
+    const student = await StudentSchema.findOne({ _id: id });
+    if (!student) {
+      throw new Error('Student not found');
+    }
+    return student;
+  }
+
+  static async getByParentId (parentId) {
+    return StudentSchema.find(student => student.contacts.some(contact => contact.id === parentId))
+  }
+
+  static async update (id, updateData) {
+    const student = await this.getById(id);
+    
+    if (Object.keys(updateData).length === 0) {
+      throw new Error('No update data provided');
+    }
+
+    Validation.validateUpdateData(updateData);
+
+    if (updateData.dni && updateData.dni !== student.dni) {
+      const existingStudent = StudentSchema.findOne({ dni: updateData.dni });
+      if (existingStudent) {
+        throw new Error('A student with this DNI already exists');
+      }
+    }
+
+    Object.assign(student, updateData)
+    return await student.save()
+  }
+
+  static async delete (id) {
+    const student = await this.getById(id);
+    StudentSchema.deleteOne({ _id: id });
+    return { message: 'Student deleted successfully' };
+  }
+}/* The UserRepository class provides methods for interacting with user data in a MongoDB database,
+including creating, updating, deleting, and retrieving user information. */
+// repositories/user-repository.js
+import bcrypt from 'bcrypt'
+import User from '../models/userSchema.js'
+
+export class UserRepository {
+  
+  static async postUserRepository(userData) {
+    const newUser = User.create(userData)
+    await newUser.save()
+    const createdUser = User.findOne({ _id: userData._id }) 
+    return createdUser
+  }
+
+  static async loginUserRepository(userData) {
+    const { username, password } = userData
+
+    const user = User.findOne({ username })
+    if (!user) {
+      throw new Error('Username not found')
+    }
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
+      throw new Error('Invalid password')
+    }
+    
+    const { password: _, ...userWithoutPassword } = user
+    return userWithoutPassword
+  }
+
+  static async getUserRepository(username) {
+    const user = User.find({ username })
+    if (!user) {
+      throw new Error('User not found')
+    }
+    const { password, ...userWithoutPassword } = user
+    return userWithoutPassword
+  }
+
+  static async getUsersRepository() {
+    const users = User.find()
+    return users.map((user) => {
+      const { password, ...userWithoutPassword } = user
+      return userWithoutPassword
+    })
+  }
+
+  static async updateUserRepository(username, data) {
+    const user = User.find({ username })
+    if (!user) {
+      throw new Error('User not found')
+    }
+    Object.assign(user, data)
+    await user.save()
+    const { password, ...userWithoutPassword } = user
+    return userWithoutPassword
+  }
+
+  static async deleteUserRepository(username) {
+    const user = User.find({ username })
+    if (!user) {
+      throw new Error('User not found')
+    }
+    await User.remove({ username })
+    return { message: 'User deleted successfully' }
+  }
+}
