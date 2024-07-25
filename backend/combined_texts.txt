@@ -1,126 +1,5 @@
-[{"_id":"a68bcec3-bf88-4113-8cda-400c1ab909f0","username":"juandops","password":"$2b$10$duSJbqBoHvTkBVw6Nj5Bl.DueMTeDtA6gL.q6aleR9Zi0BiIZ95ty","role":"teacher","permissions":["create:student","read:student"]},{"_id":"572cfb5d-b7f2-4ea3-99e3-f1cfcccdd8d8","username":"juandos","password":"$2b$10$S.HqJnfaQqwtB2rsdt.NIea12lr.jAEiIloCllGZmR.2yFbnHSubO","role":"teacher","permissions":["create:student","read:student"]},{"_id":"99fa6263-f4a7-4ba4-a5b4-9605df7bc4aa","username":"juan","password":"$2b$10$vOCbfJwYa0EcLbon/2xHROzG5ki7Y.4Vq8OUKFkdj/R0TjWTBxYv2","role":"admin","permissions":["create:student","read:student"]}][{"_id":"eaf48bea-86c3-4ef8-9e7d-40bbdab315a7","name":"estudiante1","dni":456548465,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"7f083fb0-241c-4dfe-99e8-07c1811bf2fc","name":"estudiante1","dni":45654465,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"fc48ccab-6007-420a-85be-fa1e957dd9ff","name":"estudiante1","dni":456544654,"birthDate":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"}]{
- 
-/* This code snippet is setting up a basic Express server in JavaScript. Here's a breakdown of what
-each part is doing: */
-import express from 'express'
-import { PORT } from './config/config.js'
-import { router as routes } from './routes/router.js'
-import { corsMiddleware } from './middlewares/corsMiddleware.js'
-import { jsonMiddleware } from './middlewares/jsonMiddleware.js'
-import { cookieMiddleware } from './middlewares/cookieMiddleware.js'
+[{"_id":"b4472465-7a81-4010-9205-72486747a43f","username":"juan","password":"$2b$10$TfjTuCDqJXMFxErohTLMme1psMKEoWMcZZSRaJaEyaIwKLiuJeXWG","role":"admin","permissions":["create:student","read:student","delete:student"]},{"_id":"95e9276a-00c5-4ec3-908b-018a5d3970b1","username":"juanuno","password":"$2b$10$V6V1XvfAHccSVybdDQN8HeLD7uYYjXALDP7A8CmivjYXOHeX1jUlm","role":"admin","permissions":["create:students","read:students","update:students","delete:students"]}][{"_id":"fe45249d-52c6-42c4-8b36-c6343912731d","name":"Carlos Antonio Pingu","dni":47855652,"birth_date":"2021-07-20","address":"Salta la piedra 233","contacts":[{"name":"Juan Carlos Pingu","relationship":"Padre","phone":"+542494523126"}],"turn":"morning","classRoom":"3","teacherId":"3"},{"_id":"eaf48bea-86c3-4ef8-9e7d-40bbdab315a7","name":"estudiante1","dni":456548465,"birth_date":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"7f083fb0-241c-4dfe-99e8-07c1811bf2fc","name":"estudiante1","dni":45654465,"birth_date":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"}]{
 
-const app = express()
-// Middlewares
-app.use(corsMiddleware)
-app.use(cookieMiddleware)
-app.use(jsonMiddleware)
-
-app.use('/', routes)
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
-export default class Validation {
-  static validateStudentData(data) {
-    const errors = []
-
-    if (!data.name || typeof data.name !== 'string') {
-      errors.push('Invalid name: The name is required and must be a string.')
-    }
-    if (!data.dni || typeof data.dni !== 'number') {
-      errors.push('Invalid DNI: The DNI is required and must be a number.')
-    }
-    if (!data.birthDate || !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
-      errors.push(
-        'Invalid birth date format: The birth date is required and must be in the format YYYY-MM-DD.'
-      )
-    }
-    if (!data.address || typeof data.address !== 'string') {
-      errors.push(
-        'Invalid address: The address is required and must be a string.'
-      )
-    }
-    if (!Array.isArray(data.contacts) || data.contacts.length === 0) {
-      errors.push(
-        'Invalid contacts: At least one contact is required and must be an array.'
-      )
-    }
-    if (!['morning', 'afternoon'].includes(data.turn)) {
-      errors.push(
-        'Invalid turn: The turn must be either "morning" or "afternoon".'
-      )
-    }
-    if (!data.classRoom || typeof data.classRoom !== 'string') {
-      errors.push(
-        'Invalid classRoom: The classRoom is required and must be a string.'
-      )
-    }
-    if (!data.teacherId || typeof data.teacherId !== 'string') {
-      errors.push(
-        'Invalid teacherId: The teacherId is required and must be a string.'
-      )
-    }
-
-    if (errors.length > 0) {
-      return { isValid: false, messages: errors }
-    }
-
-    return {
-      isValid: true,
-      message: 'Update validation successful. The update data is valid.',
-    }
-  }
-
-  static validateUpdateData(data) {
-    const errors = []
-
-    if (data.name && typeof data.name !== 'string') {
-      errors.push('Invalid name: If provided, the name must be a string.')
-    }
-    if (data.dni && typeof data.dni !== 'number') {
-      errors.push('Invalid DNI: If provided, the DNI must be a number.')
-    }
-    if (data.birthDate && !/^\d{4}-\d{2}-\d{2}$/.test(data.birthDate)) {
-      errors.push(
-        'Invalid birth date format: If provided, the birth date must be in the format YYYY-MM-DD.'
-      )
-    }
-    if (data.address && typeof data.address !== 'string') {
-      errors.push('Invalid address: If provided, the address must be a string.')
-    }
-    if (
-      data.contacts &&
-      (!Array.isArray(data.contacts) || data.contacts.length === 0)
-    ) {
-      errors.push(
-        'Invalid contacts: If provided, contacts must be an array and at least one contact is required.'
-      )
-    }
-    if (data.turn && !['morning', 'afternoon'].includes(data.turn)) {
-      errors.push(
-        'Invalid turn: If provided, the turn must be either "morning" or "afternoon".'
-      )
-    }
-    if (data.classRoom && typeof data.classRoom !== 'string') {
-      errors.push(
-        'Invalid classRoom: If provided, the classRoom must be a string.'
-      )
-    }
-    if (data.teacherId && typeof data.teacherId !== 'string') {
-      errors.push(
-        'Invalid teacherId: If provided, the teacherId must be a string.'
-      )
-    }
-
-    if (errors.length > 0) {
-      return { isValid: false, messages: errors }
-    }
-    return {
-      isValid: true,
-      message: 'Update validation successful. The update data is valid.',
-    }
-  }
-}
 // validators/userValidators.js
 import UserSchema from '../models/userSchema.js'
 
@@ -150,7 +29,6 @@ export function validatePassword(password) {
 }
 
 export function validateEntries(username, password, role, permissions) {
-  console.log('datos ', username, password, role, permissions)
   if (!username || !password || !role || !permissions) {
     throw new Error(
       'Todos los campos son obligatorios: username, password, role y permissions'
@@ -164,6 +42,54 @@ export function checkIfUserExists(username) {
     throw new Error('Username already exists !!')
   }
 }
+import { validateEntries, validateUsername, validatePassword,checkIfUserExists } from './commonValidators.js';
+
+export  default function validateUserData(userData) {
+  const { username, password, role, permissions } = userData;
+  const errors = [];
+
+  // Validate all required fields are present
+  try {
+    validateEntries(username, password, role, permissions);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  // Validate username
+  try {
+    validateUsername(username);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  // Validate password
+  try {
+    validatePassword(password);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  // Check if user already exists
+  try {
+    checkIfUserExists(username);
+  } catch (error) {
+    errors.push(error.message);
+  }
+
+  // If there are any errors, return them
+  if (errors.length > 0) {
+    return {
+      isValid: false,
+      errors: errors
+    };
+  }
+
+  // If all validations pass
+  return {
+    isValid: true,
+    message: 'User data is valid'
+  };
+}
 // routes/studentRoutes.js
 import express from 'express'
 import {
@@ -171,36 +97,31 @@ import {
   getAllStudentsController,
   updateStudentController,
   deleteStudentController,
+  getStudentByIdController,
 } from '../controllers/studentController.js'
 import { authorize } from '../middlewares/authMiddleware.js'
 import { PERMISSIONS } from '../config/roles.js'
 
 const router = express.Router()
 
-router.post(
-  '/',
-  authorize([PERMISSIONS.CREATE_STUDENT]),
-  (req, res) => {
-    console.log('req.body router post', req.body)
-    createStudentController(req, res)
-  }
-)
+router.post('/', authorize([PERMISSIONS.CREATE_STUDENT]), (req, res) => {
+  createStudentController(req, res)
+})
 
-router.get(
-  '/',
-  authorize([PERMISSIONS.READ_STUDENT]),
-  getAllStudentsController
-)
+router.get('/:id', authorize([PERMISSIONS.READ_STUDENT]), (req, res) => {
+  console.log('req.params get id', req.params)
+  getStudentByIdController(req, res)
+})
+
+router.get('/', authorize([PERMISSIONS.READ_STUDENT]), getAllStudentsController)
 router.put(
   '/:id',
   authorize([PERMISSIONS.UPDATE_STUDENT]),
   updateStudentController
 )
-router.delete(
-  '/:id',
-  authorize([PERMISSIONS.DELETE_STUDENT]),
-  deleteStudentController
-)
+router.delete('/:id', authorize([PERMISSIONS.DELETE_STUDENT]), (req, res) => {
+  deleteStudentController(req, res)
+})
 
 export default router
 import express from 'express'
@@ -212,7 +133,6 @@ import logger from '../utils/logger.js'
 const router = express.Router()
 
 router.use(morgan('combined', { stream: logger.stream }))
-router.use('/api', studentRoutes )
 router.use('/auth', authRoutes )
 
 router.use((error, req, res, next) => {
@@ -263,9 +183,8 @@ router.use(jwtMiddleware)
 
 // Rutas protegidas
 // ruteo a rute estudiantes
-router.use('/', studentRoutes, (req, res, next) => {
+router.use('/api', studentRoutes, (req, res, next) => {
   logger.info('Student route accessed')
-  console.log('req.user', req.user);
   next()
 }
 )
@@ -363,7 +282,7 @@ const StudentSchema = Schema('Student', {
   _id: { type: String, required: true },
   name: { type: String, required: true },
   dni: { type: Number, required: true },
-  birthDate: { type: String, required: true },
+  birth_date: { type: String, required: true },
   address: { type: String, required: true },
   contacts: { type: Array, required: true },
   turn: { type: String, required: true },
@@ -484,7 +403,7 @@ import {
   validatePassword,
   validateEntries,
   checkIfUserExists,
-} from '../validators/userValidators.js'
+} from '../validators/commonValidators.js'
 import { PERMISSIONS, ROLES, ROLE_PERMISSIONS } from '../config/roles.js'
 
 export async function createUserService({
@@ -564,8 +483,7 @@ export const logoutUserService = async  (req, res) => {
 import { loginUserService, logoutUserService } from '../services/authService.js'
 import { createUserService } from '../services/userManagementService.js'
 import logger from '../utils/logger.js'
-import { ROLE_PERMISSIONS } from '../config/roles.js'
-import { hasPermission } from '../utils/permissionUtils.js'
+import validateUserData from '../validators/userValidators.js'
 
 export const loginUserController = async (req, res) => {
   const { username, password } = req.body
@@ -573,31 +491,32 @@ export const loginUserController = async (req, res) => {
   try {
     const { user, token } = await loginUserService({ username, password })
 
-    res
-      .cookie('access_token', token, {httpOnly: true})
-      .send.json( user )
+    res.cookie('access_token', token, { httpOnly: true }).send({ user })
   } catch (error) {
     res.status(401).json({ error: error.message })
   }
 }
 
 export const createUserController = async (req, res) => {
-  const userData = req.body;
+  const userData = req.body
+  console.log('userData:', userData);
 
-  const validationErrors = Validation.validateUserData(userData);
+  const validationErrors = validateUserData(userData)
+  console.log('validationErrors:', validationErrors);
 
   if (!validationErrors.isValid) {
-    return res.status(400).json({ error: validationErrors.messages });
+    return res.status(400).json({ error: validationErrors.messages })
   }
 
   try {
-    const newUser = await createUserService(userData);
-    res.status(201).json(newUser);
+    const newUser = await createUserService(userData)
+    console.log('newUser:', newUser);
+    res.status(201).json(newUser)
   } catch (error) {
-    console.error('Error en createUserController:', error);
-    res.status(500).json({ error: 'Error al crear el usuario' });
+    console.error('Error en createUserController:', error)
+    res.status(500).json({ error: 'Error al crear el usuario' })
   }
-};
+}
 
 export const logoutUserController = async (req, res) => {
   try {
@@ -641,86 +560,107 @@ export const logoutUserController = async (req, res) => {
   }
 }
 import StudentRepository from '../repositories/student-repository.js'
-import Validation from '../validators/studenValidators.js';
-
+import Validation from '../validators/studenValidators.js'
 
 export const createStudentController = async (req, res) => {
-  const studentData = req.body;
 
-  const validationErrors = Validation.validateStudentData(studentData);
-
-  if (!validationErrors.isValid) {
-    return res.status(400).json({ error: validationErrors.messages });
+  const studentData = req.body
+  const validationErrors = Validation.validateStudentData(studentData)
+    if (!validationErrors.isValid) {
+    return res.status(400).json({ error: validationErrors.messages })
   }
-  
+
   try {
-    const newStudent = await StudentRepository.createStudentRepository(studentData);
-    res.json(newStudent);
+    const newStudent = await StudentRepository.createStudentRepository(
+      studentData
+    )
+    res.json(newStudent)
   } catch (error) {
-    console.error('Error en createStudentController:', error);
-    res.status(500).json({ error: 'Error al crear el estudiante' });
+    console.error('Error en createStudentController:', error)
+    res.status(500).json({ error: 'Error al crear el estudiante' })
   }
-};
-
+}
 
 export const getAllStudentsController = async (req, res) => {
+
   try {
-    const students = await StudentRepository.getStudentsRepository();
-    res.json(students);
+    const students = await StudentRepository.getStudentsRepository()
+    res.json(students)
   } catch (error) {
-    console.error('Error en getAllStudentsController:', error);
-    res.status(500).json({ error: 'Error al obtener los estudiantes' });
+    console.error('Error en getAllStudentsController:', error)
+    res.status(500).json({ error: 'Error al obtener los estudiantes' })
   }
 }
 
 export const getStudentByIdController = async (req, res) => {
-  const { id } = req.params;
+  console.log("aqui llega");
+  console.log('req.params controller', req.params);
+  const { id } = req.params
 
   try {
-    const student = await StudentRepository.getStudentByIdRepository(id);
+    const student = await StudentRepository.getStudentByIdRepository(id)
     if (!student) {
-      return res.status(404).json({ error: 'Estudiante no encontrado' });
+      return res.status(404).json({ error: 'Estudiante no encontrado' })
     }
-    res.json(student);
+    res.json(student)
   } catch (error) {
-    console.error('Error en getStudentByIdController:', error);
-    res.status(500).json({ error: 'Error al obtener el estudiante' });
+    console.error('Error en getStudentByIdController:', error)
+    res.status(500).json({ error: 'Error al obtener el estudiante' })
   }
 }
 
 export const deleteStudentController = async (req, res) => {
-  const { id } = req.params;
+  console.log('req.params delete', req.params);
+  const { id } = req.params
 
   try {
-    const deletedStudent = await StudentRepository.deleteStudentRepository(id);
+    const deletedStudent = await StudentRepository.deleteStudentRepository(id)
     if (!deletedStudent) {
-      return res.status(404).json({ error: 'Estudiante no encontrado' });
+      return res.status(404).json({ error: 'Estudiante no encontrado' })
     }
-    res.json(deletedStudent);
+    res.json(deletedStudent)
   } catch (error) {
-    console.error('Error en deleteStudentController:', error);
-    res.status(500).json({ error: 'Error al eliminar el estudiante' });
+    console.error('Error en deleteStudentController:', error)
+    res.status(500).json({ error: 'Error al eliminar el estudiante' })
   }
 }
 
 export const updateStudentController = async (req, res) => {
-  const { id } = req.params;
-  const updateData = req.body;
+  if (!req.user) {
+    return res
+      .status(401)
+      .json({ message: 'Unauthorized: User not authenticated' })
+  }
+
+  const { id } = req.params
+  const updateData = req.body
+
+  // Now you can safely check the role
+  if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
+    return res
+      .status(403)
+      .json({ message: 'No tienes permiso para cambiar el aula' })
+  }
 
   // Verificación adicional de permisos si es necesario
   if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
-    return res.status(403).json({ message: 'No tienes permiso para cambiar el aula' });
+    return res
+      .status(403)
+      .json({ message: 'No tienes permiso para cambiar el aula' })
   }
 
   try {
-    const updatedStudent = await StudentRepository.updateStudentRepository(id, updateData);
+    const updatedStudent = await StudentRepository.updateStudentRepository(
+      id,
+      updateData
+    )
     if (!updatedStudent) {
-      return res.status(404).json({ error: 'Estudiante no encontrado' });
+      return res.status(404).json({ error: 'Estudiante no encontrado' })
     }
-    res.json(updatedStudent);
+    res.json(updatedStudent)
   } catch (error) {
-    console.error('Error en updateStudentController:', error);
-    res.status(500).json({ error: 'Error al actualizar el estudiante' });
+    console.error('Error en updateStudentController:', error)
+    res.status(500).json({ error: 'Error al actualizar el estudiante' })
   }
 }
 // controllers/authController.js
@@ -776,8 +716,9 @@ import Validation  from '../validators/studenValidators.js'
 
 export default class StudentRepository {
   static async createStudentRepository(studentData) {
-     Validation.validateStudentData(studentData);
 
+     Validation.validateStudentData(studentData);
+     
     const existingStudent =  await StudentSchema.findOne({ dni: studentData.dni });
     if (existingStudent) {
       throw new Error('A student with this DNI already exists');
@@ -791,11 +732,12 @@ export default class StudentRepository {
     return await student
   }
 
-  static async getAll () {
+  static async getStudentsRepository () {
     return StudentSchema.find()
   }
 
-  static async getById (id) {
+  static async getStudentByIdRepository (id) {
+    console.log('id repository', id);
     const student = await StudentSchema.findOne({ _id: id });
     if (!student) {
       throw new Error('Student not found');
@@ -803,7 +745,7 @@ export default class StudentRepository {
     return student;
   }
 
-  static async getByParentId (parentId) {
+  static async getByParentIdRepository (parentId) {
     return StudentSchema.find(student => student.contacts.some(contact => contact.id === parentId))
   }
 
@@ -827,9 +769,9 @@ export default class StudentRepository {
     return await student.save()
   }
 
-  static async delete (id) {
-    const student = await this.getById(id);
-    StudentSchema.deleteOne({ _id: id });
+  static async deleteStudentRepository (id) {
+    const student = await this.getStudentByIdRepository(id);
+    StudentSchema.remove({ _id: id });
     return { message: 'Student deleted successfully' };
   }
 }/* The UserRepository class provides methods for interacting with user data in a MongoDB database,
