@@ -1,1 +1,1 @@
-[]
+[{"_id":"95e9276a-00c5-4ec3-908b-018a5d3970b1","username":"juanuno","password":"$2b$10$V6V1XvfAHccSVybdDQN8HeLD7uYYjXALDP7A8CmivjYXOHeX1jUlm","role":"admin","permissions":["create:students","read:students","update:students","delete:students"]}]

@@ -17,8 +17,10 @@ export const loginUserController = async (req, res) => {
 
 export const createUserController = async (req, res) => {
   const userData = req.body
+  console.log('userData:', userData);
 
   const validationErrors = validateUserData(userData)
+  console.log('validationErrors:', validationErrors);
 
   if (!validationErrors.isValid) {
     return res.status(400).json({ error: validationErrors.messages })
@@ -26,6 +28,7 @@ export const createUserController = async (req, res) => {
 
   try {
     const newUser = await createUserService(userData)
+    console.log('newUser:', newUser);
     res.status(201).json(newUser)
   } catch (error) {
     console.error('Error en createUserController:', error)

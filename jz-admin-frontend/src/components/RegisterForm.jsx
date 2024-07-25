@@ -5,9 +5,20 @@ const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+  const [permissions, setPermissions] = useState([]);
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+
   const navigate = useNavigate();
+
+  const handlePermissionChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setPermissions((prev) => [...prev, value]);
+    } else {
+      setPermissions((prev) => prev.filter((perm) => perm !== value));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,12 +26,12 @@ const RegisterForm = () => {
     setIsSuccess(false);
 
     try {
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await fetch('http://localhost:3000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, role }),
+        body: JSON.stringify({ username, password, role, permissions }),
       });
 
       const data = await response.json();
@@ -31,7 +42,7 @@ const RegisterForm = () => {
         setUsername('');
         setPassword('');
         setRole('');
-        // Opcionalmente, redirigir al usuario después de un registro exitoso
+        setPermissions([]);
         setTimeout(() => navigate('/login'), 2000);
       } else {
         setMessage(data.error || 'Error al registrar usuario');
@@ -75,9 +86,118 @@ const RegisterForm = () => {
         <option value="maestra">Maestra</option>
         <option value="padre">Padre</option>
       </select>
+      <label htmlFor="reg-permissions">Permisos:</label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="create:students"
+          onChange={handlePermissionChange}
+        />
+        Crear estudiantes
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="read:students"
+          onChange={handlePermissionChange}
+        />
+        Leer estudiantes
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="update:students"
+          onChange={handlePermissionChange}
+        />
+        Actualizar estudiantes
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="delete:students"
+          onChange={handlePermissionChange}
+        />
+        Eliminar estudiantes
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="create:teachers"
+          onChange={handlePermissionChange}
+        />
+        Crear profesores
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="read:teachers"
+          onChange={handlePermissionChange}
+        />
+        Leer profesores
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="update:teachers"
+          onChange={handlePermissionChange}
+        />
+        Actualizar profesores
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="delete:teachers"
+          onChange={handlePermissionChange}
+        />
+        Eliminar profesores
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="create:subjects"
+          onChange={handlePermissionChange}
+        />
+        Crear materias
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="read:subjects"
+          onChange={handlePermissionChange}
+        />
+        Leer materias
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="update:subjects"
+          onChange={handlePermissionChange}
+        />
+        Actualizar materias
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="permisos"
+          value="delete:subjects"
+          onChange={handlePermissionChange}
+        />
+        Eliminar materias
+      </label>
       <button type="submit">Registrar</button>
       {message && (
-        <div className={isSuccess ? "success" : "error"}>{message}</div>
+        <div className={isSuccess ? 'success' : 'error'}>{message}</div>
       )}
     </form>
   );

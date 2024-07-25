@@ -1,4 +1,4 @@
-import { validateEntries, validateUsername, validatePassword } from './commonValidators.js';
+import { validateEntries, validateUsername, validatePassword,checkIfUserExists } from './commonValidators.js';
 
 export  default function validateUserData(userData) {
   const { username, password, role, permissions } = userData;

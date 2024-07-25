@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const URL = 'http://localhost:3000/login'
+const URL = 'http://localhost:3000/auth/login'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('')

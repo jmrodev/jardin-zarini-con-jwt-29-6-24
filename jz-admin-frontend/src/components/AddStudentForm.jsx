@@ -30,6 +30,7 @@ const AddStudentForm = () => {
         },
         body: JSON.stringify(studentData),
       });
+      
       const data = await response.json();
       if (response.ok) {
         setMessage('Alumno añadido con éxito');
