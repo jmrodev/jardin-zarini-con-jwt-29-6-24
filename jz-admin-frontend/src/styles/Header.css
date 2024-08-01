@@ -1,0 +1,21 @@
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #5d82a8;
+    border-bottom: 1px solid #e9ecef;
+}
+img{
+    width: 100px;
+}
+button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}

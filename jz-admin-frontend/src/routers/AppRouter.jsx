@@ -6,6 +6,7 @@ import StudentsList from '../components/StudentsList';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
 import Logout from '../components/Logout';
+import Home from '../components/Home';
 // crear y adaptar import { getCookie } from '../utils/cookie';
 
  function getCookie(name) {
@@ -25,9 +26,9 @@ const AppRouter = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/logout" element={<Logout />} />
         {/* Ruta por defecto */}
-        <Route path="/" element={token ? <StudentsList /> : <LoginForm />} />
+        {/* <Route path="/" element={token ? <StudentsList /> : <LoginForm />} /> */}
 
-       
+       <Route path="/" element={<Home />} />
         {/* Ruta 404 */}
         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
       </Routes>
