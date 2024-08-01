@@ -1,1 +1,318 @@
-[{"_id":"fe45249d-52c6-42c4-8b36-c6343912731d","name":"Carlos Antonio Pingu","dni":47855652,"birth_date":"2021-07-20","address":"Salta la piedra 233","contacts":[{"name":"Juan Carlos Pingu","relationship":"Padre","phone":"+542494523126"}],"turn":"morning","classRoom":"3","teacherId":"3"},{"_id":"eaf48bea-86c3-4ef8-9e7d-40bbdab315a7","name":"estudiante1","dni":456548465,"birth_date":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"},{"_id":"7f083fb0-241c-4dfe-99e8-07c1811bf2fc","name":"estudiante1","dni":45654465,"birth_date":"2003-07-24","address":"calle uno","contacts":[],"turn":"mañana","classRoom":"3","teacherId":"4"}]
+[
+    {
+        "_id": "13d0c0b1-b421-45f5-9af0-e85bde7f9e4d",
+        "name": "Carla Gómezbbbb ",
+        "dni": 469874523,
+        "birth_date": "2010-06-01",
+        "address": "Calle Azul 852",
+        "contacts": [
+            {
+                "name": "Daniel Gómez",
+                "relationship": "Padre",
+                "phone": "+542494567890"
+            },
+            {
+                "name": "Lucía Gómez",
+                "relationship": "Madre",
+                "phone": "+542494567891"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "4",
+        "teacherId": "11"
+    },
+    {
+        "_id": "9b0df8bc-5efc-4d18-9e4b-0f0decd9eb07",
+        "name": "Nicolás Hernández jjjj",
+        "dni": 468975421,
+        "birth_date": "2011-08-22",
+        "address": "Calle Blanca 369",
+        "contacts": [
+            {
+                "name": "Ricardo Hernández",
+                "relationship": "Padre",
+                "phone": "+542495678901"
+            },
+            {
+                "name": "Patricia Hernández",
+                "relationship": "Madre",
+                "phone": "+542495678902"
+            },
+            {
+                "name": "Susana Hernández",
+                "relationship": "Tía",
+                "phone": "+542495678903"
+            }
+        ],
+        "turn": "afternoon",
+        "classRoom": "4",
+        "teacherId": "12"
+    },
+    {
+        "_id": "7e76f32e-8161-46d4-bf7b-5d6a44cd7629",
+        "name": "Mariana Castro",
+        "dni": 459872654,
+        "birth_date": "2013-04-10",
+        "address": "Calle Amarilla 159",
+        "contacts": [
+            {
+                "name": "Enrique Castro",
+                "relationship": "Padre",
+                "phone": "+542496789012"
+            },
+            {
+                "name": "Clara Castro",
+                "relationship": "Madre",
+                "phone": "+542496789013"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "1",
+        "teacherId": "13"
+    },
+    {
+        "_id": "2f4b3d98-a593-4a12-a2f0-5d54f6c3f9e2",
+        "name": "Pablo Morales",
+        "dni": 457896321,
+        "birth_date": "2010-02-27",
+        "address": "Calle Naranja 654",
+        "contacts": [
+            {
+                "name": "Miguel Morales",
+                "relationship": "Padre",
+                "phone": "+542497890123"
+            },
+            {
+                "name": "Teresa Morales",
+                "relationship": "Madre",
+                "phone": "+542497890124"
+            },
+            {
+                "name": "Juan Morales",
+                "relationship": "Primo",
+                "phone": "+542497890125"
+            }
+        ],
+        "turn": "afternoon",
+        "classRoom": "3",
+        "teacherId": "14"
+    },
+    {
+        "_id": "9c8db987-a054-41f8-a283-f3e7a94cbd49",
+        "name": "Laura Ramírez",
+        "dni": 468965432,
+        "birth_date": "2011-10-16",
+        "address": "Calle Rosa 753",
+        "contacts": [
+            {
+                "name": "Jorge Ramírez",
+                "relationship": "Padre",
+                "phone": "+542498901234"
+            },
+            {
+                "name": "Sandra Ramírez",
+                "relationship": "Madre",
+                "phone": "+542498901235"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "5",
+        "teacherId": "15"
+    },
+    {
+        "_id": "bcd6b093-53c9-4ffb-bd14-ccbb8f9a4318",
+        "name": "Diego Herrera",
+        "dni": 459987654,
+        "birth_date": "2013-01-05",
+        "address": "Calle Celeste 258",
+        "contacts": [
+            {
+                "name": "Ramón Herrera",
+                "relationship": "Padre",
+                "phone": "+542499012345"
+            },
+            {
+                "name": "Beatriz Herrera",
+                "relationship": "Madre",
+                "phone": "+542499012346"
+            },
+            {
+                "name": "Lucas Herrera",
+                "relationship": "Hermano",
+                "phone": "+542499012347"
+            }
+        ],
+        "turn": "afternoon",
+        "classRoom": "2",
+        "teacherId": "16"
+    },
+    {
+        "_id": "a8f023cf-36f2-4d72-8c82-7f36ed5b012e",
+        "name": "Marta Ruiz",
+        "dni": 468973214,
+        "birth_date": "2010-07-14",
+        "address": "Calle Gris 951",
+        "contacts": [
+            {
+                "name": "Alberto Ruiz",
+                "relationship": "Padre",
+                "phone": "+542491234568"
+            },
+            {
+                "name": "Verónica Ruiz",
+                "relationship": "Madre",
+                "phone": "+542491234569"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "4",
+        "teacherId": "17"
+    },
+    {
+        "_id": "64a7c2b0-dafe-4f32-b9bc-9678749c512f",
+        "name": "Gonzalo Silva",
+        "dni": 457823698,
+        "birth_date": "2012-05-21",
+        "address": "Calle Negra 357",
+        "contacts": [
+            {
+                "name": "Fernando Silva",
+                "relationship": "Padre",
+                "phone": "+542492345678"
+            },
+            {
+                "name": "Paula Silva",
+                "relationship": "Madre",
+                "phone": "+542492345679"
+            },
+            {
+                "name": "Estela Silva",
+                "relationship": "Abuela",
+                "phone": "+542492345680"
+            }
+        ],
+        "turn": "afternoon",
+        "classRoom": "1",
+        "teacherId": "18"
+    },
+    {
+        "_id": "b4c283a1-fbd8-4865-907e-d90d6b67b5a1",
+        "name": "Sofía Blanco",
+        "dni": 469854732,
+        "birth_date": "2011-09-06",
+        "address": "Calle Dorada 654",
+        "contacts": [
+            {
+                "name": "Álvaro Blanco",
+                "relationship": "Padre",
+                "phone": "+542493456789"
+            },
+            {
+                "name": "Rosa Blanco",
+                "relationship": "Madre",
+                "phone": "+542493456780"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "5",
+        "teacherId": "19"
+    },
+    {
+        "_id": "65d5e5a7-fdcb-4cd4-9c53-68b27a4c5123",
+        "name": "Tomás Núñez",
+        "dni": 468952417,
+        "birth_date": "2013-08-19",
+        "address": "Calle Oliva 852",
+        "contacts": [
+            {
+                "name": "Cristina Núñez",
+                "relationship": "Madre",
+                "phone": "+542494567891"
+            },
+            {
+                "name": "Emilio Núñez",
+                "relationship": "Padre",
+                "phone": "+542494567892"
+            },
+            {
+                "name": "Lola Núñez",
+                "relationship": "Tía",
+                "phone": "+542494567893"
+            }
+        ],
+        "turn": "afternoon",
+        "classRoom": "3",
+        "teacherId": "20"
+    },
+    {
+        "_id": "d8a7e8c6-0b17-4f7b-9a7b-56a6d5a7e0f1",
+        "name": "Paula Vega",
+        "dni": 457832154,
+        "birth_date": "2010-03-12",
+        "address": "Calle Verde 951",
+        "contacts": [
+            {
+                "name": "Gabriel Vega",
+                "relationship": "Padre",
+                "phone": "+542495678901"
+            },
+            {
+                "name": "Lorena Vega",
+                "relationship": "Madre",
+                "phone": "+542495678902"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "2",
+        "teacherId": "21"
+    },
+    {
+        "_id": "f1b9e7a6-a315-401f-bc3c-ace9a5d4e9f2",
+        "name": "Emilio Gutiérrez",
+        "dni": 469832145,
+        "birth_date": "2011-01-28",
+        "address": "Calle Rosa 654",
+        "contacts": [
+            {
+                "name": "Pablo Gutiérrez",
+                "relationship": "Padre",
+                "phone": "+542496789012"
+            },
+            {
+                "name": "Marina Gutiérrez",
+                "relationship": "Madre",
+                "phone": "+542496789013"
+            },
+            {
+                "name": "Diana Gutiérrez",
+                "relationship": "Abuela",
+                "phone": "+542496789014"
+            }
+        ],
+        "turn": "afternoon",
+        "classRoom": "4",
+        "teacherId": "22"
+    },
+    {
+        "_id": "f3b5c3a8-06a4-4512-b2a1-aef7d5c3f8a9",
+        "name": "Inés Ortiz",
+        "dni": 457843219,
+        "birth_date": "2012-11-03",
+        "address": "Calle Azul 258",
+        "contacts": [
+            {
+                "name": "Joaquín Ortiz",
+                "relationship": "Padre",
+                "phone": "+542497890123"
+            },
+            {
+                "name": "Sara Ortiz",
+                "relationship": "Madre",
+                "phone": "+542497890124"
+            }
+        ],
+        "turn": "morning",
+        "classRoom": "1",
+        "teacherId": "23"
+    }
+]

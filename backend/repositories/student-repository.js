@@ -38,8 +38,8 @@ export default class StudentRepository {
     return StudentSchema.find(student => student.contacts.some(contact => contact.id === parentId))
   }
 
-  static async update (id, updateData) {
-    const student = await this.getById(id);
+  static async updateStudentRepository(id, updateData) {
+    const student = await StudentSchema.findOne({ _id: id });
     
     if (Object.keys(updateData).length === 0) {
       throw new Error('No update data provided');

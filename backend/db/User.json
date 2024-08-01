@@ -1,1 +1,132 @@
-[{"_id":"a3d6e473-1ddf-44cc-bd18-dc74ff5c9937","username":"juanitojjjhh","password":"$2b$10$6K7CizyLYLzdsFl26LeU/OVRez.KzuiPb6lMh/Rx5ghPLoE0mwrKK","role":"admin","permissions":["create:students","read:students","update:students","delete:students"]},{"_id":"eb7bb751-7ba5-4487-a16f-04cbfd443cc0","username":"juanitojjjt","password":"$2b$10$KO0XpoSLcKO9TrHm/Sxlp.Bke0mQk2xTKK8iwLEwDLPGowQJhEjou","role":"admin","permissions":[]},{"_id":"913331f5-a9ae-427c-bbf9-adbc7e630f1d","username":"juanitojjj","password":"$2b$10$RuKNzXDY0tPe1bd7M9WXXuXqRRQfIMvlCFmFwjg/QNXNGurUHKOkW","role":"admin","permissions":["create:students","read:students","update:students"]},{"_id":"7a65e27d-d1cb-4cdf-87c2-8c64e5c3b534","username":"juanitojj","password":"$2b$10$qXafG4KzdIT1ZW3rx0pUc.wnneeAT11N8gcD7Pl6e4IhiZdYXtmaa","role":"admin","permissions":["create:students","read:students"]},{"_id":"e1246ae9-f6b0-4d09-baa6-8f1cac7b1e6e","username":"juanito","password":"$2b$10$uwcznLhbF833Qqy36J6JNO2ID7uKh1KTOGskZwuCewU2FAPc6xYT6","role":"admin","permissions":["create:students","read:students","update:students","delete:students"]},{"_id":"69273850-660f-4ca6-b2a3-db4f657ed584","username":"jmrodev","password":"$2b$10$qMqU.EgjIpXzXPfECAKlT.KxvArVV.LqXULvLRoxE4jIbv0xr7uQ6","role":"admin","permissions":["create:students","read:students","update:students"]},{"_id":"8360d1f1-fb45-4031-968a-5b8e2924fa94","username":"juantres","password":"$2b$10$aRQfMXpuHQSb2KPblmKYm.mvSEastAih/RM03siIbT6vOHPb2bVIC","role":"admin","permissions":["create:students","read:students","update:students"]},{"_id":"a94ada97-0d78-4b86-b724-8e5ea99e899e","username":"juannnn","password":"$2b$10$WeNwhf.2fzsylA6eOh137uIIeS99zTjio3w6uDXegfag4Jrr3QrN.","role":"admin","permissions":["create:student","read:student","delete:student"]},{"_id":"511dc589-2dc4-4b35-b7e8-047d080700ea","username":"juandos","password":"$2b$10$o/66B3o7CnpQZnVKFQ3rqe7502Cqcaz0T1P.1PajhBWZo68LiDCdO","role":"admin","permissions":["create:students","update:students","read:students","delete:students"]},{"_id":"b4472465-7a81-4010-9205-72486747a43f","username":"juan","password":"$2b$10$TfjTuCDqJXMFxErohTLMme1psMKEoWMcZZSRaJaEyaIwKLiuJeXWG","role":"admin","permissions":["create:student","read:student","delete:student"]},{"_id":"95e9276a-00c5-4ec3-908b-018a5d3970b1","username":"juanuno","password":"$2b$10$V6V1XvfAHccSVybdDQN8HeLD7uYYjXALDP7A8CmivjYXOHeX1jUlm","role":"admin","permissions":["create:students","read:students","update:students","delete:students"]}]
+[
+    {
+        "_id": "dd8c71b5-5250-4e32-85e0-1e66d61318eb",
+        "username": "juanitojjjhhrrrrrr",
+        "password": "$2b$10$sWdRmCYCjRQrve/hCwW32Oba1OeJUHpY7R6wNE1iXuapIJoGEAHS2",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students"
+        ]
+    },
+    {
+        "_id": "a3d6e473-1ddf-44cc-bd18-dc74ff5c9937",
+        "username": "juanitojjjhh",
+        "password": "$2b$10$6K7CizyLYLzdsFl26LeU/OVRez.KzuiPb6lMh/Rx5ghPLoE0mwrKK",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students",
+            "update:students",
+            "delete:students"
+        ]
+    },
+    {
+        "_id": "eb7bb751-7ba5-4487-a16f-04cbfd443cc0",
+        "username": "juanitojjjt",
+        "password": "$2b$10$KO0XpoSLcKO9TrHm/Sxlp.Bke0mQk2xTKK8iwLEwDLPGowQJhEjou",
+        "role": "admin",
+        "permissions": []
+    },
+    {
+        "_id": "913331f5-a9ae-427c-bbf9-adbc7e630f1d",
+        "username": "juanitojjj",
+        "password": "$2b$10$RuKNzXDY0tPe1bd7M9WXXuXqRRQfIMvlCFmFwjg/QNXNGurUHKOkW",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students",
+            "update:students"
+        ]
+    },
+    {
+        "_id": "7a65e27d-d1cb-4cdf-87c2-8c64e5c3b534",
+        "username": "juanitojj",
+        "password": "$2b$10$qXafG4KzdIT1ZW3rx0pUc.wnneeAT11N8gcD7Pl6e4IhiZdYXtmaa",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students"
+        ]
+    },
+    {
+        "_id": "e1246ae9-f6b0-4d09-baa6-8f1cac7b1e6e",
+        "username": "juanito",
+        "password": "$2b$10$uwcznLhbF833Qqy36J6JNO2ID7uKh1KTOGskZwuCewU2FAPc6xYT6",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students",
+            "update:students",
+            "delete:students"
+        ]
+    },
+    {
+        "_id": "69273850-660f-4ca6-b2a3-db4f657ed584",
+        "username": "jmrodev",
+        "password": "$2b$10$qMqU.EgjIpXzXPfECAKlT.KxvArVV.LqXULvLRoxE4jIbv0xr7uQ6",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students",
+            "update:students"
+        ]
+    },
+    {
+        "_id": "8360d1f1-fb45-4031-968a-5b8e2924fa94",
+        "username": "juantres",
+        "password": "$2b$10$aRQfMXpuHQSb2KPblmKYm.mvSEastAih/RM03siIbT6vOHPb2bVIC",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students",
+            "update:students"
+        ]
+    },
+    {
+        "_id": "a94ada97-0d78-4b86-b724-8e5ea99e899e",
+        "username": "juannnn",
+        "password": "$2b$10$WeNwhf.2fzsylA6eOh137uIIeS99zTjio3w6uDXegfag4Jrr3QrN.",
+        "role": "admin",
+        "permissions": [
+            "create:student",
+            "read:student",
+            "delete:student"
+        ]
+    },
+    {
+        "_id": "511dc589-2dc4-4b35-b7e8-047d080700ea",
+        "username": "juandos",
+        "password": "$2b$10$o/66B3o7CnpQZnVKFQ3rqe7502Cqcaz0T1P.1PajhBWZo68LiDCdO",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "update:students",
+            "read:students",
+            "delete:students"
+        ]
+    },
+    {
+        "_id": "b4472465-7a81-4010-9205-72486747a43f",
+        "username": "juan",
+        "password": "$2b$10$TfjTuCDqJXMFxErohTLMme1psMKEoWMcZZSRaJaEyaIwKLiuJeXWG",
+        "role": "admin",
+        "permissions": [
+            "create:student",
+            "read:student",
+            "delete:student"
+        ]
+    },
+    {
+        "_id": "95e9276a-00c5-4ec3-908b-018a5d3970b1",
+        "username": "juanuno",
+        "password": "$2b$10$V6V1XvfAHccSVybdDQN8HeLD7uYYjXALDP7A8CmivjYXOHeX1jUlm",
+        "role": "admin",
+        "permissions": [
+            "create:students",
+            "read:students",
+            "update:students",
+            "delete:students"
+        ]
+    }
+]

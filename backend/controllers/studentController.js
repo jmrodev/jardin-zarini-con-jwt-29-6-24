@@ -74,19 +74,19 @@ export const updateStudentController = async (req, res) => {
   const { id } = req.params
   const updateData = req.body
 
-  // Now you can safely check the role
-  if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
-    return res
-      .status(403)
-      .json({ message: 'No tienes permiso para cambiar el aula' })
-  }
+  // // Now you can safely check the role
+  // if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
+  //   return res
+  //     .status(403)
+  //     .json({ message: 'No tienes permiso para cambiar el aula' })
+  // }
 
-  // Verificación adicional de permisos si es necesario
-  if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
-    return res
-      .status(403)
-      .json({ message: 'No tienes permiso para cambiar el aula' })
-  }
+  // // Verificación adicional de permisos si es necesario
+  // if (req.user.role !== ROLES.ADMIN && updateData.classRoom) {
+  //   return res
+  //     .status(403)
+  //     .json({ message: 'No tienes permiso para cambiar el aula' })
+  // }
 
   try {
     const updatedStudent = await StudentRepository.updateStudentRepository(
