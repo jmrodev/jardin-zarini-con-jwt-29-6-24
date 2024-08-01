@@ -1,69 +1,103 @@
-// StudentsList.jsx
-import React, { useEffect, useState } from 'react'
-import Logout from './Logout'
-import EditStudentForm from './EditStudentForm'
-import './StudentsList.css' // Importa el CSS para el modal
+import React, { useEffect, useState } from 'react';
+import Logout from './Logout';
+import EditStudentForm from './EditStudentForm';
+import './StudentsList.css'; // Importa el CSS para el modal
 
 const StudentsList = () => {
-  const [students, setStudents] = useState([])
-  const [error, setError] = useState(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [editingStudent, setEditingStudent] = useState(null)
+  const [students, setStudents] = useState([]);
+  const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
+  const [selectedClassRoom, setSelectedClassRoom] = useState(''); // Estado para la selección de aula
+  const [allowChanges, setAllowChanges] = useState(false); // Nuevo estado para permitir cambios
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
         const response = await fetch('http://localhost:3000/auth/api/students', {
           credentials: 'include'
-        })
+        });
         if (response.ok) {
-          const data = await response.json()
-          setStudents(data)
+          const data = await response.json();
+          setStudents(data);
         } else {
-          const errorData = await response.json()
-          setError(errorData.error || 'Error al obtener los estudiantes')
+          const errorData = await response.json();
+          setError(errorData.error || 'Error al obtener los estudiantes');
         }
       } catch (error) {
-        console.error('Error:', error)
-        setError('Error al obtener los estudiantes')
+        console.error('Error:', error);
+        setError('Error al obtener los estudiantes');
       }
-    }
+    };
 
-    fetchStudents()
-  }, [])
+    fetchStudents();
+  }, []);
 
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/auth/api/students/${id}`, {
         method: 'DELETE',
         credentials: 'include'
-      })
+      });
       if (response.ok) {
-        setStudents(students.filter(student => student._id !== id))
+        setStudents(students.filter(student => student._id !== id));
       } else {
-        const errorData = await response.json()
-        setError(errorData.error || 'Error al eliminar el estudiante')
+        const errorData = await response.json();
+        setError(errorData.error || 'Error al eliminar el estudiante');
       }
     } catch (error) {
-      console.error('Error:', error)
-      setError('Error al eliminar el estudiante')
+      console.error('Error:', error);
+      setError('Error al eliminar el estudiante');
     }
-  }
+  };
 
   const openModal = (student) => {
-    setEditingStudent(student)
-    setIsModalOpen(true)
-  }
+    setEditingStudent(student);
+    setIsModalOpen(true);
+  };
 
   const closeModal = () => {
-    setIsModalOpen(false)
-    setEditingStudent(null)
-  }
+    setIsModalOpen(false);
+    setEditingStudent(null);
+  };
+
+  const handleClassRoomChange = (event) => {
+    setSelectedClassRoom(event.target.value);
+  };
+
+  // Filtrar estudiantes por aula seleccionada
+  const filteredStudents = selectedClassRoom
+    ? students.filter(student => student.classRoom === selectedClassRoom)
+    : students;
 
   return (
     <div>
       <h2>Lista de Estudiantes</h2>
       {error && <p className="error">{error}</p>}
+      
+      <div>
+        <label htmlFor="classRoomSelect">Filtrar por Aula:</label>
+        <select id="classRoomSelect" value={selectedClassRoom} onChange={handleClassRoomChange}>
+          <option value="">Todos</option>
+          {[...new Set(students.map(student => student.classRoom))].map((classRoom) => (
+            <option key={classRoom} value={classRoom}>
+              {classRoom}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label>
+          Permitir cambios:
+          <input
+            type="checkbox"
+            checked={allowChanges}
+            onChange={() => setAllowChanges(!allowChanges)}
+          />
+        </label>
+      </div>
+
       <table>
         <thead>
           <tr>
@@ -74,11 +108,11 @@ const StudentsList = () => {
             <th>Turno</th>
             <th>Aula</th>
             <th>Contactos</th>
-            <th>Acciones</th>
+            {allowChanges && <th>Acciones</th>}
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
+          {filteredStudents.map((student) => (
             <tr key={student._id}>
               <td>{student.name}</td>
               <td>{student.dni}</td>
@@ -93,10 +127,12 @@ const StudentsList = () => {
                   </div>
                 ))}
               </td>
-              <td>
-                <button onClick={() => openModal(student)}>Editar</button>
-                <button onClick={() => handleDelete(student._id)}>Eliminar</button>
-              </td>
+              {allowChanges && (
+                <td>
+                  <button onClick={() => openModal(student)}>Editar</button>
+                  <button onClick={() => handleDelete(student._id)}>Eliminar</button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
@@ -111,15 +147,15 @@ const StudentsList = () => {
               onSave={(updatedStudent) => {
                 setStudents(students.map(student =>
                   student._id === updatedStudent._id ? updatedStudent : student
-                ))
-                closeModal()
+                ));
+                closeModal();
               }}
             />
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default StudentsList
+export default StudentsList;
