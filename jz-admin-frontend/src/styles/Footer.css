@@ -1,14 +1,21 @@
 footer{
-    background-color: #c0d2e4;
-    padding: 20px 0;
-    text-align: center;
-    bottom: 0;
-    width: 100%;
-    z-index: 100;
+    grid-area: footer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    background-color: #86898f;
     border-top: 1px solid #e9ecef;
 }
 
-p{
-    font-size: 1.2rem;
-    color: #333;
+a,p {
+    font-size: .8rem;
+    color: #fdfdfd;
 }
+
+.logo-footer{
+    width: 3rem;
+    margin: 0 auto;
+}
+

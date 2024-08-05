@@ -1,18 +1,42 @@
-// crear el componente main 
-
-import React from 'react';
+// Main.js
+import React, { useState, useEffect } from 'react';
 import '../styles/Main.css';
+import Article from './Article';
+import FormArticle from './FormArticle';
 
 const Main = () => {
-    return (
-        <main className="main">
-            <h1 className="main__title">Jardin de infantes</h1>
-            <p className="main__description">Bienvenidos al jardin de infantes</p>
-        </main>
-    );
+  const [articles, setArticles] = useState([]);
+
+  // Función para obtener artículos del servidor
+  const fetchArticles = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/auth/articles');
+      if (!response.ok) {
+        throw new Error('Error al obtener los artículos');
+      }
+      const data = await response.json();
+      setArticles(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  const addArticle = (title, content) => {
+    setArticles((prevArticles) => [...prevArticles, { title, content }]);
+  };
+
+  return (
+    <main className="main">
+      <FormArticle addArticle={addArticle} />
+      {articles.map((article, i) => (
+        <Article key={i} title={article.title} content={article.content} index={i} />
+      ))}
+    </main>
+  );
 }
 
 export default Main;
-
-
-

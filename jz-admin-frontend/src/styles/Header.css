@@ -1,21 +1,43 @@
-header{
+.header {
+    grid-area: header;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: .4rem .4rem;
-    background-color: #5d82a8;
-    border-bottom: 1px solid #0541b1;
-}
-img{
+    padding: 20px;
+    background-color: #5d82a8; /* Fondo azul */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efecto 3D */
+  }
+  
+  .header__logo {
     width: 100px;
-}
-button{
-    background-color: #007bff;
+  }
+  
+  
+  .header__buttons {
+    display: flex;
+    gap: 15px; /* Espacio entre botones */
+  }
+  
+  button {
+    background-color: #007bff; /* Azul primario */
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
+    transform: scale(1.05); /* Efecto de hover */
+  }
+  
+  button:active {
+    background-color: #004080; /* Azul aún más oscuro en active */
+  }
+  
+  .button__section {
+    display: flex;
+    gap: 15px;
+  }

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import '../styles/FormRegister.css'
 
 const permissionsList = [
   { name: "students", actions: ["create", "read", "update", "delete"] },

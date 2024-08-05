@@ -1,34 +1,26 @@
-// src/AppRouter.jsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import AddStudentForm from '../components/AddStudentForm';
 import StudentsList from '../components/StudentsList';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
 import Logout from '../components/Logout';
-import Home from '../components/Home';
-// crear y adaptar import { getCookie } from '../utils/cookie';
+import Home from '../pages/Home';
 
- function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  }
 const AppRouter = () => {
+  const { isAuthenticated } = useAuth();
 
- const token = getCookie('access_token');
   return (
     <Router>
       <Routes>
         <Route path="/add-student" element={<AddStudentForm />} />
-        <Route path="/students" element={<StudentsList />} />
+        <Route path="/students" element={isAuthenticated ? <StudentsList /> : <Navigate to="/login" />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/login" element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />} />
         <Route path="/logout" element={<Logout />} />
-        {/* Ruta por defecto */}
-        {/* <Route path="/" element={token ? <StudentsList /> : <LoginForm />} /> */}
+        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
 
-       <Route path="/" element={<Home />} />
         {/* Ruta 404 */}
         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
       </Routes>
@@ -37,3 +29,4 @@ const AppRouter = () => {
 };
 
 export default AppRouter;
+
