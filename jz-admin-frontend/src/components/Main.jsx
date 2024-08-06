@@ -10,11 +10,13 @@ const Main = () => {
   // Función para obtener artículos del servidor
   const fetchArticles = async () => {
     try {
-      const response = await fetch('http://localhost:3000/auth/articles');
+      const response = await fetch('http://localhost:3000/auth/api/articles');
       if (!response.ok) {
+        console.log(response);
         throw new Error('Error al obtener los artículos');
       }
       const data = await response.json();
+      console.log(data);
       setArticles(data);
     } catch (error) {
       console.error('Error:', error);

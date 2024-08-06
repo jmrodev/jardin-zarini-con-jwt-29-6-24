@@ -1,17 +1,22 @@
 import ArticleRepository from '../repositories/article-repository.js';
-import ArticleValidation from '../validators/articleValidators.js';
+import validateArticleData from '../validators/articleValidators.js'; // Asegúrate de que la importación sea correcta
 
 // Crear un nuevo artículo
 export const createArticleController = async (req, res) => {
+  console.log("createArticleController",req.body);
   const articleData = req.body;
-  const validationErrors = ArticleValidation.validateArticleData(articleData);
-  
-  if (!validationErrors.isValid) {
-    return res.status(400).json({ error: validationErrors.messages });
-  }
+  // const validationErrors = validateArticleData(articleData);
+
+  // console.log("validationErrors",validationErrors);
+  // if (!validationErrors.isValid) {
+  //   return res.status(400).json({ error: validationErrors.messages });
+  // }
 
   try {
-    const newArticle = await ArticleRepository.createArticleRepository(articleData);
+    const author = req.user.username; // Obtener el autor del usuario autenticado
+    console.log("author",author);
+    const newArticle = await ArticleRepository.createArticleRepository(articleData, author);
+    console.log("newArticle",newArticle);
     res.status(201).json(newArticle);
   } catch (error) {
     console.error('Error en createArticleController:', error);

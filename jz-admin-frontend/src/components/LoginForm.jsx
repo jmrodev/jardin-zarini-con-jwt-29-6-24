@@ -12,6 +12,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await fetch(URL, {
         method: 'POST',
@@ -24,14 +25,15 @@ const LoginForm = () => {
         const data = await response.json();
         localStorage.setItem('user', JSON.stringify(data.user));
         login(); // Llama a la función de login del contexto
+        setMessage('Inicio de sesión exitoso. Bienvenido!');
       } else {
         const errorData = await response.json();
         console.error('Error en la respuesta:', response.status, errorData);
-        setMessage('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+        setMessage(`Error al iniciar sesión. Código de estado: ${response.status}. Mensaje: ${errorData.message}`);
       }
     } catch (error) {
       console.error('Error de autenticación:', error);
-      setMessage('Error de red. Inténtalo de nuevo más tarde.');
+      setMessage(`Error de red. Detalles: ${error.message}`);
     }
   };
 
@@ -55,8 +57,10 @@ const LoginForm = () => {
           required
         />
 
-        <button type="submit">Iniciar sesión</button>
-        {message && <div className="error">{message}</div>}
+        <button type="submit">
+          Iniciar sesión
+        </button>
+        {message && <div className="message">{message}</div>}
       </form>
       <RegisterButton />
     </>

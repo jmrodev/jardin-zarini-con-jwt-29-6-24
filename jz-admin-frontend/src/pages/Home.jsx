@@ -1,24 +1,36 @@
-//crear la pagina home del jardin infantes con un header ,un main, un footer y un aside con un menu de navegaciony ademas un boton ingreso y un boton registrarse
-
-import React from 'react'
-import Header from '../components/Header'
-import Main from '../components/Main'
-import Footer from '../components/Footer'
-import Aside from '../components/Aside'
-import Nav from '../components/Nav'
-import '../styles/Home.css'
+// Home.js
+import React from 'react';
+import Header from '../components/Header';
+import Main from '../components/Main';
+import Footer from '../components/Footer';
+import Aside from '../components/Aside';
+import Nav from '../components/Nav';
+import { useAuth } from '../context/AuthContext'; // Importar el hook
+import '../styles/Home.css';
 
 const Home = () => {
+  const { isAuthenticated, login, logout } = useAuth(); // Usar el hook para obtener el estado y las funciones
+
   return (
     <div className="container">
       <Header />
       <Aside>
         <Nav />
+        <div>
+          {isAuthenticated ? (
+            <button onClick={logout}>Cerrar Sesión</button>
+          ) : (
+            <>
+              <button onClick={login}>Ingreso</button>
+              <button>Registrarse</button> {/* Puedes manejar el registro por separado */}
+            </>
+          )}
+        </div>
       </Aside>
       <Main />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
