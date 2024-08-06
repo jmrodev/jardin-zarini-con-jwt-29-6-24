@@ -17,8 +17,9 @@ const AppRouter = () => {
         <Route path="/add-student" element={<AddStudentForm />} />
         <Route path="/students" element={isAuthenticated ? <StudentsList /> : <Navigate to="/login" />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/login" element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />} />
+        <Route path="/login" element={!isAuthenticated ? <LoginForm /> : <Navigate to="/" />} />        
         <Route path="/logout" element={<Logout />} />
+
         <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
 
         {/* Ruta 404 */}

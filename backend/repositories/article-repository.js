@@ -1,52 +1,72 @@
-import ArticleSchema from '../models/articleSchema.js';
-import crypto from 'crypto';
+import ArticleSchema from '../models/articleSchema.js'
+import crypto from 'crypto'
+import { format, parse } from '@formkit/tempo'
 
 export default class ArticleRepository {
   static async createArticleRepository(articleData, author) {
-    const id = crypto.randomUUID();
-    const article = await ArticleSchema.create({
-      _id: id,
-      ...articleData,
-      date: new Date(), // Añadir la fecha actual
-      author: author || 'Unknown', // Usar el autor proporcionado o 'Unknown' si no está disponible
-    }).save();
-
-    console.log("repositorio articulo",article);
-    return article;
+    const id = crypto.randomUUID()
+    const date = format(new Date(), "DD-MM-YYYY");
+    console.log(date);
+    try {
+      const article = await ArticleSchema.create({
+        _id: id,
+        ...articleData,
+        date: date,
+        author: author || 'Unknown',
+      }).save
+      console.log('Artículo creado:', article)
+      return await article
+    } catch (error) {
+      console.error('Error al crear artículo:', error)
+      throw new Error('Error al crear el artículo')
+    }
   }
 
   static async getArticlesRepository() {
     try {
-      return await ArticleSchema.find();
+      return await ArticleSchema.find()
     } catch (error) {
-      throw new Error('Error getting articles');
+      console.error('Error al obtener artículos:', error)
+      throw new Error('Error al obtener los artículos')
     }
   }
 
   static async getArticleByIdRepository(id) {
-    const article = await ArticleSchema.findOne({ _id: id });
-    if (!article) {
-      throw new Error('Article not found');
+    console.log('ID:', id)
+    try {
+      const article = await ArticleSchema.findOne({ _id: id })
+      if (!article) {
+        throw new Error('Artículo no encontrado')
+      }
+      return article
+    } catch (error) {
+      console.error('Error al obtener artículo:', error)
+      throw error
     }
-    return article;
   }
-
   static async updateArticleRepository(id, updateData) {
-    const article = await ArticleSchema.findOne({ _id: id });
+    try {
+      const article = await ArticleSchema.findOne({ _id: id })
+      if (!article) {
+        throw new Error('Artículo no encontrado')
+      }
 
-    if (Object.keys(updateData).length === 0) {
-      throw new Error('No update data provided');
+      if (Object.keys(updateData).length === 0) {
+        throw new Error('No se proporcionaron datos de actualización')
+      }
+
+      Object.assign(article, updateData)
+      return await article.save()
+    } catch (error) {
+      console.error('Error al actualizar artículo:', error)
+      throw error
     }
-
-    Object.assign(article, updateData);
-    return await article.save();
   }
 
   static async deleteArticleRepository(id) {
-    const article = await ArticleSchema.findOne({ _id: id });
-    if (!article) {
-      throw new Error('Article not found');
-    }
-    return await article.remove();
+    console.log('delete ID:', id)
+    const article = await this.getArticleByIdRepository(id)
+    ArticleSchema.remove({ _id: id })
+    return { message: `Article ${article} deleted successfully` }
   }
 }

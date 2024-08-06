@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormRegister from './FormRegister.jsx';
-import { registerUser } from '../services/authService.js'; // Importa el servicio
+import { registerUser } from '../services/authService'; // Supongo que tienes un servicio de autenticación
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -9,57 +8,63 @@ const RegisterForm = () => {
   const [role, setRole] = useState('');
   const [permissions, setPermissions] = useState([]);
   const [message, setMessage] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setMessage('');
-    setIsSuccess(false);
-
-    const userDetails = { username, password, role, permissions };
 
     try {
-      const data = await registerUser(userDetails); // Usa el servicio aquí
-
-      if (data) {
-        setIsSuccess(true);
-        setMessage('Usuario registrado con éxito');
-        setUsername('');
-        setPassword('');
-        setRole('');
-        setPermissions([]);
-        setTimeout(() => navigate('/login'), 2000);
-      } else {
-        setMessage(data.error || 'Error al registrar usuario');
-      }
+      await registerUser({ username, password, role, permissions });
+      setMessage('Registro exitoso');
+      navigate('/login');
     } catch (error) {
-      console.error('Error:', error);
-      setMessage('Error de conexión. Por favor, intente más tarde.');
+      setMessage(`Error al registrar. Detalles: ${error.message}`);
     }
   };
 
-  const handlePermissionsChange = (e) => {
-    const { value, checked } = e.target;
-    setPermissions((prevPermissions) =>
-      checked ? [...prevPermissions, value] : prevPermissions.filter(p => p !== value)
-    );
-  };
-
   return (
-    <FormRegister
-      handleSubmit={handleSubmit}
-      username={username}
-      setUsername={setUsername}
-      password={password}
-      setPassword={setPassword}
-      role={role}
-      setRole={setRole}
-      handlePermissionsChange={handlePermissionsChange}
-      message={message}
-      isSuccess={isSuccess}
-    />
+    <form className="form" onSubmit={handleSubmit}>
+      <h2>Registrarse</h2>
+      <label htmlFor="username">Usuario:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <label htmlFor="password">Contraseña:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <label htmlFor="role">Rol:</label>
+      <input
+        type="text"
+        id="role"
+        name="role"
+        value={role}
+        onChange={(e) => setRole(e.target.value)}
+      />
+      <label htmlFor="permissions">Permisos:</label>
+      <select
+        id="permissions"
+        name="permissions"
+        value={permissions}
+        onChange={(e) => setPermissions(Array.from(e.target.selectedOptions, option => option.value))}
+        multiple
+      >
+        {/* Aquí deberías tener opciones para los permisos */}
+      </select>
+      <button type="submit">Registrarse</button>
+      {message && <p className="message">{message}</p>}
+    </form>
   );
 };
 

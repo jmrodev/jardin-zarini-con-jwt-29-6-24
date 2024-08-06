@@ -1,0 +1,23 @@
+[
+    {
+        "_id": "e7bdf5d4-6a55-4b8c-8a1e-7f3d75db99f5",
+        "title": "The Rise of AI",
+        "content": "Artificial intelligence is transforming industries across the globe, from healthcare to finance.",
+        "date": "2024-08-01",
+        "author": "Jane Doe"
+    },
+    {
+        "_id": "a6f9d6c3-2b47-4d89-b0f5-5e2c345d4a21",
+        "title": "Climate Change Effects",
+        "content": "Rising temperatures and sea levels are having significant impacts on global ecosystems.",
+        "date": "2024-08-02",
+        "author": "John Smith"
+    },
+    {
+        "_id": "9f34b7c6-3c57-4a7e-b0d3-6f5e2f3d4b8e",
+        "title": "Quantum Computing Breakthroughs",
+        "content": "Recent advancements in quantum computing promise to revolutionize data processing capabilities.",
+        "date": "2024-08-03",
+        "author": "Alice Johnson"
+    }
+]

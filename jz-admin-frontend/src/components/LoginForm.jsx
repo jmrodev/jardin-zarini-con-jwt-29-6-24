@@ -21,9 +21,14 @@ const LoginForm = () => {
         credentials: 'include',
       });
 
+      const token = response.headers.get('Authorization');
+
+
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('authToken', token); // Guarda el token en localStorage
+
         login(); // Llama a la función de login del contexto
         setMessage('Inicio de sesión exitoso. Bienvenido!');
       } else {

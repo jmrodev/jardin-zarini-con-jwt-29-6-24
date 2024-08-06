@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FormArticle = () => {
+const FormArticle = ({ onArticleAdded }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [message, setMessage] = useState('');
@@ -17,10 +17,7 @@ const FormArticle = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title: title,
-          content: content,
-        }),
+        body: JSON.stringify({ title, content }),
       });
 
       if (!response.ok) {
@@ -28,13 +25,12 @@ const FormArticle = () => {
       }
 
       const result = await response.json();
-      console.log('Artículo añadido:', result);
       setTitle('');
       setContent('');
       setIsSuccess(true);
       setMessage('Artículo añadido con éxito');
+      onArticleAdded(result); // Notifica al padre sobre el nuevo artículo
     } catch (error) {
-      console.error('Error al añadir el artículo:', error);
       setMessage(`Error al añadir el artículo. Detalles: ${error.message}`);
     }
   };
@@ -42,14 +38,13 @@ const FormArticle = () => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Añadir artículo</h2>
-
       <label htmlFor="title">Título:</label>
       <input
         type="text"
         id="title"
         name="title"
         value={title}
-        onChange={(event) => setTitle(event.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
         required
       />
       <label htmlFor="content">Contenido:</label>
@@ -57,14 +52,12 @@ const FormArticle = () => {
         id="content"
         name="content"
         value={content}
-        onChange={(event) => setContent(event.target.value)}
+        onChange={(e) => setContent(e.target.value)}
         required
       />
       <button type="submit">Añadir artículo</button>
       {message && <p className={isSuccess ? 'success' : 'error'}>{message}</p>}
     </form>
-
-
   );
 };
 

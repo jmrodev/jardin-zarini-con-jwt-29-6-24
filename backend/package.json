@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@formkit/tempo": "^0.1.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -24,6 +25,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4",
     "path": "^0.12.7",
+    "tempo": "^0.2.7",
     "winston": "^3.13.1"
   }
 }

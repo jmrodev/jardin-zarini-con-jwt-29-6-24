@@ -1,4 +1,3 @@
-// Home.js
 import React from 'react';
 import Header from '../components/Header';
 import Main from '../components/Main';
@@ -15,7 +14,10 @@ const Home = () => {
     <div className="container">
       <Header />
       <Aside>
-        <Nav />
+        <Nav /> {/* Mensaje de depuración */}
+      <p className="debug-message">
+        Estado de autenticación: {isAuthenticated ? 'Autenticado' : 'No autenticado'}
+      </p>
         <div>
           {isAuthenticated ? (
             <button onClick={logout}>Cerrar Sesión</button>
@@ -29,6 +31,7 @@ const Home = () => {
       </Aside>
       <Main />
       <Footer />
+     
     </div>
   );
 };

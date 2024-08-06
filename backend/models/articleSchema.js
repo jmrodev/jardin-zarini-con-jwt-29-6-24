@@ -1,14 +1,14 @@
 // models/userSchema.js
-import DBLocal from 'db-local';
+import DBLocal from 'db-local'
 
 const { Schema } = new DBLocal({ path: './db' })
 
-const ArticleSchema = Schema('Article', {
-    _id: { type: String, required: true },
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    
-
+const Articles = Schema('Articles', {
+  _id: { type: String, required: true },
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  date: { type: Date, required: true },
+  author: { type: String, default: 'Unknown' },
 })
 
-export default ArticleSchema
+export default Articles

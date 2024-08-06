@@ -3,7 +3,6 @@ import validateArticleData from '../validators/articleValidators.js'; // Asegúr
 
 // Crear un nuevo artículo
 export const createArticleController = async (req, res) => {
-  console.log("createArticleController",req.body);
   const articleData = req.body;
   // const validationErrors = validateArticleData(articleData);
 
@@ -70,6 +69,7 @@ export const updateArticleController = async (req, res) => {
 
 // Eliminar un artículo por ID
 export const deleteArticleController = async (req, res) => {
+  console.log("deleteArticleController",req.params);
   const { articleId } = req.params;
 
   try {
