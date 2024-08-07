@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './CreateArticleForm.css';
 
-const CreateArticleForm = ({ onCreate }) => {
+const CreateArticleForm = ({ onCreate, onClose }) => {
   const [newArticle, setNewArticle] = useState({
     title: '',
     content: '',
@@ -31,13 +32,15 @@ const CreateArticleForm = ({ onCreate }) => {
       // Limpiar el formulario después de crear
       setNewArticle({ title: '', content: '', category: '' });
       setError(null);
+      // Cerrar el modal después de crear
+      onClose();
     } catch (error) {
       setError('Error al crear el artículo.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='article-form' onSubmit={handleSubmit}>
       {error && <p className="error">{error}</p>}
       <input
         type="text"
@@ -63,6 +66,7 @@ const CreateArticleForm = ({ onCreate }) => {
         required
       />
       <button type="submit">Crear Artículo</button>
+      <button type="button" onClick={onClose}>Cancelar</button>
     </form>
   );
 };

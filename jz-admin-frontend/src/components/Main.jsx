@@ -10,6 +10,7 @@ const ArticlesList = () => {
   const [editingArticle, setEditingArticle] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [allowChanges, setAllowChanges] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -115,7 +116,14 @@ const ArticlesList = () => {
     setIsModalOpen(false);
     setEditingArticle(null);
   };
-
+  const openCreateModal = () => {
+    setIsCreateModalOpen(true);
+  };
+  
+  const closeCreateModal = () => {
+    setIsCreateModalOpen(false);
+  };
+  
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
@@ -126,67 +134,82 @@ const ArticlesList = () => {
 
   return (
     <div>
-      <h2>Lista de Artículos</h2>
-      {error && <p className="error">{error}</p>}
-      
-      <div>
-        <label htmlFor="categorySelect">Filtrar por Categoría:</label>
-        <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
-          <option value="">Todos</option>
-          {[...new Set(articles.map(article => article.category))].map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
+  <h2>Lista de Artículos</h2>
+  {error && <p className="error">{error}</p>}
+  
+  <div>
+    <label htmlFor="categorySelect">Filtrar por Categoría:</label>
+    <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
+      <option value="">Todos</option>
+      {[...new Set(articles.map(article => article.category))].map((category) => (
+        <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
+    </select>
+  </div>
 
-      <div>
-        <label>
-          Permitir cambios:
-          <input
-            type="checkbox"
-            checked={allowChanges}
-            onChange={() => setAllowChanges(!allowChanges)}
-          />
-        </label>
-      </div>
+  <div>
+    <label>
+      Permitir cambios:
+      <input
+        type="checkbox"
+        checked={allowChanges}
+        onChange={() => setAllowChanges(!allowChanges)}
+      />
+    </label>
+  </div>
 
-      <CreateArticleForm onCreate={handleCreate} />
+  <button onClick={openCreateModal}>Crear Nuevo Artículo</button>
 
-      <div className="articles-list">
-        {filteredArticles.map((article) => (
-          <div key={article._id} className="article-card">
-            <h3>{article.title}</h3>
-            <p>{article.content}</p>
-            <p><strong>Categoría:</strong> {article.category}</p>
-            {allowChanges && (
-              <div className="article-actions">
-                <button onClick={() => openModal(article)}>Editar</button>
-                <button onClick={() => handleDelete(article._id)}>Eliminar</button>
-              </div>
-            )}
+  <div className="articles-list">
+    {filteredArticles.map((article) => (
+      <div key={article._id} className="article-card">
+        <h3>{article.title}</h3>
+        <p>{article.content}</p>
+        <p><strong>Categoría:</strong> {article.category}</p>
+        {allowChanges && (
+          <div className="article-actions">
+            <button onClick={() => openModal(article)}>Editar</button>
+            <button onClick={() => handleDelete(article._id)}>Eliminar</button>
           </div>
-        ))}
+        )}
       </div>
+    ))}
+  </div>
 
-      {isModalOpen && editingArticle && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <EditArticleForm
-              article={editingArticle}
-              onClose={closeModal}
-              onSave={(updatedArticle) => {
-                setArticles(articles.map(article =>
-                  article._id === updatedArticle._id ? updatedArticle : article
-                ));
-                closeModal();
-              }}
-            />
-          </div>
-        </div>
-      )}
+  {isModalOpen && editingArticle && (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <EditArticleForm
+          article={editingArticle}
+          onClose={closeModal}
+          onSave={(updatedArticle) => {
+            setArticles(articles.map(article =>
+              article._id === updatedArticle._id ? updatedArticle : article
+            ));
+            closeModal();
+          }}
+        />
+      </div>
     </div>
+  )}
+
+  {isCreateModalOpen && (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <CreateArticleForm
+          onCreate={(newArticle) => {
+            handleCreate(newArticle);
+            closeCreateModal();
+          }}
+          onClose={closeCreateModal}
+        />
+      </div>
+    </div>
+  )}
+</div>
+
   );
 };
 

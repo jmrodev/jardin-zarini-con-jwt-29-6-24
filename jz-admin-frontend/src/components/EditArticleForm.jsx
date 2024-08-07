@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './EditArticleForm.css';
 
 const EditArticleForm = ({ article, onClose, onSave }) => {
   const [editedArticle, setEditedArticle] = useState(article);
