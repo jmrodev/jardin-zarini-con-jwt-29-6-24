@@ -36,7 +36,6 @@ const ArticlesList = () => {
         const data = await response.json();
         setArticles(data);
       } catch (error) {
-        console.error('Error al obtener los artículos:', error);
         setError(error.message);
       }
     };
@@ -45,8 +44,6 @@ const ArticlesList = () => {
   }, []);
 
   const handleCreate = async (article) => {
-    console.log('Creando artículo:', article);
-
     try {
       const token = localStorage.getItem('authToken');
       if (!token) {
@@ -71,14 +68,11 @@ const ArticlesList = () => {
       const newArticle = await response.json();
       setArticles((prevArticles) => [...prevArticles, newArticle]);
     } catch (error) {
-      console.error('Error al crear el artículo:', error);
       setError(error.message);
     }
   };
 
   const handleDelete = async (id) => {
-    console.log('Eliminando artículo con id:', id);
-
     try {
       const token = localStorage.getItem('authToken');
       if (!token) {
@@ -101,7 +95,6 @@ const ArticlesList = () => {
 
       setArticles((prevArticles) => prevArticles.filter(article => article._id !== id));
     } catch (error) {
-      console.error('Error al eliminar el artículo:', error);
       setError(error.message);
     }
   };
@@ -155,19 +148,25 @@ const ArticlesList = () => {
       <CreateArticleForm onCreate={handleCreate} />
 
       <div className="articles-list">
-        {filteredArticles.map((article) => (
-          <div key={article._id} className="article-card">
-            <h3>{article.title}</h3>
-            <p>{article.content}</p>
-            <p><strong>Categoría:</strong> {article.category}</p>
-            {allowChanges && (
-              <div className="article-actions">
-                <button onClick={() => openModal(article)}>Editar</button>
-                <button onClick={() => handleDelete(article._id)}>Eliminar</button>
-              </div>
-            )}
-          </div>
-        ))}
+        {filteredArticles.length === 0 ? (
+          <p>No hay artículos disponibles.</p>
+        ) : (
+          filteredArticles.map((article) => (
+            <div key={article._id} className="article-card">
+              <h3>{article.title}</h3>
+              <p><strong>Contenido:</strong> {article.content || 'Contenido no disponible'}</p>
+              <p><strong>Categoría:</strong> {article.category || 'Categoría no disponible'}</p>
+              <p><strong>Fecha:</strong> {article.date}</p>
+              <p><strong>Autor:</strong> {article.author}</p>
+              {allowChanges && (
+                <div className="article-actions">
+                  <button onClick={() => openModal(article)}>Editar</button>
+                  <button onClick={() => handleDelete(article._id)}>Eliminar</button>
+                </div>
+              )}
+            </div>
+          ))
+        )}
       </div>
 
       {isModalOpen && editingArticle && (

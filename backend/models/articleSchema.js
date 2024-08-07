@@ -7,6 +7,7 @@ const Articles = Schema('Articles', {
   _id: { type: String, required: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
+  category: { type: String, required: true },
   date: { type: Date, required: true },
   author: { type: String, default: 'Unknown' },
 })

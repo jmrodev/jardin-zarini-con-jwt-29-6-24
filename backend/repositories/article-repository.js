@@ -4,22 +4,18 @@ import { format, parse } from '@formkit/tempo'
 
 export default class ArticleRepository {
   static async createArticleRepository(articleData, author) {
+
     const id = crypto.randomUUID()
-    const date = format(new Date(), "DD-MM-YYYY");
-    console.log(date);
-    try {
-      const article = await ArticleSchema.create({
-        _id: id,
-        ...articleData,
-        date: date,
-        author: author || 'Unknown',
-      }).save
-      console.log('Artículo creado:', article)
-      return await article
-    } catch (error) {
-      console.error('Error al crear artículo:', error)
-      throw new Error('Error al crear el artículo')
-    }
+    const date = format(new Date(), 'DD-MM-YYYY')
+
+    const article = await ArticleSchema.create({
+      _id: id,
+      ...articleData,
+      date: date,
+      author: author,
+    }).save()
+    console.log('Artículo creado:', article)
+    return await article
   }
 
   static async getArticlesRepository() {

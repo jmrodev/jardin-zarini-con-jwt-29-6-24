@@ -13,7 +13,6 @@ export const createArticleController = async (req, res) => {
 
   try {
     const author = req.user.username; // Obtener el autor del usuario autenticado
-    console.log("author",author);
     const newArticle = await ArticleRepository.createArticleRepository(articleData, author);
     console.log("newArticle",newArticle);
     res.status(201).json(newArticle);
@@ -36,10 +35,10 @@ export const getAllArticlesController = async (req, res) => {
 
 // Obtener un artículo por ID
 export const getArticleByIdController = async (req, res) => {
-  const { articleId } = req.params;
+  const { id } = req.params;
 
   try {
-    const article = await ArticleRepository.getArticleByIdRepository(articleId);
+    const article = await ArticleRepository.getArticleByIdRepository(id);
     if (!article) {
       return res.status(404).json({ error: 'Artículo no encontrado' });
     }
@@ -52,11 +51,11 @@ export const getArticleByIdController = async (req, res) => {
 
 // Actualizar un artículo por ID
 export const updateArticleController = async (req, res) => {
-  const { articleId } = req.params;
+  const { id } = req.params;
   const updateData = req.body;
 
   try {
-    const updatedArticle = await ArticleRepository.updateArticleRepository(articleId, updateData);
+    const updatedArticle = await ArticleRepository.updateArticleRepository(id, updateData);
     if (!updatedArticle) {
       return res.status(404).json({ error: 'Artículo no encontrado' });
     }
@@ -70,14 +69,14 @@ export const updateArticleController = async (req, res) => {
 // Eliminar un artículo por ID
 export const deleteArticleController = async (req, res) => {
   console.log("deleteArticleController",req.params);
-  const { articleId } = req.params;
+  const { id } = req.params;
 
   try {
-    const deletedArticle = await ArticleRepository.deleteArticleRepository(articleId);
+    const deletedArticle = await ArticleRepository.deleteArticleRepository(id);
     if (!deletedArticle) {
       return res.status(404).json({ error: 'Artículo no encontrado' });
     }
-    res.status(204).end(); // No content
+    res.json(deletedArticle)// No content
   } catch (error) {
     console.error('Error en deleteArticleController:', error);
     res.status(500).json({ error: 'Error al eliminar el artículo' });

@@ -14,24 +14,23 @@ const Home = () => {
     <div className="container">
       <Header />
       <Aside>
-        <Nav /> {/* Mensaje de depuración */}
-      <p className="debug-message">
-        Estado de autenticación: {isAuthenticated ? 'Autenticado' : 'No autenticado'}
-      </p>
+        <Nav />
+        <p className="debug-message">
+          Estado de autenticación: {isAuthenticated ? 'Autenticado' : 'No autenticado'}
+        </p>
         <div>
           {isAuthenticated ? (
             <button onClick={logout}>Cerrar Sesión</button>
           ) : (
             <>
               <button onClick={login}>Ingreso</button>
-              <button>Registrarse</button> {/* Puedes manejar el registro por separado */}
+              <button>Registrarse</button> {/* Manejar el registro en una página o modal separado */}
             </>
           )}
         </div>
       </Aside>
       <Main />
       <Footer />
-     
     </div>
   );
 };

@@ -1,93 +1,69 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
 const EditArticleForm = ({ article, onClose, onSave }) => {
-  const [title, setTitle] = useState(article.title);
-  const [content, setContent] = useState(article.content);
-  const [category, setCategory] = useState(article.category);
+  const [editedArticle, setEditedArticle] = useState(article);
+
+  useEffect(() => {
+    setEditedArticle(article);
+  }, [article]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setEditedArticle((prevArticle) => ({
+      ...prevArticle,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const updatedArticle = {
-      ...article,
-      title,
-      content,
-      category,
-    };
-
+    
     try {
-      const response = await fetch(`http://localhost:3000/auth/api/articles/${article._id}`, {
+      await fetch(`http://localhost:3000/auth/api/articles/${editedArticle._id}`, {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedArticle),
+        body: JSON.stringify(editedArticle),
+        credentials: 'include'
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        onSave(data);
-      } else {
-        const errorData = await response.json();
-        console.error('Error:', errorData.error);
-      }
+      onSave(editedArticle);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al actualizar el artículo:', error);
     }
   };
 
   return (
-    <div className="edit-article-form">
-      <h3>Editar Artículo</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Título:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="content">Contenido:</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="category">Categoría:</label>
-          <input
-            type="text"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <button type="submit">Guardar</button>
-          <button type="button" onClick={onClose}>Cancelar</button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="title"
+        value={editedArticle.title}
+        onChange={handleChange}
+        placeholder="Título"
+        required
+      />
+      <textarea
+        name="content"
+        value={editedArticle.content}
+        onChange={handleChange}
+        placeholder="Contenido"
+        required
+      />
+      <input
+        type="text"
+        name="category"
+        value={editedArticle.category}
+        onChange={handleChange}
+        placeholder="Categoría"
+        required
+      />
+      <button type="submit">Guardar</button>
+      <button type="button" onClick={onClose}>Cancelar</button>
+    </form>
   );
-};
-
-EditArticleForm.propTypes = {
-  article: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-  }).isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
 };
 
 export default EditArticleForm;
