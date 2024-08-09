@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Logout from './Logout';
 import EditStudentForm from './EditStudentForm';
 import './StudentsList.css'; // Importa el CSS para el modal
+import AddStudentForm from './AddStudentForm';
 
 const StudentsList = () => {
   const [students, setStudents] = useState([]);
@@ -76,6 +77,7 @@ const StudentsList = () => {
       {error && <p className="error">{error}</p>}
       
       <div>
+        <button onClick={() => openModal({ AddStudentForm })}>Agregar Estudiante</button>
         <label htmlFor="classRoomSelect">Filtrar por Aula:</label>
         <select id="classRoomSelect" value={selectedClassRoom} onChange={handleClassRoomChange}>
           <option value="">Todos</option>
