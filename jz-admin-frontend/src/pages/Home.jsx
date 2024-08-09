@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
-import Main from '../components/Main';
+import ArticlesList from '../components/ArticlesList';
 import Footer from '../components/Footer';
 import Aside from '../components/Aside';
 import Nav from '../components/Nav';
@@ -29,7 +29,7 @@ const Home = () => {
           )}
         </div>
       </Aside>
-      <Main />
+      <ArticlesList />
       <Footer />
     </div>
   );

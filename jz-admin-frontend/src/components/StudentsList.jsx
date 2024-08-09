@@ -139,7 +139,7 @@ const StudentsList = () => {
           ))}
         </tbody>
       </table>
-      <Logout />
+      
       {isModalOpen && editingStudent && (
         <div className="modal-overlay">
           <div className="modal-content">
