@@ -4,7 +4,6 @@ import Main from '../components/Main';
 import Footer from '../components/Footer';
 import Aside from '../components/Aside';
 import Nav from '../components/Nav';
-import { useAuth } from '../context/AuthContext'; // Importar el hook
 import '../styles/Home.css';
 import LoginForm from '../components/LoginForm';
 

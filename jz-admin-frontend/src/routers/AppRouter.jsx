@@ -10,7 +10,7 @@ import Home from '../pages/Home';
 import ArticlesList from '../components/ArticlesList'; // Asegúrate de que la importación sea correcta
 import CreateArticleForm from '../components/CreateArticleForm'; // Asegúrate de que la importación sea correcta
 import EditArticleForm from '../components/EditArticleForm'; // Asegúrate de que la importación sea correcta
-
+import Student from '../pages/Student'; 
 const AppRouter = () => {
   const { isAuthenticated } = useAuth();
 
@@ -32,7 +32,8 @@ const AppRouter = () => {
         <Route path="/logout" element={<Logout />} />
 
         {/* Ruta Principal */}
-        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+        {/* <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} /> */}
+        <Route path="/" element={isAuthenticated ? <Home /> : <Student />} />
         {/* <Route path="/" element={<ArticlesList />} /> */}
         {/* Ruta 404 */}
         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
