@@ -22,10 +22,10 @@ const ArticlesList = () => {
         const response = await fetch('http://localhost:3000/auth/api/articles', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          credentials: 'include'
+          credentials: 'include',
         });
 
         if (!response.ok) {
@@ -53,11 +53,11 @@ const ArticlesList = () => {
       const response = await fetch('http://localhost:3000/auth/api/articles', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(article),
-        credentials: 'include'
+        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -82,10 +82,10 @@ const ArticlesList = () => {
       const response = await fetch(`http://localhost:3000/auth/api/articles/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        credentials: 'include'
+        credentials: 'include',
       });
 
       if (!response.ok) {
@@ -93,7 +93,7 @@ const ArticlesList = () => {
         throw new Error(errorData.error || 'Error al eliminar el artículo');
       }
 
-      setArticles((prevArticles) => prevArticles.filter(article => article._id !== id));
+      setArticles((prevArticles) => prevArticles.filter((article) => article._id !== id));
     } catch (error) {
       setError(error.message);
     }
@@ -113,20 +113,24 @@ const ArticlesList = () => {
     setSelectedCategory(event.target.value);
   };
 
+  const toggleAllowChanges = () => {
+    setAllowChanges(!allowChanges);
+  };
+
   const filteredArticles = selectedCategory
-    ? articles.filter(article => article.category === selectedCategory)
+    ? articles.filter((article) => article.category === selectedCategory)
     : articles;
 
   return (
     <div>
       <h2>Lista de Artículos</h2>
       {error && <p className="error">{error}</p>}
-      
+
       <div>
         <label htmlFor="categorySelect">Filtrar por Categoría:</label>
         <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
           <option value="">Todos</option>
-          {[...new Set(articles.map(article => article.category))].map((category) => (
+          {[...new Set(articles.map((article) => article.category))].map((category) => (
             <option key={category} value={category}>
               {category}
             </option>
@@ -135,14 +139,9 @@ const ArticlesList = () => {
       </div>
 
       <div>
-        <label>
-          Permitir cambios:
-          <input
-            type="checkbox"
-            checked={allowChanges}
-            onChange={() => setAllowChanges(!allowChanges)}
-          />
-        </label>
+        <button onClick={toggleAllowChanges}>
+          {allowChanges ? 'Deshabilitar cambios' : 'Permitir cambios'}
+        </button>
       </div>
 
       <CreateArticleForm onCreate={handleCreate} />
@@ -154,10 +153,18 @@ const ArticlesList = () => {
           filteredArticles.map((article) => (
             <div key={article._id} className="article-card">
               <h3>{article.title}</h3>
-              <p><strong>Contenido:</strong> {article.content || 'Contenido no disponible'}</p>
-              <p><strong>Categoría:</strong> {article.category || 'Categoría no disponible'}</p>
-              <p><strong>Fecha:</strong> {article.date}</p>
-              <p><strong>Autor:</strong> {article.author}</p>
+              <p>
+                <strong>Contenido:</strong> {article.content || 'Contenido no disponible'}
+              </p>
+              <p>
+                <strong>Categoría:</strong> {article.category || 'Categoría no disponible'}
+              </p>
+              <p>
+                <strong>Fecha:</strong> {article.date}
+              </p>
+              <p>
+                <strong>Autor:</strong> {article.author}
+              </p>
               {allowChanges && (
                 <div className="article-actions">
                   <button onClick={() => openModal(article)}>Editar</button>
@@ -176,9 +183,11 @@ const ArticlesList = () => {
               article={editingArticle}
               onClose={closeModal}
               onSave={(updatedArticle) => {
-                setArticles(articles.map(article =>
-                  article._id === updatedArticle._id ? updatedArticle : article
-                ));
+                setArticles(
+                  articles.map((article) =>
+                    article._id === updatedArticle._id ? updatedArticle : article
+                  )
+                );
                 closeModal();
               }}
             />

@@ -32,8 +32,8 @@ const AppRouter = () => {
         <Route path="/logout" element={<Logout />} />
 
         {/* Ruta Principal */}
-        {/* <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} /> */}
-        <Route path="/" element={<ArticlesList />} />
+        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+        {/* <Route path="/" element={<ArticlesList />} /> */}
         {/* Ruta 404 */}
         <Route path="*" element={<h1>404: Página no encontrada</h1>} />
       </Routes>

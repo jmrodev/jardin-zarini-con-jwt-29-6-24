@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
 import './CreateArticleForm.css';
 
-const CreateArticleForm = ({ onCreate, onClose }) => {
+const CreateArticleForm = ({ onCreate }) => {
   const [newArticle, setNewArticle] = useState({
     title: '',
     content: '',
-    category: ''
+    category: '',
   });
 
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewArticle((prevArticle) => ({
       ...prevArticle,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Validación simple
     if (!newArticle.title || !newArticle.content || !newArticle.category) {
       setError('Todos los campos son obligatorios.');
@@ -33,41 +34,53 @@ const CreateArticleForm = ({ onCreate, onClose }) => {
       setNewArticle({ title: '', content: '', category: '' });
       setError(null);
       // Cerrar el modal después de crear
-      onClose();
+      setIsModalOpen(false);
     } catch (error) {
       setError('Error al crear el artículo.');
     }
   };
 
   return (
-    <form className='article-form' onSubmit={handleSubmit}>
-      {error && <p className="error">{error}</p>}
-      <input
-        type="text"
-        name="title"
-        value={newArticle.title}
-        onChange={handleChange}
-        placeholder="Título"
-        required
-      />
-      <textarea
-        name="content"
-        value={newArticle.content}
-        onChange={handleChange}
-        placeholder="Contenido"
-        required
-      />
-      <input
-        type="text"
-        name="category"
-        value={newArticle.category}
-        onChange={handleChange}
-        placeholder="Categoría"
-        required
-      />
-      <button type="submit">Crear Artículo</button>
-      <button type="button" onClick={onClose}>Cancelar</button>
-    </form>
+    <div>
+      <button onClick={() => setIsModalOpen(true)}>Crear Nuevo Artículo</button>
+
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <form className="article-form" onSubmit={handleSubmit}>
+              {error && <p className="error">{error}</p>}
+              <input
+                type="text"
+                name="title"
+                value={newArticle.title}
+                onChange={handleChange}
+                placeholder="Título"
+                required
+              />
+              <textarea
+                name="content"
+                value={newArticle.content}
+                onChange={handleChange}
+                placeholder="Contenido"
+                required
+              />
+              <input
+                type="text"
+                name="category"
+                value={newArticle.category}
+                onChange={handleChange}
+                placeholder="Categoría"
+                required
+              />
+              <button type="submit">Crear Artículo</button>
+              <button type="button" onClick={() => setIsModalOpen(false)}>
+                Cancelar
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
